@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>kxdn — FiveM & RedM Developer</title>
+  <meta name="description" content="kxdn is a developer focused on building immersive FiveM and RedM experiences.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --text: #f2f2f2;
+      --muted: #888;
+      --accent: #ff4d00;
+      --card: #1a1a1a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    header {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .section {
+      max-width: 720px;
+      margin: 60px auto;
+    }
+
+    .section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--card);
+      padding-bottom: 8px;
+    }
+
+    .project {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: 0.2s ease-in-out;
+    }
+
+    .project:hover {
+      background: #222;
+    }
+
+    .project h3 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .project p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+    .social a {
+      color: var(--accent);
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 12px;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .section {
+        padding: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>kxdn</h1>
+    <div class="tagline">FiveM & RedM Developer</div>
+    <p>Crafting immersive roleplay frameworks, custom scripts, and optimized multiplayer experiences.</p>
+  </header>
+
+  <section class="section" id="projects">
+    <h2>Featured Work</h2>
+
+    <div class="project">
+      <h3>RedM WesternRP Framework</h3>
+      <p>Fully modular roleplay framework for RedM with core systems like inventory, law enforcement, horse stables, and more.</p>
+    </div>
+
+    <div class="project">
+      <h3>FiveM CityLife Server</h3>
+      <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy — optimized for performance.</p>
+    </div>
+
+    <div class="project">
+      <h3>kxdn-utils</h3>
+      <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact</h2>
+    <p>Want to collaborate or need development help for your FiveM or RedM project?</p>
+    <a href="mailto:kxdn@pm.me" class="button">Email Me</a>
+    <div class="social" style="margin-top:16px">
+      <a href="https://github.com/kxdn" target="_blank">GitHub</a>
+      <a href="https://discord.gg/yourserver" target="_blank">Discord</a>
+      <a href="https://twitter.com/kxdn_dev" target="_blank">Twitter</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 kxdn. Built with pure HTML & CSS. Hosted free on GitHub Pages.</p>
+  </footer>
+
+</body>
+</html>
