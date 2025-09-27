@@ -25,12 +25,39 @@
       scroll-behavior: smooth;
     }
 
+    /* === BODY with sky gradient background and moving clouds === */
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to bottom right, #e0e7ff, #f5f7fb);
+      background: linear-gradient(to bottom, #87ceeb 0%, #f0f8ff 100%);
       color: var(--text);
       line-height: 1.6;
       padding-top: 80px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Moving clouds animation */
+    @keyframes moveClouds {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 1000px 0; /* moves clouds to the right */
+      }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 200vw; /* twice viewport width for smooth movement */
+      height: 100vh;
+      background: url('path-to-your-clouds.png') repeat-x;
+      background-size: contain;
+      animation: moveClouds 60s linear infinite;
+      opacity: 0.3; /* subtle clouds */
+      pointer-events: none;
+      z-index: -1; /* behind all content */
     }
 
     /* Navbar */
@@ -59,8 +86,24 @@
       font-weight: 600;
       font-size: 0.95rem;
       transition: color 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
-
+    /* Nav link underline animation */
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .nav-links a:hover::after {
+      transform: translateX(0);
+    }
     .nav-links a:hover {
       color: var(--accent);
     }
@@ -70,6 +113,8 @@
       margin: 0 auto 40px;
       text-align: center;
       padding: 0 20px;
+      animation: fadeSlideIn 1s ease-out forwards;
+      opacity: 0;
     }
 
     header h1 {
@@ -90,11 +135,15 @@
       margin-top: 12px;
     }
 
+    /* Sections with more padding and min height */
     .section {
       max-width: 720px;
       margin: 80px auto;
       padding: 80px 20px;
-      min-height: 60vh;     
+      min-height: 60vh;
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
     .section h2 {
@@ -168,7 +217,7 @@
         font-size: 2.2rem;
       }
       .section {
-        padding: 0 10px;
+        padding: 60px 10px;
       }
       .navbar {
         justify-content: center;
@@ -181,53 +230,42 @@
         gap: 10px;
       }
     }
-    /* Animation base styles */
-.fade-in {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
-/* Hero animation */
-header {
-  animation: fadeSlideIn 1s ease-out forwards;
-  opacity: 0;
-}
-@keyframes fadeSlideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    /* Fade-in animation base styles */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* Navbar link underline animation */
-.nav-links a {
-  position: relative;
-  overflow: hidden;
-}
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background-color: var(--accent);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-}
-.nav-links a:hover::after {
-  transform: translateX(0);
-}
+    /* Hero animation */
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    /* Wave separator styles */
+    .wave-separator {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin: 40px 0 0 0;
+    }
+    .wave-separator svg {
+      display: block;
+      width: 100%;
+      height: 100px;
+    }
   </style>
 </head>
 <body>
@@ -235,7 +273,7 @@ header {
   <!-- Navbar -->
   <nav class="navbar">
     <ul class="nav-links">
-      <li><a href="#projects">Showcases</a></li>
+      <li><a href="#recent-work">Showcases</a></li>
       <li><a href="#about">About Me</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#recent-work">Recent Work</a></li>
@@ -257,11 +295,11 @@ header {
   </section>
 
   <!-- Wave Separator -->
-<div class="wave-separator">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="width: 100%; height: 100px; display: block;">
-    <path fill="#f5f7fb" d="M0,30 C480,90 960,0 1440,30 L1440,100 L0,100 Z"></path>
-  </svg>
-</div>
+  <div class="wave-separator">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path fill="#f5f7fb" d="M0,30 C480,90 960,0 1440,30 L1440,100 L0,100 Z"></path>
+    </svg>
+  </div>
 
   <!-- Experience -->
   <section class="section fade-in" id="experience">
@@ -274,12 +312,12 @@ header {
     </ul>
   </section>
 
-    <!-- Wave Separator -->
-<div class="wave-separator">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="width: 100%; height: 100px; display: block;">
-    <path fill="#f5f7fb" d="M0,30 C480,90 960,0 1440,30 L1440,100 L0,100 Z"></path>
-  </svg>
-</div>
+  <!-- Wave Separator -->
+  <div class="wave-separator">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path fill="#f5f7fb" d="M0,30 C480,90 960,0 1440,30 L1440,100 L0,100 Z"></path>
+    </svg>
+  </div>
 
   <!-- Recent Work -->
   <section class="section fade-in" id="recent-work">
@@ -297,12 +335,12 @@ header {
     </div>
   </section>
 
-    <!-- Wave Separator -->
-<div class="wave-separator">
-  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="width: 100%; height: 100px; display: block;">
-    <path fill="#f5f7fb" d="M0,30 C480,90 960,0 1440,30 L1440,100 L0,100 Z"></path>
-  </svg>
-</div>
+  <!-- Wave Separator -->
+  <div class="wave-separator">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path fill="#f5f7fb" d="M0,30 C480,90 960,0 1440,30 L1440,100 L0,100 Z"></path>
+    </svg>
+  </div>
 
   <!-- Contact -->
   <section class="section fade-in" id="contact">
@@ -320,27 +358,28 @@ header {
   <footer>
     <p>© 2025 kxdn. Built with love and lavender in HTML & CSS.</p>
   </footer>
-<script>
-  // Fade in on scroll
-  const faders = document.querySelectorAll('.fade-in');
 
-  const appearOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-  };
+  <script>
+    // Fade in on scroll using IntersectionObserver
+    const faders = document.querySelectorAll('.fade-in');
 
-  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+    const appearOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
     });
-  }, appearOptions);
-
-  faders.forEach(fader => {
-    appearOnScroll.observe(fader);
-  });
-</script>
+  </script>
   
 </body>
 </html>
