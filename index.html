@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>kxdn — FiveM & RedM Developer</title>
-  <meta name="description" content="kxdn is a developer focused on building immersive FiveM and RedM experiences.">
+  <title>kxdn — FiveM Developer</title>
+  <meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d0d0d;
-      --text: #f2f2f2;
-      --muted: #888;
-      --accent: #ff4d00;
-      --card: #1a1a1a;
+      --bg: #f5f7fb;
+      --text: #2d2d2d;
+      --muted: #6a6a6a;
+      --accent: #c8a2c8;
+      --card: #ffffff;
     }
 
     * {
@@ -23,7 +23,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      background: linear-gradient(to bottom right, #e0e7ff, #f5f7fb);
       color: var(--text);
       line-height: 1.6;
       padding: 40px 20px;
@@ -38,11 +38,19 @@
     header h1 {
       font-size: 2.8rem;
       margin-bottom: 10px;
+      color: var(--accent);
     }
 
     header p {
       color: var(--muted);
       font-size: 1.1rem;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 12px;
     }
 
     .section {
@@ -54,25 +62,28 @@
       font-size: 1.4rem;
       margin-bottom: 20px;
       color: var(--accent);
-      border-bottom: 1px solid var(--card);
+      border-bottom: 1px solid #ddd;
       padding-bottom: 8px;
     }
 
     .project {
       background: var(--card);
       padding: 20px;
-      border-radius: 8px;
+      border-radius: 12px;
       margin-bottom: 20px;
-      transition: 0.2s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .project:hover {
-      background: #222;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
     }
 
     .project h3 {
       font-size: 1.2rem;
       margin-bottom: 6px;
+      color: var(--text);
     }
 
     .project p {
@@ -91,18 +102,12 @@
       color: var(--accent);
       text-decoration: none;
       margin: 0 10px;
-    }
-
-    .tagline {
-      font-size: 1.25rem;
       font-weight: 500;
-      color: var(--accent);
-      margin-top: 12px;
     }
 
     a.button {
       display: inline-block;
-      margin-top: 12px;
+      margin-top: 16px;
       padding: 10px 18px;
       background: var(--accent);
       color: #fff;
@@ -110,6 +115,12 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 0.95rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.2s ease;
+    }
+
+    a.button:hover {
+      background: #b18ab1;
     }
 
     @media (max-width: 600px) {
@@ -126,17 +137,12 @@
 
   <header>
     <h1>kxdn</h1>
-    <div class="tagline">FiveM & RedM Developer</div>
-    <p>Creating immersive roleplay frameworks, custom scripts, custom clothing and optimized experiences for all your FiveM & RedM needs.</p>
+    <div class="tagline">Experienced FiveM Developer</div>
+    <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
   </header>
 
   <section class="section" id="projects">
     <h2>Featured Work</h2>
-
-    <div class="project">
-      <h3>RedM WesternRP Framework</h3>
-      <p>Fully modular roleplay framework for RedM with core systems like inventory, law enforcement, horse stables, and more.</p>
-    </div>
 
     <div class="project">
       <h3>FiveM ErrorRP Server</h3>
@@ -151,7 +157,7 @@
 
   <section class="section" id="contact">
     <h2>Contact</h2>
-    <p>Get In Touch With Me. I am willing to learn anything to fit your FiveM & RedM needs</p>
+    <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
     <a href="https://discord.gg/w8w4dsKKG8" class="button">Project Discord!</a>
     <div class="social" style="margin-top:16px">
       <a href="https://github.com/ilykxdn" target="_blank">GitHub</a>
@@ -161,7 +167,7 @@
   </section>
 
   <footer>
-    <p>© 2025 kxdn. Built with HTML & CSS</p>
+    <p>© 2025 kxdn. Built with love and lavender in HTML & CSS.</p>
   </footer>
 
 </body>
