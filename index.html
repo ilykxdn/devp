@@ -26,9 +26,9 @@
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-image: url('https://i.pinimg.com/736x/12/cf/dc/12cfdcbb2320824919f1f1b119591d39.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover;       /* Make the image cover entire viewport */
+    background-position: center;  /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating */
     color: var(--text-primary);
     min-height: 100vh;
     padding-top: 72px;
@@ -36,6 +36,7 @@
     position: relative;
   }
 
+  /* Anime-style subtle cloud pattern background */
   body::before {
     content: "";
     position: fixed;
@@ -54,10 +55,15 @@
   }
 
   @keyframes cloudMove {
-    0% { background-position: 0 0, 0 0, 0 0; }
-    100% { background-position: 1000px 0, 800px 0, 1200px 0; }
+    0% {
+      background-position: 0 0, 0 0, 0 0;
+    }
+    100% {
+      background-position: 1000px 0, 800px 0, 1200px 0;
+    }
   }
 
+  /* Navbar with kxdn top right */
   .navbar {
     position: fixed;
     top: 0; right: 0;
@@ -75,6 +81,7 @@
     text-shadow: 0 0 8px rgba(74,144,226,0.75);
   }
 
+  /* Main nav below with links, centered horizontally */
   nav.main-nav {
     position: fixed;
     top: 72px;
@@ -86,7 +93,6 @@
     z-index: 1000;
     padding: 12px 28px;
   }
-
   .nav-links {
     display: flex;
     list-style: none;
@@ -94,7 +100,6 @@
     padding: 0;
     gap: 28px;
   }
-
   .nav-links a {
     color: var(--text-primary);
     text-decoration: none;
@@ -104,7 +109,6 @@
     padding-bottom: 4px;
     transition: color 0.3s ease;
   }
-
   .nav-links a::after {
     content: "";
     position: absolute;
@@ -116,11 +120,9 @@
     transition: transform 0.3s ease;
     border-radius: 2px;
   }
-
   .nav-links a:hover {
     color: var(--accent-light);
   }
-
   .nav-links a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
@@ -134,40 +136,30 @@
     animation: fadeSlideIn 1s ease-out forwards;
     opacity: 0;
   }
-
-  /* === MODIFIED HERO TEXT STYLES === */
-  header h1,
-  header .tagline,
-  header p {
-    color: white !important;
-    text-shadow:
-      0 0 6px #4a90e2,
-      0 0 10px #4a90e2,
-      0 0 20px #4a90e2,
-      0 0 30px #4a90e2;
-  }
-
   header h1 {
     font-size: 4rem;
     font-weight: 900;
+    color: var(--accent);
     letter-spacing: 0.15em;
     margin-bottom: 8px;
+    text-shadow: 0 0 12px var(--accent-light);
   }
-
   .tagline {
     font-size: 1.6rem;
     font-weight: 600;
+    color: var(--accent-light);
     margin-bottom: 24px;
     letter-spacing: 0.05em;
   }
-
   header p {
     max-width: 580px;
     margin: 0 auto;
     font-size: 1.2rem;
     line-height: 1.7;
+    color: var(--text-muted);
   }
 
+  /* Sections styling */
   .section {
     max-width: 720px;
     margin: 72px auto;
@@ -177,11 +169,9 @@
     box-shadow: 0 10px 30px var(--shadow-light);
     transition: box-shadow 0.3s ease;
   }
-
   .section:hover {
     box-shadow: 0 16px 48px rgba(74,144,226,0.35);
   }
-
   .section h2 {
     font-size: 1.8rem;
     color: var(--accent);
@@ -190,22 +180,20 @@
     border-bottom: 3px solid var(--accent-light);
     padding-bottom: 10px;
   }
-
   .section p, .section ul {
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--text-muted);
   }
-
   ul {
     padding-left: 24px;
     margin-top: 12px;
   }
-
   ul li {
     margin-bottom: 12px;
   }
 
+  /* Project Cards */
   .project {
     background: white;
     border-radius: 14px;
@@ -215,25 +203,23 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: default;
   }
-
   .project:hover {
     transform: translateY(-8px);
     box-shadow: 0 14px 44px rgba(74,144,226,0.3);
   }
-
   .project h3 {
     color: var(--text-primary);
     font-size: 1.5rem;
     margin-bottom: 10px;
     font-weight: 700;
   }
-
   .project p {
     color: var(--text-muted);
     font-size: 1.1rem;
     line-height: 1.5;
   }
 
+  /* Contact Button */
   a.button {
     display: inline-block;
     background: var(--accent);
@@ -248,12 +234,12 @@
     transition: background 0.3s ease;
     user-select: none;
   }
-
   a.button:hover {
     background: var(--accent-light);
     box-shadow: 0 12px 32px rgba(129,179,255,0.6);
   }
 
+  /* Social links */
   .social {
     margin-top: 20px;
     display: flex;
@@ -262,13 +248,11 @@
     font-weight: 600;
     font-size: 1rem;
   }
-
   .social a {
     color: var(--accent);
     text-decoration: none;
     transition: color 0.3s ease;
   }
-
   .social a:hover {
     color: var(--accent-light);
   }
@@ -283,6 +267,7 @@
     user-select: none;
   }
 
+  /* Responsive */
   @media (max-width: 720px) {
     header h1 {
       font-size: 3.2rem;
@@ -304,7 +289,6 @@
       justify-content: center;
     }
   }
-
   @media (max-width: 400px) {
     header h1 {
       font-size: 2.6rem;
@@ -317,6 +301,7 @@
     }
   }
 
+  /* Animations */
   @keyframes fadeSlideIn {
     from {
       opacity: 0;
@@ -327,13 +312,11 @@
       transform: translateY(0);
     }
   }
-
   .fade-in {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
-
   .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
@@ -341,3 +324,125 @@
 </style>
 </head>
 <body>
+
+  <!-- kxdn top-right -->
+  <div class="navbar">kxdn</div>
+
+  <!-- Main Navigation -->
+  <nav class="main-nav" aria-label="Primary Navigation">
+    <ul class="nav-links">
+      <li><a href="#showcases">Showcases</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Recent Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header>
+    <h1>kxdn</h1>
+    <div class="tagline">Experienced FiveM Developer</div>
+    <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
+  </header>
+
+  <!-- Showcases -->
+  <section class="section fade-in" id="showcases">
+    <h2>Showcases</h2>
+    <p>Featured highlights of my FiveM projects, demonstrating creativity, performance, and depth.</p>
+
+    <div class="project">
+      <h3>FiveM ErrorRP Server</h3>
+      <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy optimized for performance.</p>
+    </div>
+
+    <div class="project">
+      <h3>kxdn-utils</h3>
+      <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
+    </div>
+  </section>
+
+  <!-- About Me -->
+  <section class="section fade-in" id="about">
+    <h2>About Me</h2>
+    <p>I'm a passionate developer with a focus on immersive experiences in GTA V's FiveM platform. I love solving problems, creating clean code, and learning new techniques to stay ahead in game development.</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="section fade-in" id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>Lua, JavaScript, SQL, and CFX scripting</li>
+      <li>Custom Framework Creation & Optimization</li>
+      <li>UI/UX Design & Implementation</li>
+      <li>Performance-focused server and client systems</li>
+      <li>Version control with Git and teamwork</li>
+      <li>Debugging and profiling for optimization</li>
+    </ul>
+  </section>
+
+  <!-- Experience -->
+  <section class="section fade-in" id="experience">
+    <h2>Experience</h2>
+    <ul>
+      <li>5+ Years FiveM Development</li>
+      <li>Multiple Custom Roleplay Servers Launched</li>
+      <li>Collaboration with server owners and designers</li>
+      <li>Training and mentoring junior developers</li>
+    </ul>
+  </section>
+
+  <!-- Recent Work -->
+  <section class="section fade-in" id="projects">
+    <h2>Recent Work</h2>
+    <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
+
+<div class="project">
+  <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+    <h3>kx-weather</h3>
+    <p>kx-weather is a QBCore script that adds dynamic, location based weather, so it can be sunny in Sandy Shores and stormy in Los Santos at the same time!</p>
+  </a>
+</div>
+
+
+    <div class="project">
+      <h3>Advanced Role Management</h3>
+      <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section fade-in" id="contact">
+    <h2>Contact</h2>
+    <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
+    <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
+    <div class="social" aria-label="Social Links">
+      <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://twitter.com/kxdn_dev" target="_blank" rel="noopener noreferrer">Twitter</a>
+      <a href="https://www.linkedin.com/in/kxdn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 kxdn. All rights reserved.
+  </footer>
+
+<script>
+  // Fade in sections on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 }
+  );
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
