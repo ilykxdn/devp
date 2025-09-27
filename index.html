@@ -46,18 +46,18 @@
       }
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 200vw; /* twice viewport width for smooth movement */
-      height: 100vh;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/White_cloud_icon.svg/1200px-White_cloud_icon.svg.png') repeat-x;
-      background-size: 200px 100px; /* adjust size as needed */
-      animation: moveClouds 60s linear infinite;
-      opacity: 0.3; /* subtle clouds */
-      pointer-events: none;
-      z-index: -1; /* behind all content */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 200vw;
+  height: 100vh;
+  background: url('https://raw.githubusercontent.com/jackrugile/cloud-images/main/clouds.png') repeat-x;
+  background-size: 300px 150px;
+  animation: moveClouds 60s linear infinite;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
     }
 
     /* Navbar */
