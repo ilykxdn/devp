@@ -1,357 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>kxdn — FiveM Developer</title>
-  <meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #f0f4f8;
-      --text: #1e1e2f;
-      --muted: #6b7280;
-      --accent: #7c3aed;
-      --card: #ffffff;
-      --shadow-light: rgba(124, 58, 237, 0.15);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>kxdn — FiveM Developer</title>
+<meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg-gradient-start: #c9e3ff;
+    --bg-gradient-end: #e6f1ff;
+    --text-primary: #1b365d;
+    --text-muted: #5a7dbf;
+    --accent: #4a90e2;
+    --accent-light: #81b3ff;
+    --card-bg: #ffffffdd;
+    --shadow-light: rgba(74, 144, 226, 0.25);
+  }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #a7cdf0 0%, #f0f4f8 100%);
-      color: var(--text);
-      padding-top: 72px;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding-top: 72px;
+    overflow-x: hidden;
+    position: relative;
+  }
 
-    /* Cloud background animation */
-    @keyframes moveClouds {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 2000px 0;
-      }
-    }
+  /* Anime-style subtle cloud pattern background */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 30%, #a9c7ff55 100px, transparent 120px),
+      radial-gradient(circle at 50% 60%, #b4d0ff88 120px, transparent 160px),
+      radial-gradient(circle at 80% 40%, #9dbfffa8 80px, transparent 110px);
+    background-repeat: no-repeat;
+    animation: cloudMove 70s linear infinite;
+    z-index: -1;
+    filter: brightness(1.05);
+  }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 300vw;
-      height: 100vh;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/e/e9/Clouds_in_the_sky_2007-03-21.jpg') repeat-x;
-      background-size: 400px 200px;
-      animation: moveClouds 90s linear infinite;
-      opacity: 0.15;
-      pointer-events: none;
-      z-index: -1;
-      filter: brightness(0.95);
+  @keyframes cloudMove {
+    0% {
+      background-position: 0 0, 0 0, 0 0;
     }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(255 255 255 / 0.95);
-      box-shadow: 0 2px 12px var(--shadow-light);
-      z-index: 1000;
-      display: flex;
-      justify-content: flex-end;
-      padding: 14px 32px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      user-select: none;
+    100% {
+      background-position: 1000px 0, 800px 0, 1200px 0;
     }
+  }
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 24px;
-      margin: 0;
-      padding: 0;
-    }
+  /* Navbar with kxdn top right */
+  .navbar {
+    position: fixed;
+    top: 0; right: 0;
+    width: auto;
+    padding: 16px 24px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    user-select: none;
+    cursor: default;
+    z-index: 1001;
+    font-family: 'Inter', sans-serif;
+    background: transparent;
+    text-shadow: 0 0 8px rgba(74,144,226,0.75);
+  }
 
-    .nav-links a {
-      color: var(--text);
-      text-decoration: none;
-      position: relative;
-      padding: 6px 0;
-      transition: color 0.3s ease;
-    }
+  /* Main nav below with links, centered horizontally */
+  nav.main-nav {
+    position: fixed;
+    top: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px var(--shadow-light);
+    z-index: 1000;
+    padding: 12px 28px;
+  }
+  .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 28px;
+  }
+  .nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+  }
+  .nav-links a:hover {
+    color: var(--accent-light);
+  }
+  .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 
-    /* Underline effect on nav links */
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
+  header {
+    max-width: 720px;
+    margin: 64px auto 56px;
+    padding: 0 24px;
+    text-align: center;
+    animation: fadeSlideIn 1s ease-out forwards;
+    opacity: 0;
+  }
+  header h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+    text-shadow: 0 0 12px var(--accent-light);
+  }
+  .tagline {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+  }
+  header p {
+    max-width: 580px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
 
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+  /* Sections styling */
+  .section {
+    max-width: 720px;
+    margin: 72px auto;
+    background: var(--card-bg);
+    padding: 48px 32px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-light);
+    transition: box-shadow 0.3s ease;
+  }
+  .section:hover {
+    box-shadow: 0 16px 48px rgba(74,144,226,0.35);
+  }
+  .section h2 {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-bottom: 28px;
+    font-weight: 700;
+    border-bottom: 3px solid var(--accent-light);
+    padding-bottom: 10px;
+  }
+  .section p, .section ul {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+  ul {
+    padding-left: 24px;
+    margin-top: 12px;
+  }
+  ul li {
+    margin-bottom: 12px;
+  }
 
-    .nav-links a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
+  /* Project Cards */
+  .project {
+    background: white;
+    border-radius: 14px;
+    padding: 24px 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 6px 20px var(--shadow-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+  .project:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 44px rgba(74,144,226,0.3);
+  }
+  .project h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  .project p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
 
-    header {
-      max-width: 720px;
-      margin: 0 auto 48px;
-      padding: 0 24px;
-      text-align: center;
-      animation: fadeSlideIn 1s ease-out forwards;
-      opacity: 0;
-    }
+  /* Contact Button */
+  a.button {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 16px 32px;
+    margin-top: 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 20px rgba(74,144,226,0.35);
+    text-decoration: none;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  a.button:hover {
+    background: var(--accent-light);
+    box-shadow: 0 12px 32px rgba(129,179,255,0.6);
+  }
 
+  /* Social links */
+  .social {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .social a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .social a:hover {
+    color: var(--accent-light);
+  }
+
+  footer {
+    max-width: 720px;
+    margin: 96px auto 48px;
+    padding: 0 24px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-align: center;
+    user-select: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
     header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
+      font-size: 3.2rem;
     }
-
-    .tagline {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 20px;
-      letter-spacing: 0.03em;
-    }
-
-    header p {
-      max-width: 580px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
     .section {
-      max-width: 720px;
-      margin: 64px auto;
-      background: var(--card);
-      padding: 48px 32px;
-      border-radius: 14px;
-      box-shadow: 0 8px 24px var(--shadow-light);
-      transition: box-shadow 0.3s ease;
+      margin: 48px 16px;
+      padding: 40px 24px;
     }
-
-    .section:hover {
-      box-shadow: 0 12px 32px rgba(124, 58, 237, 0.3);
-    }
-
-    .section h2 {
-      font-size: 1.6rem;
-      color: var(--accent);
-      margin-bottom: 24px;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .section p,
-    .section ul {
-      font-size: 1rem;
-      line-height: 1.6;
-      color: var(--muted);
-    }
-
-    ul {
-      padding-left: 20px;
-      margin-top: 8px;
-    }
-
-    ul li {
-      margin-bottom: 10px;
-    }
-
-    /* Project Cards */
-    .project {
-      background: var(--card);
+    nav.main-nav {
+      left: 16px;
+      transform: none;
+      width: calc(100% - 32px);
       border-radius: 12px;
-      padding: 20px 28px;
-      margin-bottom: 28px;
-      box-shadow: 0 4px 16px var(--shadow-light);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: default;
+      padding: 10px 16px;
     }
-
-    .project:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+    .nav-links {
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-
-    .project h3 {
-      color: var(--text);
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      font-weight: 600;
+  }
+  @media (max-width: 400px) {
+    header h1 {
+      font-size: 2.6rem;
     }
-
-    .project p {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.5;
+    .tagline {
+      font-size: 1.2rem;
     }
-
-    footer {
-      max-width: 720px;
-      margin: 80px auto 40px;
-      padding: 0 24px;
-      font-size: 0.9rem;
-      color: var(--muted);
-      text-align: center;
-      user-select: none;
+    .section h2 {
+      font-size: 1.5rem;
     }
+  }
 
-    .social {
-      margin-top: 12px;
-    }
-
-    .social a {
-      margin: 0 12px;
-      color: var(--accent);
-      font-weight: 600;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .social a:hover {
-      color: #5a22c7;
-    }
-
-    a.button {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 14px 26px;
-      margin-top: 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
-      text-decoration: none;
-      transition: background 0.3s ease;
-      user-select: none;
-    }
-
-    a.button:hover {
-      background: #5a22c7;
-      box-shadow: 0 8px 24px rgba(90, 34, 199, 0.5);
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .navbar {
-        justify-content: center;
-        padding: 14px 16px;
-        font-size: 0.9rem;
-      }
-      .nav-links {
-        flex-direction: column;
-        gap: 14px;
-      }
-      header h1 {
-        font-size: 2.4rem;
-      }
-      header p {
-        font-size: 1rem;
-      }
-      .section {
-        margin: 48px 16px;
-        padding: 32px 24px;
-      }
-      a.button {
-        width: 100%;
-        text-align: center;
-      }
-    }
-
-    /* Animations */
-    @keyframes fadeSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
+  /* Animations */
+  @keyframes fadeSlideIn {
+    from {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transform: translateY(-24px);
     }
-
-    .fade-in.visible {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
-  </style>
+  }
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
+  <!-- kxdn top-right -->
+  <div class="navbar">kxdn</div>
+
+  <!-- Main Navigation -->
+  <nav class="main-nav" aria-label="Primary Navigation">
     <ul class="nav-links">
-      <li><a href="#recent-work">Showcases</a></li>
+      <li><a href="#showcases">Showcases</a></li>
       <li><a href="#about">About Me</a></li>
+      <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#recent-work">Recent Work</a></li>
+      <li><a href="#projects">Recent Work</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <header>
     <h1>kxdn</h1>
     <div class="tagline">Experienced FiveM Developer</div>
     <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
   </header>
 
-  <!-- About Me -->
-  <section class="section fade-in" id="about">
-    <h2>About Me</h2>
-    <p>I'm a passionate developer with a focus on immersive experiences in GTA V's FiveM platform. I love solving problems, creating clean code, and learning new techniques to stay ahead in game development.</p>
-  </section>
-
-  <!-- Experience -->
-  <section class="section fade-in" id="experience">
-    <h2>Experience</h2>
-    <ul>
-      <li>5 Years FiveM Development (LUA, JS, SQL, CFX)</li>
-      <li>Custom Framework Creation & Optimization</li>
-      <li>UI Design & Implementation</li>
-      <li>Performance-focused server-side systems</li>
-    </ul>
-  </section>
-
-  <!-- Recent Work -->
-  <section class="section fade-in" id="recent-work">
-    <h2>Recent Work</h2>
-    <p>Here are a few of my latest projects built for the FiveM community.</p>
+  <!-- Showcases -->
+  <section class="section fade-in" id="showcases">
+    <h2>Showcases</h2>
+    <p>Featured highlights of my FiveM projects, demonstrating creativity, performance, and depth.</p>
 
     <div class="project">
       <h3>FiveM ErrorRP Server</h3>
@@ -364,21 +360,67 @@
     </div>
   </section>
 
+  <!-- About Me -->
+  <section class="section fade-in" id="about">
+    <h2>About Me</h2>
+    <p>I'm a passionate developer with a focus on immersive experiences in GTA V's FiveM platform. I love solving problems, creating clean code, and learning new techniques to stay ahead in game development.</p>
+  </section>
+
+  <!-- Skills -->
+  <section class="section fade-in" id="skills">
+    <h2>Skills</h2>
+    <ul>
+      <li>Lua, JavaScript, SQL, and CFX scripting</li>
+      <li>Custom Framework Creation & Optimization</li>
+      <li>UI/UX Design & Implementation</li>
+      <li>Performance-focused server and client systems</li>
+      <li>Version control with Git and teamwork</li>
+      <li>Debugging and profiling for optimization</li>
+    </ul>
+  </section>
+
+  <!-- Experience -->
+  <section class="section fade-in" id="experience">
+    <h2>Experience</h2>
+    <ul>
+      <li>5+ Years FiveM Development</li>
+      <li>Multiple Custom Roleplay Servers Launched</li>
+      <li>Collaboration with server owners and designers</li>
+      <li>Training and mentoring junior developers</li>
+    </ul>
+  </section>
+
+  <!-- Recent Work -->
+  <section class="section fade-in" id="projects">
+    <h2>Recent Work</h2>
+    <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
+
+    <div class="project">
+      <h3>Enhanced Vehicle Shop</h3>
+      <p>Custom vehicle shop script with dynamic pricing and showroom previews for immersive player interaction.</p>
+    </div>
+
+    <div class="project">
+      <h3>Advanced Role Management</h3>
+      <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section class="section fade-in" id="contact">
     <h2>Contact</h2>
     <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
-    <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Project Discord!</a>
-    <div class="social">
-      <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://discord.gg/w8w4dsKKG8" target="_blank" rel="noopener noreferrer">Discord</a>
-      <a href="https://x.com/xokxdn" target="_blank" rel="noopener noreferrer">Twitter</a>
+    <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
+    <div class="social" aria-label="Social Links">
+      <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+      <a href="https://discord.gg/w8w4dsKKG8" target="_blank" rel="noopener noreferrer" aria-label="Discord">Discord</a>
+      <a href="https://x.com/xokxdn" target="_blank" rel="noopener noreferrer" aria-label="Twitter">Twitter</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>© 2025 kxdn. Built with love and lavender in HTML &amp; CSS.</p>
+    <p>© 2025 kxdn. Built with love and a splash of blue in HTML &amp; CSS.</p>
   </footer>
 
   <script>
