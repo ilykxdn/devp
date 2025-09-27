@@ -21,18 +21,55 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to bottom right, #e0e7ff, #f5f7fb);
       color: var(--text);
       line-height: 1.6;
-      padding: 40px 20px;
+      padding-top: 80px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      z-index: 1000;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
     }
 
     header {
       max-width: 720px;
       margin: 0 auto 40px;
       text-align: center;
+      padding: 0 20px;
     }
 
     header h1 {
@@ -56,6 +93,7 @@
     .section {
       max-width: 720px;
       margin: 60px auto;
+      padding: 0 20px;
     }
 
     .section h2 {
@@ -96,6 +134,7 @@
       color: var(--muted);
       margin-top: 60px;
       font-size: 0.9rem;
+      padding-bottom: 40px;
     }
 
     .social a {
@@ -130,19 +169,60 @@
       .section {
         padding: 0 10px;
       }
+      .navbar {
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 16px 10px;
+      }
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Navbar -->
+  <nav class="navbar">
+    <ul class="nav-links">
+      <li><a href="#projects">Showcases</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#recent-work">Recent Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
   <header>
     <h1>kxdn</h1>
     <div class="tagline">Experienced FiveM Developer</div>
     <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
   </header>
 
-  <section class="section" id="projects">
-    <h2>Featured Work</h2>
+  <!-- About Me -->
+  <section class="section" id="about">
+    <h2>About Me</h2>
+    <p>I'm a passionate developer with a focus on immersive experiences in GTA V's FiveM platform. I love solving problems, creating clean code, and learning new techniques to stay ahead in game development.</p>
+  </section>
+
+  <!-- Experience -->
+  <section class="section" id="experience">
+    <h2>Experience</h2>
+    <ul>
+      <li>5 Years FiveM Development (LUA, JS, SQL, CFX)</li>
+      <li>Custom Framework Creation & Optimization</li>
+      <li>UI Design & Implementation</li>
+      <li>Performance-focused server-side systems</li>
+    </ul>
+  </section>
+
+  <!-- Recent Work -->
+  <section class="section" id="recent-work">
+    <h2>Recent Work</h2>
+    <p>Here are a few of my latest projects built for the FiveM community.</p>
 
     <div class="project">
       <h3>FiveM ErrorRP Server</h3>
@@ -155,6 +235,7 @@
     </div>
   </section>
 
+  <!-- Contact -->
   <section class="section" id="contact">
     <h2>Contact</h2>
     <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
@@ -166,6 +247,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>© 2025 kxdn. Built with love and lavender in HTML & CSS.</p>
   </footer>
