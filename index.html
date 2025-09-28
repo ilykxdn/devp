@@ -24,6 +24,7 @@ body {
   background-attachment: fixed; 
   color: var(--text-primary); 
   overflow-x: hidden; 
+  scroll-behavior: smooth;
 }
 
 /* Header */
@@ -34,22 +35,13 @@ body {
   background: rgba(0,0,0,0.2); backdrop-filter: blur(12px);
   z-index: 1000;
 }
-
 .site-name { font-weight: 700; font-size: 1.5rem; color: #fff; text-shadow: 0 0 6px var(--accent-light); }
-
 nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
-
 .nav-links { display: flex; list-style: none; gap: 28px; margin: 0; padding: 0; }
-.nav-links a {
-  text-decoration: none; font-weight: 600; color: #fff; padding-bottom: 4px; position: relative; transition: color 0.3s ease;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-  background: var(--accent-light); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px;
-}
+.nav-links a { text-decoration: none; font-weight: 600; color: #fff; padding-bottom: 4px; position: relative; transition: color 0.3s ease; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-light); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px; }
 .nav-links a:hover { color: var(--accent-light); }
 .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-
 .social-icons { display: flex; gap: 16px; margin-left: 16px; }
 .social-icons a { color: #fff; font-size: 1.25rem; transition: color 0.3s ease; }
 .social-icons a:hover { color: var(--accent-light); }
@@ -64,8 +56,9 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .section {
   width: 100%; min-height: 90vh; display: flex; flex-direction: column;
   align-items: center; justify-content: center; padding: 64px 32px;
-  background: transparent; /* remove gray blocks */
-  margin: 0; transition: box-shadow 0.3s ease;
+  background: transparent; 
+  margin: 0; 
+  transition: background 1s ease;
 }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; text-align: center; }
 .section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
@@ -73,7 +66,7 @@ ul { padding-left: 24px; margin-top: 16px; } ul li { margin-bottom: 12px; }
 
 /* Projects */
 .project {
-  background: rgba(255, 255, 255, 0.15); /* show gradient behind */
+  background: rgba(255, 255, 255, 0.15); 
   border-radius: 14px; padding: 28px 32px; margin-bottom: 28px;
   box-shadow: 0 6px 18px var(--shadow-light);
   transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
@@ -110,7 +103,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 }
 
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
 </style>
 </head>
 <body>
