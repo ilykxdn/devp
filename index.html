@@ -14,26 +14,27 @@
   --accent: #b39ddb;
   --accent-light: #d1c4e9;
   --shadow-light: rgba(0,0,0,0.2);
+  --separator: #fff;
 }
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; background: linear-gradient(135deg, #ede7f6, #b39ddb); background-size: 100% 100vh; background-repeat: no-repeat; background-attachment: fixed; }
+body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; background: linear-gradient(135deg, #ede7f6, #b39ddb); background-size: cover; background-attachment: fixed; }
 
 /* Header */
 .header-bar {
   position: fixed; top: 0; left: 0; width: 100%;
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 32px;
-  background: rgba(255,255,255,0.1); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
   z-index: 1000;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid var(--separator);
 }
 .site-name { font-weight: 700; font-size: 1.5rem; color: #fff; text-shadow: 0 0 6px var(--accent-light); }
 nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
 .nav-links { display: flex; list-style: none; gap: 28px; margin: 0; padding: 0; }
 .nav-links a { text-decoration: none; font-weight: 600; color: #fff; padding-bottom: 4px; position: relative; transition: color 0.3s ease; }
-.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #fff; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-light); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px; }
 .nav-links a:hover { color: var(--accent-light); }
 .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
 .social-icons { display: flex; gap: 16px; margin-left: 16px; }
@@ -46,67 +47,51 @@ header h1 { font-size: 4rem; font-weight: 900; color: var(--accent); letter-spac
 header .tagline { font-size: 1.6rem; font-weight: 600; color: var(--accent-light); margin-bottom: 20px; }
 header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto; }
 
+/* Separator */
+.separator { width: 80%; max-width: 1200px; height: 2px; background: var(--separator); margin: 64px auto; opacity: 0.85; border-radius: 2px; }
+
 /* Sections */
-.section { width: 100%; min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 64px 32px; margin: 0; border-radius: 0; background: transparent; border-top: 2px solid #fff; }
-.section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid #fff; padding-bottom: 8px; text-align: center; }
-.section p { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
+.section {
+  width: 100%; min-height: 90vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 64px 32px;
+  background: transparent;
+}
+.section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 32px; text-align: center; }
 
 /* Fade animation */
 .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* Experience Section Cards */
-.experience-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 32px;
-}
-.exp-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 14px;
-  padding: 28px 24px;
-  min-width: 260px;
-  max-width: 320px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.exp-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
-.exp-card h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.3rem; }
-.exp-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
+/* Cards */
+.card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 32px; }
+.card { background: rgba(0,0,0,0.25); border-radius: 14px; padding: 24px 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; width: 300px; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
+.card h3 { color: #fff; margin-bottom: 12px; }
+.card p { color: var(--text-muted); }
 
-/* Recent Work Cards */
-.recent-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 24px;
-  margin-top: 32px;
-}
-.recent-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 14px;
-  padding: 28px 24px;
-  min-width: 280px;
-  max-width: 350px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.recent-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
-.recent-card h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.3rem; }
-.recent-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
-.recent-card a { text-decoration: none; color: inherit; display: block; }
+/* Skills cards */
+.skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 24px; }
+.skills-card { flex: 1 1 250px; background: rgba(0,0,0,0.25); padding: 24px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); text-align: center; transition: transform 0.3s ease; }
+.skills-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.3); }
+.skills-card h4 { color: var(--accent); margin-bottom: 12px; font-size: 1.1rem; }
+
+/* Buttons */
+a.button { display: inline-block; background: var(--accent); color: #fff; padding: 14px 30px; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease; }
+a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(255,255,255,0.3); }
+
+/* Projects grid for showcases */
+.showcase-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 32px; }
+.showcase-card { background: rgba(0,0,0,0.25); border-radius: 14px; padding: 12px; width: 300px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+.showcase-card img { width: 100%; border-radius: 10px; }
+.showcase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.3); }
 
 /* Footer */
 footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin: 64px auto 32px; }
 
 /* Responsive */
-@media (max-width: 1000px) { .experience-cards, .recent-cards { flex-direction: row; justify-content: center; } }
+@media (max-width: 900px) { .card-container, .skills-container, .showcase-grid { flex-direction: column; align-items: center; } }
 @media (max-width: 720px) { header h1 { font-size: 3.2rem; } .section { padding: 48px 24px; } .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; } .social-icons { margin-left: 8px; } }
-@media (max-width: 500px) { .experience-cards, .recent-cards { flex-direction: column; align-items: center; } header h1 { font-size: 2.6rem; } .section h2 { font-size: 1.5rem; } }
+@media (max-width: 400px) { header h1 { font-size: 2.6rem; } .tagline { font-size: 1.2rem; } .section h2 { font-size: 1.5rem; } }
 
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
@@ -120,9 +105,9 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
     <ul class="nav-links">
       <li><a href="#about">About Me</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Recent Work</a></li>
+      <li><a href="#recent">Recent Work</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#featured">Featured Work</a></li>
+      <li><a href="#showcases">Showcases</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -136,55 +121,94 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 <header>
   <h1>kxdn</h1>
   <div class="tagline">Experienced FiveM Developer</div>
-  <p>I'm a versatile FiveM developer creating immersive, optimized, and visually stunning roleplay experiences, specializing in scripts, cars, clothing, GFX, and over 15 coding languages.</p>
+  <p>I'm a developer passionate about creating immersive FiveM experiences. I specialize in custom scripts, cars, handling, clothing, and GFX, while continually learning and expanding my skillset.</p>
 </header>
 
+<div class="separator"></div>
+
+<!-- About Me -->
 <section class="section fade-in" id="about">
   <h2>About Me</h2>
-  <p>I'm a versatile FiveM developer with expertise in creating immersive experiences in GTA V, from custom scripts and handling to clothing and GFX. I thrive on problem-solving, writing clean code, and mastering new techniques to continuously push the limits of game development.</p>
+  <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:32px;">
+    <p style="flex:1; min-width:280px;">I craft immersive roleplay experiences in GTA V's FiveM, leveraging years of experience in scripts, cars, handling, clothing, and GFX design. I enjoy solving problems, writing clean, efficient code, and continuously learning new techniques to elevate my work.</p>
+    <img src="your-image.jpg" alt="About Me Image" style="flex:1; max-width:400px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.3);"/>
+  </div>
 </section>
 
+<div class="separator"></div>
+
+<!-- Experience -->
 <section class="section fade-in" id="experience">
   <h2>Experience</h2>
-  <div class="experience-cards">
-    <div class="exp-card">
-      <h3>5+ Years FiveM Dev</h3>
-      <p>Developed custom frameworks, scripts, cars, handling systems, and clothing for immersive roleplay experiences.</p>
+  <div class="card-container">
+    <div class="card"><h3>5+ Years FiveM Development</h3><p>Custom frameworks, scripts, cars, handling, and clothing.</p></div>
+    <div class="card"><h3>Custom RP Servers</h3><p>Multiple servers launched with unique content and immersive systems.</p></div>
+    <div class="card"><h3>Collaboration</h3><p>Worked with server owners and designers across FiveM.</p></div>
+    <div class="card"><h3>Mentoring</h3><p>Training and mentoring new developers.</p></div>
+    <div class="card"><h3>GFX Experience</h3><p>2 years of GFX experience and soon returning to study GFX design.</p></div>
+    <div class="card"><h3>Car Livery Design</h3><p>1 year experience designing car liveries for FiveM vehicles.</p></div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Recent Work -->
+<section class="section fade-in" id="recent">
+  <h2>Recent Work</h2>
+  <div class="card-container">
+    <div class="card">
+      <h3>kx-weather</h3>
+      <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
     </div>
-    <div class="exp-card">
-      <h3>Custom Servers</h3>
-      <p>Launched multiple custom roleplay servers, collaborating closely with owners and designers to deliver polished results.</p>
-    </div>
-    <div class="exp-card">
-      <h3>Mentorship</h3>
-      <p>Training and guiding new developers to enhance server capabilities and improve coding standards.</p>
-    </div>
-    <div class="exp-card">
-      <h3>GFX Experience</h3>
-      <p>2 years of graphic design experience, currently expanding skills further in GFX development and planning to return to school.</p>
-    </div>
-    <div class="exp-card">
-      <h3>Car Livery Design</h3>
-      <p>1 year of designing car liveries, creating realistic and visually appealing vehicles for roleplay environments.</p>
+    <div class="card">
+      <h3>kx-chatclear</h3>
+      <p>Chat clearing script to prevent chat spam and clutter on your server.</p>
+      <a href="https://github.com/ilykxdn/kx-chatclear" target="_blank" class="button" style="margin-top:12px;">View on GitHub</a>
     </div>
   </div>
 </section>
 
-<section class="section fade-in" id="projects">
-  <h2>Recent Work</h2>
-  <div class="recent-cards">
-    <div class="recent-card">
-      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer">
-        <h3>kx-weather</h3>
-        <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
-      </a>
-    </div>
-    <div class="recent-card">
-      <a href="https://github.com/ilykxdn/kx-chatclear" target="_blank" rel="noopener noreferrer">
-        <h3>kx-chatclear</h3>
-        <p>Chat-clearing script to prevent chat from being flooded with messages, keeping communication clean and organized.</p>
-      </a>
-    </div>
+<div class="separator"></div>
+
+<!-- Skills -->
+<section class="section fade-in" id="skills">
+  <h2>My Skills</h2>
+  <div class="skills-container">
+    <div class="skills-card"><h4>Clothing Development</h4></div>
+    <div class="skills-card"><h4>Script Development</h4></div>
+    <div class="skills-card"><h4>Car Development</h4></div>
+    <div class="skills-card"><h4>Handling Metas</h4></div>
+    <div class="skills-card"><h4>Tools & Workflow</h4></div>
+    <div class="skills-card"><h4>Web Development</h4></div>
+    <div class="skills-card"><h4>GFX</h4></div>
+    <div class="skills-card"><h4>Knowledge in 15+ Coding Languages</h4></div>
+    <div class="skills-card"><h4>+ Learning so much more</h4></div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Showcases -->
+<section class="section fade-in" id="showcases">
+  <h2>Showcases</h2>
+  <div class="showcase-grid">
+    <div class="showcase-card"><img src="clothing1.jpg" alt="Clothing Preview"></div>
+    <div class="showcase-card"><img src="car1.jpg" alt="Car Preview"></div>
+    <div class="showcase-card"><img src="clothing2.jpg" alt="Clothing Preview"></div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Contact -->
+<section class="section fade-in" id="contact">
+  <h2>Contact</h2>
+  <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
+  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank">Join the Project Discord</a>
+  <div class="social" aria-label="Social Links" style="margin-top:16px;">
+    <a href="https://github.com/ilykxdn" target="_blank">GitHub</a> | 
+    <a href="https://x.com/xokxdn" target="_blank">X</a> | 
+    <a href="https://throne.com/kxdn" target="_blank">Throne</a>
   </div>
 </section>
 
