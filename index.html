@@ -8,382 +8,339 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  :root {
-    --bg-gradient-start: #f0f8ff;
-    --bg-gradient-mid: #e0f7fa;
-    --bg-gradient-end: #e8f5e9;
-    --section2-gradient-start: #fff3e0;
-    --section2-gradient-end: #ffe0b2;
-    --section3-gradient-start: #f3e5f5;
-    --section3-gradient-end: #e1bee7;
-    --section4-gradient-start: #ede7f6;
-    --section4-gradient-end: #d1c4e9;
-    --section5-gradient-start: #fffde7;
-    --section5-gradient-end: #fff9c4;
-    --text-primary: #2d2d2d;
-    --text-muted: #555;
-    --accent: #6c5ce7;
-    --accent-light: #a29bfe;
-    --card-bg: #ffffffdd;
-    --shadow-light: rgba(108, 92, 231, 0.2);
-  }
+:root {
+  --text-primary: #2d2d2d;
+  --text-muted: #555;
+  --accent: #6c5ce7;
+  --accent-light: #a29bfe;
+  --shadow-light: rgba(108, 92, 231, 0.2);
+  /* Gradients */
+  --grad1-start: #f0f8ff; --grad1-end: #e0f7fa;
+  --grad2-start: #fff3e0; --grad2-end: #ffe0b2;
+  --grad3-start: #f3e5f5; --grad3-end: #e1bee7;
+  --grad4-start: #ede7f6; --grad4-end: #d1c4e9;
+  --grad5-start: #fffde7; --grad5-end: #fff9c4;
+  --grad6-start: #e0f2f1; --grad6-end: #b2dfdb;
+}
 
-  *, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
-    color: var(--text-primary);
-    min-height: 100vh;
-    padding-top: 100px;
-    overflow-x: hidden;
-    position: relative;
-  }
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  padding-top: 100px;
+  overflow-x: hidden;
+}
 
-  /* Top header bar */
-  .header-bar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 32px;
-    background: transparent;
-    border-bottom: 1px solid rgba(255,255,255,0.95);
-    z-index: 1000;
-  }
+/* Header Bar */
+.header-bar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: transparent;
+  border-bottom: 1px solid rgba(255,255,255,0.98);
+  z-index: 1000;
+}
 
-  .site-name {
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: var(--accent);
-    text-shadow: 0 0 8px var(--accent-light);
-    display: flex;
-    align-items: center;
-  }
+.site-name {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent-light);
+  display: flex;
+  align-items: center;
+}
 
-  nav.main-nav {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+nav.main-nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 32px;
-  }
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+}
 
-  .nav-links a {
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 4px;
-    transition: color 0.3s ease;
-  }
+.nav-links a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
 
-  .nav-links a::after {
-    content: "";
-    position: absolute;
-    left: 0; bottom: 0;
-    width: 100%; height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-    border-radius: 2px;
-  }
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
 
-  .nav-links a:hover {
-    color: var(--accent-light);
-  }
+.nav-links a:hover {
+  color: var(--accent-light);
+}
 
-  .nav-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
+.nav-links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 
-  .social-icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
+.social-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
 
-  .social-icons a {
-    color: var(--text-primary);
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-  }
+.social-icons a {
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
 
-  .social-icons a:hover {
-    color: var(--accent);
-  }
+.social-icons a:hover {
+  color: var(--accent);
+}
 
-  header {
-    max-width: 720px;
-    margin: 64px auto 56px;
-    padding: 0 24px;
-    text-align: center;
-    animation: fadeSlideIn 1s ease-out forwards;
-    opacity: 0;
-  }
+/* Fullscreen Sections */
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 64px 32px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-light);
+  transition: box-shadow 0.3s ease;
+}
 
-  header h1 {
-    font-size: 4rem;
-    font-weight: 900;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    margin-bottom: 8px;
-    text-shadow: 0 0 12px var(--accent-light);
-  }
+#showcases { background: linear-gradient(135deg, var(--grad1-start), var(--grad1-end)); }
+#about { background: linear-gradient(135deg, var(--grad2-start), var(--grad2-end)); }
+#skills { background: linear-gradient(135deg, var(--grad3-start), var(--grad3-end)); }
+#experience { background: linear-gradient(135deg, var(--grad4-start), var(--grad4-end)); }
+#projects { background: linear-gradient(135deg, var(--grad5-start), var(--grad5-end)); }
+#contact { background: linear-gradient(135deg, var(--grad6-start), var(--grad6-end)); }
 
-  .tagline {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--accent-light);
-    margin-bottom: 24px;
-    letter-spacing: 0.05em;
-  }
+.section:hover { box-shadow: 0 16px 48px rgba(108,92,231,0.25); }
 
-  header p {
-    max-width: 580px;
-    margin: 0 auto;
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: var(--text-muted);
-  }
+.section h2 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 28px;
+  font-weight: 700;
+  border-bottom: 3px solid var(--accent-light);
+  padding-bottom: 10px;
+  text-align: center;
+}
 
-  /* Sections with unique gradients */
-  .section {
-    max-width: 720px;
-    margin: 72px auto;
-    padding: 48px 32px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px var(--shadow-light);
-    transition: box-shadow 0.3s ease;
-  }
+.section p, .section ul {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  text-align: center;
+}
 
-  #showcases { background: linear-gradient(135deg, #f0f8ff, #e0f7fa); }
-  #about { background: linear-gradient(135deg, var(--section2-gradient-start), var(--section2-gradient-end)); }
-  #skills { background: linear-gradient(135deg, var(--section3-gradient-start), var(--section3-gradient-end)); }
-  #experience { background: linear-gradient(135deg, var(--section4-gradient-start), var(--section4-gradient-end)); }
-  #projects { background: linear-gradient(135deg, var(--section5-gradient-start), var(--section5-gradient-end)); }
+ul { padding-left: 24px; margin-top: 12px; }
+ul li { margin-bottom: 12px; }
 
-  .section:hover { box-shadow: 0 16px 48px rgba(108,92,231,0.25); }
+/* Projects */
+.project {
+  background: white;
+  border-radius: 14px;
+  padding: 24px 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 6px 20px var(--shadow-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
 
-  .section h2 {
-    font-size: 1.8rem;
-    color: var(--accent);
-    margin-bottom: 28px;
-    font-weight: 700;
-    border-bottom: 3px solid var(--accent-light);
-    padding-bottom: 10px;
-  }
+.project:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 14px 44px rgba(108,92,231,0.25);
+}
 
-  .section p, .section ul {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text-muted);
-  }
+.project h3 { color: var(--text-primary); font-size: 1.5rem; margin-bottom: 10px; font-weight: 700; }
+.project p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.5; }
 
-  ul { padding-left: 24px; margin-top: 12px; }
-  ul li { margin-bottom: 12px; }
+/* Buttons */
+a.button {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 16px 32px;
+  margin-top: 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 8px 20px rgba(108,92,231,0.25);
+  text-decoration: none;
+  transition: background 0.3s ease;
+  user-select: none;
+}
 
-  .project {
-    background: white;
-    border-radius: 14px;
-    padding: 24px 32px;
-    margin-bottom: 32px;
-    box-shadow: 0 6px 20px var(--shadow-light);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: default;
-  }
+a.button:hover {
+  background: var(--accent-light);
+  box-shadow: 0 12px 32px rgba(162,155,254,0.6);
+}
 
-  .project:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 14px 44px rgba(108,92,231,0.25);
-  }
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  .project h3 {
-    color: var(--text-primary);
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
+footer {
+  max-width: 720px;
+  margin: 96px auto 48px;
+  padding: 0 24px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+  user-select: none;
+}
 
-  .project p {
-    color: var(--text-muted);
-    font-size: 1.1rem;
-    line-height: 1.5;
-  }
+@media (max-width: 720px) {
+  header h1 { font-size: 3.2rem; }
+  .section { padding: 48px 24px; }
+  .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+}
 
-  a.button {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    padding: 16px 32px;
-    margin-top: 28px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    box-shadow: 0 8px 20px rgba(108,92,231,0.25);
-    text-decoration: none;
-    transition: background 0.3s ease;
-    user-select: none;
-  }
+@media (max-width: 400px) {
+  header h1 { font-size: 2.6rem; }
+  .tagline { font-size: 1.2rem; }
+  .section h2 { font-size: 1.5rem; }
+}
 
-  a.button:hover {
-    background: var(--accent-light);
-    box-shadow: 0 12px 32px rgba(162,155,254,0.6);
-  }
-
-  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-  footer {
-    max-width: 720px;
-    margin: 96px auto 48px;
-    padding: 0 24px;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    text-align: center;
-    user-select: none;
-  }
-
-  @media (max-width: 720px) {
-    header h1 { font-size: 3.2rem; }
-    .section { margin: 48px 16px; padding: 40px 24px; }
-    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
-  }
-  @media (max-width: 400px) {
-    header h1 { font-size: 2.6rem; }
-    .tagline { font-size: 1.2rem; }
-    .section h2 { font-size: 1.5rem; }
-  }
-
-  @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
 
-  <!-- Top Header Bar -->
-  <div class="header-bar">
-    <div class="site-name">kxdn</div>
+<!-- Top Header Bar -->
+<div class="header-bar">
+  <div class="site-name">kxdn</div>
 
-    <nav class="main-nav" aria-label="Primary Navigation">
-      <ul class="nav-links">
-        <li><a href="#showcases">Showcases</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Recent Work</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <nav class="main-nav" aria-label="Primary Navigation">
+    <ul class="nav-links">
+      <li><a href="#showcases">Showcases</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Recent Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <div class="social-icons">
-      <a href="https://discord.gg/w8w4dsKKG8" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-      <a href="https://github.com/ilykxdn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-      <a href="https://twitter.com/kxdn_dev" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-    </div>
+  <div class="social-icons">
+    <a href="https://discord.gg/w8w4dsKKG8" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+    <a href="https://github.com/ilykxdn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://twitter.com/kxdn_dev" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
   </div>
+</div>
 
-  <header>
-    <h1>kxdn</h1>
-    <div class="tagline">Experienced FiveM Developer</div>
-    <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
-  </header>
+<header>
+  <h1>kxdn</h1>
+  <div class="tagline">Experienced FiveM Developer</div>
+  <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
+</header>
 
-  <!-- Sections -->
-  <section class="section fade-in" id="showcases">
-    <h2>Showcases</h2>
-    <p>Featured highlights of my FiveM projects, demonstrating creativity, performance, and depth.</p>
-    <div class="project">
-      <h3>FiveM ErrorRP Server</h3>
-      <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy optimized for performance.</p>
-    </div>
-    <div class="project">
-      <h3>kxdn-utils</h3>
-      <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
-    </div>
-  </section>
+<!-- Sections -->
+<section class="section fade-in" id="showcases">
+  <h2>Showcases</h2>
+  <p>Featured highlights of my FiveM projects, demonstrating creativity, performance, and depth.</p>
+  <div class="project">
+    <h3>FiveM ErrorRP Server</h3>
+    <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy optimized for performance.</p>
+  </div>
+  <div class="project">
+    <h3>kxdn-utils</h3>
+    <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
+  </div>
+</section>
 
-  <section class="section fade-in" id="about">
-    <h2>About Me</h2>
-    <p>I'm a passionate developer with a focus on immersive experiences in GTA V's FiveM platform. I love solving problems, creating clean code, and learning new techniques to stay ahead in game development.</p>
-  </section>
+<section class="section fade-in" id="about">
+  <h2>About Me</h2>
+  <p>I'm a passionate developer with a focus on immersive experiences in GTA V's FiveM platform. I love solving problems, creating clean code, and learning new techniques to stay ahead in game development.</p>
+</section>
 
-  <section class="section fade-in" id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>Lua, JavaScript, SQL, and CFX scripting</li>
-      <li>Custom Framework Creation & Optimization</li>
-      <li>UI/UX Design & Implementation</li>
-      <li>Performance-focused server and client systems</li>
-      <li>Version control with Git and teamwork</li>
-      <li>Debugging and profiling for optimization</li>
-    </ul>
-  </section>
+<section class="section fade-in" id="skills">
+  <h2>Skills</h2>
+  <ul>
+    <li>Lua, JavaScript, SQL, and CFX scripting</li>
+    <li>Custom Framework Creation & Optimization</li>
+    <li>UI/UX Design & Implementation</li>
+    <li>Performance-focused server and client systems</li>
+    <li>Version control with Git and teamwork</li>
+    <li>Debugging and profiling for optimization</li>
+  </ul>
+</section>
 
-  <section class="section fade-in" id="experience">
-    <h2>Experience</h2>
-    <ul>
-      <li>5+ Years FiveM Development</li>
-      <li>Multiple Custom Roleplay Servers Launched</li>
-      <li>Collaboration with server owners and designers</li>
-      <li>Training and mentoring junior developers</li>
-    </ul>
-  </section>
+<section class="section fade-in" id="experience">
+  <h2>Experience</h2>
+  <ul>
+    <li>5+ Years FiveM Development</li>
+    <li>Multiple Custom Roleplay Servers Launched</li>
+    <li>Collaboration with server owners and designers</li>
+    <li>Training and mentoring junior developers</li>
+  </ul>
+</section>
 
-  <section class="section fade-in" id="projects">
-    <h2>Recent Work</h2>
-    <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
-    <div class="project">
-      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
-        <h3>kx-weather</h3>
-        <p>kx-weather is a QBCore script that adds dynamic, location based weather, so it can be sunny in Sandy Shores and stormy in Los Santos at the same time!</p>
-      </a>
-    </div>
-    <div class="project">
-      <h3>Advanced Role Management</h3>
-      <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
-    </div>
-  </section>
+<section class="section fade-in" id="projects">
+  <h2>Recent Work</h2>
+  <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
+  <div class="project">
+    <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+      <h3>kx-weather</h3>
+      <p>kx-weather is a QBCore script that adds dynamic, location based weather, so it can be sunny in Sandy Shores and stormy in Los Santos at the same time!</p>
+    </a>
+  </div>
+  <div class="project">
+    <h3>Advanced Role Management</h3>
+    <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
+  </div>
+</section>
 
-  <section class="section fade-in" id="contact">
-    <h2>Contact</h2>
-    <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
-    <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
-    <div class="social" aria-label="Social Links">
-      <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="https://twitter.com/kxdn_dev" target="_blank" rel="noopener noreferrer">Twitter</a>
-      <a href="https://www.linkedin.com/in/kxdn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </div>
-  </section>
+<section class="section fade-in" id="contact">
+  <h2>Contact</h2>
+  <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
+  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
+  <div class="social" aria-label="Social Links">
+    <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://twitter.com/kxdn_dev" target="_blank" rel="noopener noreferrer">Twitter</a>
+    <a href="https://www.linkedin.com/in/kxdn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+</section>
 
-  <footer>
-    &copy; 2025 kxdn. All rights reserved.
-  </footer>
+<footer>
+  &copy; 2025 kxdn. All rights reserved.
+</footer>
 
 <script>
-  const fadeEls = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 }
-  );
-  fadeEls.forEach(el => observer.observe(el));
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 }
+);
+fadeEls.forEach(el => observer.observe(el));
 </script>
 
 </body>
