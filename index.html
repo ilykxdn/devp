@@ -18,7 +18,7 @@
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; background: #ede7f6; overflow-x: hidden; }
+body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; }
 
 /* Header */
 .header-bar {
@@ -28,22 +28,13 @@ body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; backgrou
   background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
   z-index: 1000;
 }
-
 .site-name { font-weight: 700; font-size: 1.5rem; color: #fff; text-shadow: 0 0 6px var(--accent-light); }
-
 nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
-
 .nav-links { display: flex; list-style: none; gap: 28px; margin: 0; padding: 0; }
-.nav-links a {
-  text-decoration: none; font-weight: 600; color: #fff; padding-bottom: 4px; position: relative; transition: color 0.3s ease;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px;
-  background: var(--accent-light); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px;
-}
+.nav-links a { text-decoration: none; font-weight: 600; color: #fff; padding-bottom: 4px; position: relative; transition: color 0.3s ease; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-light); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px; }
 .nav-links a:hover { color: var(--accent-light); }
 .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-
 .social-icons { display: flex; gap: 16px; margin-left: 16px; }
 .social-icons a { color: #fff; font-size: 1.25rem; transition: color 0.3s ease; }
 .social-icons a:hover { color: var(--accent-light); }
@@ -67,7 +58,7 @@ ul { padding-left: 24px; margin-top: 16px; } ul li { margin-bottom: 12px; }
 
 /* Projects */
 .project {
-  background: rgba(255, 255, 255, 0.15); /* show gradient behind */
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 14px; padding: 28px 32px; margin-bottom: 28px;
   box-shadow: 0 6px 18px var(--shadow-light);
   transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
@@ -104,6 +95,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 }
 
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
 </style>
 </head>
 <body>
@@ -196,8 +188,8 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
   <div class="social" aria-label="Social Links" style="margin-top:16px;">
     <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a> | 
-    <a href="https://twitter.com/kxdn_dev" target="_blank" rel="noopener noreferrer">Twitter</a> | 
-    <a href="https://www.linkedin.com/in/kxdn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://x.com/xokxdn" target="_blank" rel="noopener noreferrer">X</a> | 
+    <a href="https://throne.com/kxdn" target="_blank" rel="noopener noreferrer">Throne</a>
   </div>
 </section>
 
@@ -218,44 +210,28 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 fadeEls.forEach(el => observer.observe(el));
 
-// Full-page smooth gradient scroll
+// Static gradient per section (repeating)
 const sections = document.querySelectorAll('.section');
 const sectionColors = [
-  ['#ede7f6','#b39ddb'],
-  ['#d1c4e9','#9575cd'],
-  ['#b39ddb','#7e57c2'],
-  ['#d1c4e9','#9575cd'],
-  ['#ede7f6','#b39ddb'],
-  ['#7e57c2','#9575cd']
+  ['#ede7f6','#b39ddb'], // Gradient 1
+  ['#d1c4e9','#9575cd']  // Gradient 2
 ];
-
-function lerpColor(a, b, t) {
-  const ah = parseInt(a.replace('#',''),16),
-        bh = parseInt(b.replace('#',''),16),
-        ar = ah >> 16, ag = (ah >> 8)&0xff, ab = ah &0xff,
-        br = bh >> 16, bg = (bh >> 8)&0xff, bb = bh &0xff;
-  const rr = Math.round(ar+(br-ar)*t),
-        rg = Math.round(ag+(bg-ag)*t),
-        rb = Math.round(ab+(bb-ab)*t);
-  return `#${(rr<<16|rg<<8|rb).toString(16).padStart(6,'0')}`;
-}
 
 function updateBackground() {
   const scrollY = window.scrollY;
-  const totalHeight = document.body.scrollHeight - window.innerHeight;
-  let pageT = scrollY / totalHeight;
-  
-  const totalSections = sectionColors.length;
-  let idx = Math.floor(pageT * totalSections);
-  let t = (pageT * totalSections) - idx;
-  
-  const [c1Start,c1End] = sectionColors[idx % totalSections];
-  const [c2Start,c2End] = sectionColors[(idx+1) % totalSections];
-  
-  const gradStart = lerpColor(c1Start, c2Start, t);
-  const gradEnd = lerpColor(c1End, c2End, t);
-  
-  document.body.style.background = `linear-gradient(135deg, ${gradStart}, ${gradEnd})`;
+  for(let i=0; i<sections.length; i++){
+    const sec = sections[i];
+    const startY = sec.offsetTop;
+    const endY = sec.offsetTop + sec.offsetHeight;
+    if(scrollY >= startY && scrollY < endY){
+      const [c1,c2] = sectionColors[i % sectionColors.length];
+      document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+      return;
+    }
+  }
+  // Default background
+  const [c1,c2] = sectionColors[0];
+  document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
 }
 
 window.addEventListener('scroll', updateBackground);
