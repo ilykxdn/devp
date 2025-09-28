@@ -10,7 +10,7 @@
 <style>
 :root {
   --text-primary: #fff;
-  --text-muted: rgba(255,255,255,0.85);
+  --text-muted: rgba(255,255,255,0.8);
   --accent: #b39ddb;
   --accent-light: #d1c4e9;
   --shadow-light: rgba(0,0,0,0.2);
@@ -18,20 +18,14 @@
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { 
-  margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; 
-  background: linear-gradient(180deg, #ede7f6, #d1c4e9, #b39ddb, #9575cd); 
-  background-attachment: fixed; 
-  color: var(--text-primary); 
-  overflow-x: hidden; 
-}
+body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; background: #ede7f6; overflow-x: hidden; }
 
 /* Header */
 .header-bar {
   position: fixed; top: 0; left: 0; width: 100%;
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 32px;
-  background: rgba(0,0,0,0.2); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
   z-index: 1000;
 }
 
@@ -64,9 +58,9 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .section {
   width: 100%; min-height: 90vh; display: flex; flex-direction: column;
   align-items: center; justify-content: center; padding: 64px 32px;
-  background: transparent; /* remove gray blocks */
-  margin: 0; transition: box-shadow 0.3s ease;
+  border-radius: 20px; margin: 48px 0; transition: box-shadow 0.3s ease;
 }
+.section:hover { box-shadow: 0 16px 48px var(--shadow-light); }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; text-align: center; }
 .section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
 ul { padding-left: 24px; margin-top: 16px; } ul li { margin-bottom: 12px; }
@@ -92,6 +86,14 @@ a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(2
 /* Fade animation */
 .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* Gradients for sections */
+#about { background: linear-gradient(135deg, #ede7f6, #b39ddb); }
+#experience { background: linear-gradient(135deg, #d1c4e9, #9575cd); }
+#projects { background: linear-gradient(135deg, #b39ddb, #7e57c2); }
+#skills { background: linear-gradient(135deg, #d1c4e9, #9575cd); }
+#featured { background: linear-gradient(135deg, #ede7f6, #b39ddb); }
+#contact { background: linear-gradient(135deg, #7e57c2, #9575cd); }
 
 /* Footer */
 footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin: 64px auto 32px; }
@@ -201,6 +203,11 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <h2>Contact</h2>
   <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
   <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
+  <div class="social" aria-label="Social Links" style="margin-top:16px;">
+    <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a> | 
+    <a href="https://twitter.com/kxdn_dev" target="_blank" rel="noopener noreferrer">Twitter</a> | 
+    <a href="https://www.linkedin.com/in/kxdn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
 </section>
 
 <footer>
