@@ -84,10 +84,11 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .project:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.2); }
 .project h3, .project p { color: #fff; }
 
-/* Featured Screenshots */
-.featured-screenshots { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 16px; }
-.featured-screenshots img { width: 30%; border-radius: 12px; object-fit: cover; border: 2px solid var(--accent-light); transition: transform 0.3s ease; }
-.featured-screenshots img:hover { transform: scale(1.05); }
+/* Showcases */
+.showcase-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 24px; }
+.showcase-box { flex: 1 1 300px; background: rgba(0,0,0,0.25); border-radius: 12px; padding: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
+.showcase-box:hover { transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0,0,0,0.3); }
+.showcase-box img { width: 100%; border-radius: 8px; margin-bottom: 8px; object-fit: cover; }
 
 /* Buttons */
 a.button {
@@ -104,7 +105,7 @@ a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(2
 /* Skills Section Grid */
 .skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin-top: 32px;
 }
@@ -137,7 +138,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   .social-icons { margin-left: 8px; }
   .about-container { flex-direction: column; }
   .skills-container { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
-  .featured-screenshots img { width: 80%; }
 }
 @media (max-width: 400px) {
   header h1 { font-size: 2.6rem; }
@@ -159,7 +159,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Recent Work</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#featured">Featured Work</a></li>
+      <li><a href="#showcases">Showcases</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -176,7 +176,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
 </header>
 
-<!-- Sections -->
+<!-- About Me -->
 <section class="section fade-in" id="about">
   <h2>About Me</h2>
   <div class="about-container">
@@ -189,6 +189,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   </div>
 </section>
 
+<!-- Experience -->
 <section class="section fade-in" id="experience">
   <h2>Experience</h2>
   <ul>
@@ -199,29 +200,31 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   </ul>
 </section>
 
+<!-- Recent Work -->
 <section class="section fade-in" id="projects">
   <h2>Recent Work</h2>
-  <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
   <div class="project">
     <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
       <h3>kx-weather</h3>
       <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
     </a>
-    <div class="featured-screenshots">
-      <img src="https://via.placeholder.com/400x200" alt="Clothing Preview 1">
-      <img src="https://via.placeholder.com/400x200" alt="Car Preview 1">
-      <img src="https://via.placeholder.com/400x200" alt="Clothing Preview 2">
-    </div>
+  </div>
+  <div class="project">
+    <a href="https://github.com/ilykxdn/kx-chatclear" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+      <h3>kx-chatclear</h3>
+      <p>Chat clearing script to prevent chat from being drowned with messages.</p>
+    </a>
   </div>
 </section>
 
+<!-- Skills -->
 <section class="section fade-in" id="skills">
   <h2 style="font-size:3rem; font-weight:900; margin-bottom:32px;">My Skills</h2>
   <div class="skills-container">
     <div class="skill-card">Clothing Development</div>
     <div class="skill-card">Script Development</div>
     <div class="skill-card">Car Development</div>
-    <div class="skill-card">Car Handling Development</div>
+    <div class="skill-card">Handling Metas</div>
     <div class="skill-card">Tools & Workflow</div>
     <div class="skill-card">Web Development</div>
     <div class="skill-card">GFX</div>
@@ -229,6 +232,25 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   </div>
 </section>
 
+<!-- Showcases -->
+<section class="section fade-in" id="showcases">
+  <h2>Showcases</h2>
+  <div class="showcase-container">
+    <div class="showcase-box">
+      <h3>Clothing Previews</h3>
+      <img src="https://via.placeholder.com/400x200" alt="Clothing Preview 1">
+      <img src="https://via.placeholder.com/400x200" alt="Clothing Preview 2">
+    </div>
+    <div class="showcase-box">
+      <h3>Car Previews</h3>
+      <img src="https://via.placeholder.com/400x200" alt="Car Preview 1">
+      <img src="https://via.placeholder.com/400x200" alt="Car Preview 2">
+      <img src="https://via.placeholder.com/400x200" alt="Car Preview 3">
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
 <section class="section fade-in" id="contact">
   <h2>Contact</h2>
   <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
