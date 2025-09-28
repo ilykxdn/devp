@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kxdn — FiveM Developer</title>
+<meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
@@ -17,14 +18,7 @@
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { 
-  margin: 0; 
-  font-family: 'Inter', sans-serif; 
-  padding-top: 100px; 
-  overflow-x: hidden; 
-  background: linear-gradient(180deg, #ede7f6 0%, #b39ddb 16.66%, #d1c4e9 16.66%, #9575cd 33.33%, #b39ddb 33.33%, #7e57c2 50%, #ede7f6 50%, #b39ddb 66.66%, #d1c4e9 66.66%, #9575cd 83.33%, #7e57c2 83.33%, #9575cd 100%);
-  background-attachment: fixed;
-}
+body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; }
 
 /* Header */
 .header-bar {
@@ -53,15 +47,11 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 
 /* Sections */
 .section {
-  width: 100%; 
-  min-height: 90vh; 
-  display: flex; 
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center; 
-  padding: 64px 32px;
-  margin: 0;
-  background: transparent;
+  width: 100%; min-height: 90vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 64px 32px;
+  margin: 0; /* remove spacing between sections */
+  border-radius: 0; /* remove border-radius to avoid color gaps */
+  background: transparent; /* transparent so the gradient shows fully */
 }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; text-align: center; }
 .section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
@@ -70,7 +60,7 @@ ul li { margin-bottom: 12px; }
 
 /* Projects */
 .project {
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.25); /* subtle contrast but not too large */
   border-radius: 14px; 
   padding: 28px 32px; 
   margin-bottom: 28px;
@@ -224,6 +214,22 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 fadeEls.forEach(el => observer.observe(el));
+
+// Static multi-gradient background
+const gradients = [
+  'linear-gradient(135deg, #ede7f6, #b39ddb)',
+  'linear-gradient(135deg, #d1c4e9, #9575cd)',
+  'linear-gradient(135deg, #b39ddb, #7e57c2)',
+  'linear-gradient(135deg, #ede7f6, #b39ddb)',
+  'linear-gradient(135deg, #d1c4e9, #9575cd)',
+  'linear-gradient(135deg, #7e57c2, #9575cd)'
+];
+
+// Combine gradients vertically
+document.body.style.background = gradients.join(', ');
+document.body.style.backgroundSize = '100% 100vh';
+document.body.style.backgroundRepeat = 'no-repeat';
+document.body.style.backgroundAttachment = 'fixed';
 </script>
 
 </body>
