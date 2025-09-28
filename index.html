@@ -14,7 +14,7 @@
   --accent: #b39ddb;
   --accent-light: #d1c4e9;
   --shadow-light: rgba(0,0,0,0.2);
-  --separator: #ffffff; /* White separators */
+  --separator: #ffffff;
 }
 
 /* Basic resets */
@@ -28,7 +28,7 @@ body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow
   padding: 16px 32px;
   background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
   z-index: 1000;
-  border-bottom: 2px solid var(--separator); /* Thicker white line */
+  border-bottom: 2px solid var(--separator);
 }
 .site-name { font-weight: 700; font-size: 1.5rem; color: #fff; text-shadow: 0 0 6px var(--accent-light); }
 nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
@@ -56,12 +56,12 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .section + .section::before {
   content: '';
   position: absolute; top: 0; left: 32px; right: 32px;
-  height: 2px; background: var(--separator); opacity: 1; /* Thicker white line */
+  height: 2px; background: var(--separator); opacity: 1;
 }
 #about::before {
   content: '';
   position: absolute; top: 0; left: 32px; right: 32px;
-  height: 2px; background: var(--separator); opacity: 1; /* Line above About Me */
+  height: 2px; background: var(--separator); opacity: 1;
 }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; text-align: center; }
 .section p { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
@@ -84,6 +84,11 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .project:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.2); }
 .project h3, .project p { color: #fff; }
 
+/* Featured Screenshots */
+.featured-screenshots { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 16px; }
+.featured-screenshots img { width: 30%; border-radius: 12px; object-fit: cover; border: 2px solid var(--accent-light); transition: transform 0.3s ease; }
+.featured-screenshots img:hover { transform: scale(1.05); }
+
 /* Buttons */
 a.button {
   display: inline-block; background: var(--accent); color: #fff; padding: 14px 30px;
@@ -96,8 +101,13 @@ a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(2
 .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* Skills Section Tabs */
-.skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 32px; }
+/* Skills Section Grid */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
 .skill-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.2);
@@ -107,8 +117,6 @@ a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(2
   font-weight: 600;
   font-size: 1.1rem;
   text-align: center;
-  min-width: 160px;
-  flex: 1 1 140px;
   transition: all 0.3s ease;
   backdrop-filter: blur(6px);
 }
@@ -128,7 +136,8 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   .social-icons { margin-left: 8px; }
   .about-container { flex-direction: column; }
-  .skills-container { flex-direction: column; gap: 16px; }
+  .skills-container { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+  .featured-screenshots img { width: 80%; }
 }
 @media (max-width: 400px) {
   header h1 { font-size: 2.6rem; }
@@ -137,7 +146,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 }
 
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
 </style>
 </head>
 <body>
@@ -199,10 +207,11 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
       <h3>kx-weather</h3>
       <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
     </a>
-  </div>
-  <div class="project">
-    <h3>Advanced Role Management</h3>
-    <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
+    <div class="featured-screenshots">
+      <img src="https://via.placeholder.com/400x200" alt="Clothing Preview 1">
+      <img src="https://via.placeholder.com/400x200" alt="Car Preview 1">
+      <img src="https://via.placeholder.com/400x200" alt="Clothing Preview 2">
+    </div>
   </div>
 </section>
 
@@ -212,23 +221,11 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
     <div class="skill-card">Clothing Development</div>
     <div class="skill-card">Script Development</div>
     <div class="skill-card">Car Development</div>
+    <div class="skill-card">Car Handling Development</div>
     <div class="skill-card">Tools & Workflow</div>
     <div class="skill-card">Web Development</div>
     <div class="skill-card">GFX</div>
     <div class="skill-card">+ Learning so much more</div>
-  </div>
-</section>
-
-<section class="section fade-in" id="featured">
-  <h2>Featured Work</h2>
-  <p>Highlighted projects demonstrating creativity, performance, and depth in FiveM development.</p>
-  <div class="project">
-    <h3>FiveM ErrorRP Server</h3>
-    <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy optimized for performance.</p>
-  </div>
-  <div class="project">
-    <h3>kxdn-utils</h3>
-    <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
   </div>
 </section>
 
