@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>kxdn — FiveM Developer</title>
-<meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
@@ -18,13 +17,14 @@
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { 
-  margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; 
-  background: linear-gradient(180deg, #ede7f6, #d1c4e9, #b39ddb, #9575cd); 
-  background-attachment: fixed; 
-  color: var(--text-primary); 
-  overflow-x: hidden; 
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  padding-top: 100px;
+  color: var(--text-primary);
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  transition: background 0.5s ease;
 }
 
 /* Header */
@@ -56,9 +56,7 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .section {
   width: 100%; min-height: 90vh; display: flex; flex-direction: column;
   align-items: center; justify-content: center; padding: 64px 32px;
-  background: transparent; 
-  margin: 0; 
-  transition: background 1s ease;
+  transition: background 0.5s ease;
 }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; text-align: center; }
 .section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
@@ -66,7 +64,7 @@ ul { padding-left: 24px; margin-top: 16px; } ul li { margin-bottom: 12px; }
 
 /* Projects */
 .project {
-  background: rgba(255, 255, 255, 0.15); 
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 14px; padding: 28px 32px; margin-bottom: 28px;
   box-shadow: 0 6px 18px var(--shadow-light);
   transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
@@ -130,13 +128,13 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 <header>
   <h1>kxdn</h1>
   <div class="tagline">Experienced FiveM Developer</div>
-  <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
+  <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs.</p>
 </header>
 
 <!-- Sections -->
 <section class="section fade-in" id="about">
   <h2>About Me</h2>
-  <p>I'm a passionate developer focused on immersive experiences in GTA V's FiveM. I enjoy problem solving, writing clean code, and learning new techniques to stay ahead in game development.</p>
+  <p>I'm a passionate developer focused on immersive experiences in GTA V's FiveM.</p>
 </section>
 
 <section class="section fade-in" id="experience">
@@ -153,14 +151,8 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <h2>Recent Work</h2>
   <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
   <div class="project">
-    <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
-      <h3>kx-weather</h3>
-      <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
-    </a>
-  </div>
-  <div class="project">
-    <h3>Advanced Role Management</h3>
-    <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
+    <h3>kx-weather</h3>
+    <p>Dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
   </div>
 </section>
 
@@ -171,28 +163,20 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
     <li>Custom Framework Creation & Optimization</li>
     <li>UI/UX Design & Implementation</li>
     <li>Performance-focused server and client systems</li>
-    <li>Version control with Git and teamwork</li>
-    <li>Debugging and profiling for optimization</li>
   </ul>
 </section>
 
 <section class="section fade-in" id="featured">
   <h2>Featured Work</h2>
-  <p>Highlighted projects demonstrating creativity, performance, and depth in FiveM development.</p>
   <div class="project">
     <h3>FiveM ErrorRP Server</h3>
     <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy optimized for performance.</p>
-  </div>
-  <div class="project">
-    <h3>kxdn-utils</h3>
-    <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
   </div>
 </section>
 
 <section class="section fade-in" id="contact">
   <h2>Contact</h2>
-  <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
-  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
+  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank">Join the Project Discord</a>
 </section>
 
 <footer>
@@ -210,6 +194,29 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 fadeEls.forEach(el => observer.observe(el));
+
+// Dynamic gradient scroll effect
+const colors = [
+  ['#ede7f6', '#d1c4e9'],
+  ['#b39ddb', '#9575cd'],
+  ['#7e57c2', '#673ab7'],
+  ['#9575cd', '#7e57c2'],
+  ['#d1c4e9', '#b39ddb'],
+  ['#ede7f6', '#b39ddb']
+];
+const sections = document.querySelectorAll('.section');
+
+function updateGradient() {
+  const scrollPos = window.scrollY + window.innerHeight/2;
+  let currentIndex = 0;
+  sections.forEach((sec, i) => {
+    if(sec.offsetTop < scrollPos) currentIndex = i;
+  });
+  const [start, end] = colors[currentIndex % colors.length];
+  document.body.style.background = `linear-gradient(135deg, ${start}, ${end})`;
+}
+window.addEventListener('scroll', updateGradient);
+updateGradient();
 </script>
 
 </body>
