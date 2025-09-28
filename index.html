@@ -1,91 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>kxdn — FiveM Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --text-primary: #fff;
-  --text-muted: rgba(255,255,255,0.85);
-  --accent: #b39ddb;
-  --accent-light: #d1c4e9;
-  --shadow-light: rgba(0,0,0,0.2);
+  --text-primary: #1f1f1f;
+  --text-muted: #555;
+  --accent: #6c5ce7;
+  --accent-light: #a29bfe;
+  --shadow-light: rgba(108,92,231,0.15);
 }
 
-/* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   padding-top: 100px;
-  color: var(--text-primary);
   overflow-x: hidden;
-  scroll-behavior: smooth;
-  transition: background 0.5s ease;
+  transition: background 0.3s ease;
 }
 
 /* Header */
 .header-bar {
-  position: fixed; top: 0; left: 0; width: 100%;
-  display: flex; justify-content: space-between; align-items: center;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 16px 32px;
-  background: rgba(0,0,0,0.2); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px var(--shadow-light);
   z-index: 1000;
 }
-.site-name { font-weight: 700; font-size: 1.5rem; color: #fff; text-shadow: 0 0 6px var(--accent-light); }
-nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
-.nav-links { display: flex; list-style: none; gap: 28px; margin: 0; padding: 0; }
-.nav-links a { text-decoration: none; font-weight: 600; color: #fff; padding-bottom: 4px; position: relative; transition: color 0.3s ease; }
-.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent-light); transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; border-radius: 2px; }
+
+.site-name {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 0 0 6px var(--accent-light);
+}
+
+nav.main-nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 28px;
+  margin: 0; padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  color: #fff;
+  padding-bottom: 4px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--accent-light);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  border-radius: 2px;
+}
+
 .nav-links a:hover { color: var(--accent-light); }
 .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-.social-icons { display: flex; gap: 16px; margin-left: 16px; }
-.social-icons a { color: #fff; font-size: 1.25rem; transition: color 0.3s ease; }
+
+.social-icons {
+  display: flex;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
 .social-icons a:hover { color: var(--accent-light); }
 
 /* Header Section */
-header { max-width: 800px; margin: 0 auto 64px; text-align: center; animation: fadeSlideIn 1s ease-out forwards; opacity: 0; }
-header h1 { font-size: 4rem; font-weight: 900; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; }
-header .tagline { font-size: 1.6rem; font-weight: 600; color: var(--accent-light); margin-bottom: 20px; }
-header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-width: 640px; margin: 0 auto; }
+header {
+  max-width: 800px;
+  margin: 0 auto 64px;
+  text-align: center;
+  animation: fadeSlideIn 1s ease-out forwards;
+  opacity: 0;
+}
+
+header h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+header .tagline {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent-light);
+  margin-bottom: 20px;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto;
+}
 
 /* Sections */
 .section {
-  width: 100%; min-height: 90vh; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; padding: 64px 32px;
-  transition: background 0.5s ease;
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 32px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px var(--shadow-light);
+  margin: 48px 0;
+  transition: box-shadow 0.3s ease;
 }
-.section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; text-align: center; }
-.section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
-ul { padding-left: 24px; margin-top: 16px; } ul li { margin-bottom: 12px; }
+
+.section:hover { box-shadow: 0 16px 48px rgba(108,92,231,0.2); }
+
+.section h2 {
+  font-size: 2rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--accent-light);
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+.section p, .section ul {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+ul { padding-left: 24px; margin-top: 16px; }
+ul li { margin-bottom: 12px; }
 
 /* Projects */
 .project {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 14px; padding: 28px 32px; margin-bottom: 28px;
+  background: white;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 28px;
   box-shadow: 0 6px 18px var(--shadow-light);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
 }
-.project:hover { transform: translateY(-6px); box-shadow: 0 14px 36px var(--shadow-light); }
-.project h3, .project p { color: #fff; }
+
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(108,92,231,0.2);
+}
+
+.project h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-primary); }
+.project p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.5; }
 
 /* Buttons */
 a.button {
-  display: inline-block; background: var(--accent); color: #fff; padding: 14px 30px;
-  border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease;
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(108,92,231,0.25);
+  transition: all 0.3s ease;
 }
-a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(255,255,255,0.3); }
 
-/* Fade animation */
+a.button:hover {
+  background: var(--accent-light);
+  box-shadow: 0 10px 28px rgba(162,155,254,0.5);
+}
+
 .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* Footer */
-footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin: 64px auto 32px; }
+footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 64px auto 32px;
+}
 
 /* Responsive */
 @media (max-width: 720px) {
@@ -94,6 +223,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   .social-icons { margin-left: 8px; }
 }
+
 @media (max-width: 400px) {
   header h1 { font-size: 2.6rem; }
   .tagline { font-size: 1.2rem; }
@@ -128,13 +258,13 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 <header>
   <h1>kxdn</h1>
   <div class="tagline">Experienced FiveM Developer</div>
-  <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs.</p>
+  <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
 </header>
 
 <!-- Sections -->
 <section class="section fade-in" id="about">
   <h2>About Me</h2>
-  <p>I'm a passionate developer focused on immersive experiences in GTA V's FiveM.</p>
+  <p>I'm a passionate developer focused on immersive experiences in GTA V's FiveM. I enjoy problem solving, writing clean code, and learning new techniques to stay ahead in game development.</p>
 </section>
 
 <section class="section fade-in" id="experience">
@@ -151,8 +281,14 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <h2>Recent Work</h2>
   <p>A selection of recent projects and contributions I have made to the FiveM community.</p>
   <div class="project">
-    <h3>kx-weather</h3>
-    <p>Dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
+    <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
+      <h3>kx-weather</h3>
+      <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
+    </a>
+  </div>
+  <div class="project">
+    <h3>Advanced Role Management</h3>
+    <p>Robust role and permission system designed for scalable server administration and anti-cheat compliance.</p>
   </div>
 </section>
 
@@ -163,20 +299,33 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
     <li>Custom Framework Creation & Optimization</li>
     <li>UI/UX Design & Implementation</li>
     <li>Performance-focused server and client systems</li>
+    <li>Version control with Git and teamwork</li>
+    <li>Debugging and profiling for optimization</li>
   </ul>
 </section>
 
 <section class="section fade-in" id="featured">
   <h2>Featured Work</h2>
+  <p>Highlighted projects demonstrating creativity, performance, and depth in FiveM development.</p>
   <div class="project">
     <h3>FiveM ErrorRP Server</h3>
     <p>Complete FiveM server setup with custom UI, job systems, vehicle shops, and realistic economy optimized for performance.</p>
+  </div>
+  <div class="project">
+    <h3>kxdn-utils</h3>
+    <p>Open-source utility scripts for server devs: logging, anti-cheat basics, role management, and server diagnostics.</p>
   </div>
 </section>
 
 <section class="section fade-in" id="contact">
   <h2>Contact</h2>
-  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank">Join the Project Discord</a>
+  <p>Let’s build something amazing. I’m open to learning new tools and techniques to match your project’s needs in the FiveM world.</p>
+  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank" rel="noopener noreferrer">Join the Project Discord</a>
+  <div class="social" aria-label="Social Links" style="margin-top:16px;">
+    <a href="https://github.com/ilykxdn" target="_blank" rel="noopener noreferrer">GitHub</a> | 
+    <a href="https://twitter.com/kxdn_dev" target="_blank" rel="noopener noreferrer">Twitter</a> | 
+    <a href="https://www.linkedin.com/in/kxdn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
 </section>
 
 <footer>
@@ -184,6 +333,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 </footer>
 
 <script>
+// Fade-in observer
 const fadeEls = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -195,26 +345,50 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 fadeEls.forEach(el => observer.observe(el));
 
-// Dynamic gradient scroll effect
-const colors = [
-  ['#ede7f6', '#d1c4e9'],
-  ['#b39ddb', '#9575cd'],
-  ['#7e57c2', '#673ab7'],
-  ['#9575cd', '#7e57c2'],
-  ['#d1c4e9', '#b39ddb'],
-  ['#ede7f6', '#b39ddb']
-];
+// Smooth full-page gradient
 const sections = document.querySelectorAll('.section');
+const colors = [
+  ['#ede7f6', '#d1c4e9'], // About
+  ['#b39ddb', '#9575cd'], // Experience
+  ['#7e57c2', '#673ab7'], // Recent Work
+  ['#9575cd', '#7e57c2'], // Skills
+  ['#d1c4e9', '#b39ddb'], // Featured
+  ['#ede7f6', '#b39ddb']  // Contact
+];
+
+function lerpColor(a, b, t) {
+  const ah = parseInt(a.replace('#',''),16),
+        bh = parseInt(b.replace('#',''),16),
+        ar = ah >> 16, ag = (ah >> 8) & 0xff, ab = ah & 0xff,
+        br = bh >> 16, bg = (bh >> 8) & 0xff, bb = bh & 0xff;
+  const rr = Math.round(ar + (br-ar)*t),
+        rg = Math.round(ag + (bg-ag)*t),
+        rb = Math.round(ab + (bb-ab)*t);
+  return `#${(rr<<16 | rg<<8 | rb).toString(16).padStart(6,'0')}`;
+}
 
 function updateGradient() {
-  const scrollPos = window.scrollY + window.innerHeight/2;
-  let currentIndex = 0;
-  sections.forEach((sec, i) => {
-    if(sec.offsetTop < scrollPos) currentIndex = i;
-  });
-  const [start, end] = colors[currentIndex % colors.length];
-  document.body.style.background = `linear-gradient(135deg, ${start}, ${end})`;
+  const scrollY = window.scrollY;
+  const windowHeight = window.innerHeight;
+  
+  for(let i=0;i<sections.length;i++){
+    const sec = sections[i];
+    const startY = sec.offsetTop;
+    const endY = sec.offsetTop + sec.offsetHeight;
+    if(scrollY >= startY && scrollY < endY){
+      let t = (scrollY - startY) / sec.offsetHeight;
+      const [startColor, endColor] = colors[i % colors.length];
+      const gradientStart = lerpColor(startColor, endColor, t);
+      const gradientEnd = lerpColor(endColor, startColor, t);
+      document.body.style.background = `linear-gradient(135deg, ${gradientStart}, ${gradientEnd})`;
+      return;
+    }
+  }
+  // Default top
+  const [startColor, endColor] = colors[0];
+  document.body.style.background = `linear-gradient(135deg, ${startColor}, ${endColor})`;
 }
+
 window.addEventListener('scroll', updateGradient);
 updateGradient();
 </script>
