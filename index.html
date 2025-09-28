@@ -9,18 +9,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --text-primary: #1f1f1f;
-  --text-muted: #555;
-  --accent: #6c5ce7;
-  --accent-light: #a29bfe;
-  --shadow-light: rgba(108,92,231,0.15);
+  --text-primary: #fff;
+  --text-muted: rgba(255,255,255,0.8);
+  --accent: #d1c4e9;
+  --accent-light: #ede7f6;
+  --shadow-light: rgba(108,92,231,0.2);
 
-  --grad1-start: #e0f7fa; --grad1-end: #b2ebf2;
-  --grad2-start: #ede7f6; --grad2-end: #d1c4e9;
-  --grad3-start: #e8f5e9; --grad3-end: #c8e6c9;
-  --grad4-start: #e3f2fd; --grad4-end: #bbdefb;
-  --grad5-start: #f3e5f5; --grad5-end: #e1bee7;
-  --grad6-start: #e0f2f1; --grad6-end: #b2dfdb;
+  --lavender-start: #ede7f6;
+  --lavender-end: #c5cae9;
+  --blue-start: #b3e5fc;
+  --blue-end: #81d4fa;
+  --green-start: #c8e6c9;
+  --green-end: #a5d6a7;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -153,16 +153,15 @@ header p {
   justify-content: center;
   padding: 64px 32px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px var(--shadow-light);
   margin: 48px 0;
   transition: box-shadow 0.3s ease;
 }
 
-.section:hover { box-shadow: 0 16px 48px rgba(108,92,231,0.2); }
+.section:hover { box-shadow: 0 16px 48px var(--shadow-light); }
 
 .section h2 {
   font-size: 2rem;
-  color: var(--accent);
+  color: #fff;
   font-weight: 700;
   margin-bottom: 24px;
   border-bottom: 2px solid var(--accent-light);
@@ -182,7 +181,7 @@ ul li { margin-bottom: 12px; }
 
 /* Projects */
 .project {
-  background: white;
+  background: rgba(255,255,255,0.1);
   border-radius: 14px;
   padding: 28px 32px;
   margin-bottom: 28px;
@@ -193,10 +192,10 @@ ul li { margin-bottom: 12px; }
 
 .project:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(108,92,231,0.2);
+  box-shadow: 0 14px 36px var(--shadow-light);
 }
 
-.project h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--text-primary); }
+.project h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
 .project p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.5; }
 
 /* Buttons */
@@ -229,13 +228,9 @@ footer {
   margin: 64px auto 32px;
 }
 
-/* Gradients for sections */
-#about { background: linear-gradient(135deg, var(--grad2-start), var(--grad2-end)); }
-#experience { background: linear-gradient(135deg, var(--grad4-start), var(--grad4-end)); }
-#projects { background: linear-gradient(135deg, var(--grad5-start), var(--grad5-end)); }
-#skills { background: linear-gradient(135deg, var(--grad3-start), var(--grad3-end)); }
-#featured { background: linear-gradient(135deg, var(--grad1-start), var(--grad1-end)); }
-#contact { background: linear-gradient(135deg, var(--grad6-start), var(--grad6-end)); }
+/* Gradient Sections */
+#about, #skills, #contact { background: linear-gradient(135deg, var(--lavender-start), var(--lavender-end)); }
+#experience, #projects, #featured { background: linear-gradient(135deg, var(--blue-start), var(--blue-end)); }
 
 /* Responsive */
 @media (max-width: 720px) {
