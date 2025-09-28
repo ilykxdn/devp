@@ -81,8 +81,8 @@ a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(2
 
 /* Projects grid for showcases */
 .showcase-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin-top: 32px; }
-.showcase-card { background: rgba(0,0,0,0.25); border-radius: 14px; padding: 12px; width: 300px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
-.showcase-card img { width: 100%; border-radius: 10px; }
+.showcase-card { background: rgba(0,0,0,0.25); border-radius: 14px; padding: 12px; width: 300px; height: 200px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: transform 0.3s ease; overflow: hidden; }
+.showcase-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
 .showcase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.3); }
 
 /* Footer */
@@ -131,7 +131,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <h2>About Me</h2>
   <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:32px;">
     <p style="flex:1; min-width:280px;">I craft immersive roleplay experiences in GTA V's FiveM, leveraging years of experience in scripts, cars, handling, clothing, and GFX design. I enjoy solving problems, writing clean, efficient code, and continuously learning new techniques to elevate my work.</p>
-    <img src="https://media.discordapp.net/attachments/1238156628042186857/1421885398195507200/blue-haired-anime-character-night-scene-61isqr8ewr7fmxh8.jpg?ex=68daa978&is=68d957f8&hm=9636a923a64826a457680a6fafb82a905b24a3d005914b3ccf05214679259eb0&=&format=webp&width=1006&height=1006" alt="About Me Image" style="flex:1; max-width:400px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.3);"/>
+    <img src="https://media.discordapp.net/attachments/1238156628042186857/1421885398195507200/blue-haired-anime-character-night-scene-61isqr8ewr7fmxh8.jpg" alt="About Me Image" style="flex:1; max-width:400px; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.3);"/>
   </div>
 </section>
 
@@ -159,6 +159,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
     <div class="card">
       <h3>kx-weather</h3>
       <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
+      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" class="button" style="margin-top:12px;">View on GitHub</a>
     </div>
     <div class="card">
       <h3>kx-chatclear</h3>
@@ -192,9 +193,9 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 <section class="section fade-in" id="showcases">
   <h2>Showcases</h2>
   <div class="showcase-grid">
-    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png?ex=68da456b&is=68d8f3eb&hm=7be1436818af38bcaae5bc3cde857051f8b1bee46f447f09e61c8dbe95dc7c97&=&format=webp&quality=lossless&width=1759&height=902" alt="Outlaws Racing Crew PS"></div>
-    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png?ex=68daae1d&is=68d95c9d&hm=8500ae6ef1c3b09aecc45ce2e7f75b5842aeccdb6326308a41b92d03bb467c96&=&format=webp&quality=lossless" alt="Legion MC"></div>
-    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png?ex=68da5ea8&is=68d90d28&hm=7e10b58119e94d16f68d2e514ac3c84244ce1b04d42df0d9e343fd103befcb3d&=&format=webp&quality=lossless&width=1687&height=902" alt="LSCS Preview"></div>
+    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png" alt="Outlaws Racing Crew PS"></div>
+    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png" alt="Legion MC"></div>
+    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png" alt="LSCS Preview"></div>
   </div>
 </section>
 
@@ -221,12 +222,10 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 const fadeEls = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.2 });
+
 fadeEls.forEach(el => observer.observe(el));
 </script>
 
