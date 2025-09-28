@@ -73,29 +73,40 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.exp-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 36px rgba(0,0,0,0.3);
-}
+.exp-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
 .exp-card h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.3rem; }
 .exp-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
 
-/* Projects */
-.project { background: rgba(0,0,0,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 28px; box-shadow: 0 6px 18px rgba(0,0,0,0.2); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default; }
-.project:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.2); }
-.project h3, .project p { color: #fff; }
-
-/* Buttons */
-a.button { display: inline-block; background: var(--accent); color: #fff; padding: 14px 30px; border-radius: 12px; font-weight: 700; font-size: 1.1rem; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease; }
-a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(255,255,255,0.3); }
+/* Recent Work Cards */
+.recent-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+.recent-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 14px;
+  padding: 28px 24px;
+  min-width: 280px;
+  max-width: 350px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.recent-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
+.recent-card h3 { color: var(--accent); margin-bottom: 12px; font-size: 1.3rem; }
+.recent-card p { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
+.recent-card a { text-decoration: none; color: inherit; display: block; }
 
 /* Footer */
 footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin: 64px auto 32px; }
 
 /* Responsive */
-@media (max-width: 1000px) { .experience-cards { flex-direction: row; justify-content: center; } }
+@media (max-width: 1000px) { .experience-cards, .recent-cards { flex-direction: row; justify-content: center; } }
 @media (max-width: 720px) { header h1 { font-size: 3.2rem; } .section { padding: 48px 24px; } .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; } .social-icons { margin-left: 8px; } }
-@media (max-width: 500px) { .experience-cards { flex-direction: column; align-items: center; } header h1 { font-size: 2.6rem; } .section h2 { font-size: 1.5rem; } }
+@media (max-width: 500px) { .experience-cards, .recent-cards { flex-direction: column; align-items: center; } header h1 { font-size: 2.6rem; } .section h2 { font-size: 1.5rem; } }
 
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 </style>
@@ -127,8 +138,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <div class="tagline">Experienced FiveM Developer</div>
   <p>I'm a versatile FiveM developer creating immersive, optimized, and visually stunning roleplay experiences, specializing in scripts, cars, clothing, GFX, and over 15 coding languages.</p>
 </header>
-
-<!-- Sections -->
 
 <section class="section fade-in" id="about">
   <h2>About Me</h2>
@@ -163,21 +172,21 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 
 <section class="section fade-in" id="projects">
   <h2>Recent Work</h2>
-  <div class="project">
-    <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
-      <h3>kx-weather</h3>
-      <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
-    </a>
-  </div>
-  <div class="project">
-    <a href="https://github.com/ilykxdn/kx-chatclear" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: block;">
-      <h3>kx-chatclear</h3>
-      <p>Chat-clearing script to prevent chat from being flooded with messages, keeping communication clean and organized.</p>
-    </a>
+  <div class="recent-cards">
+    <div class="recent-card">
+      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" rel="noopener noreferrer">
+        <h3>kx-weather</h3>
+        <p>QBCore script adding dynamic, location-based weather: sunny in Sandy Shores and stormy in Los Santos simultaneously!</p>
+      </a>
+    </div>
+    <div class="recent-card">
+      <a href="https://github.com/ilykxdn/kx-chatclear" target="_blank" rel="noopener noreferrer">
+        <h3>kx-chatclear</h3>
+        <p>Chat-clearing script to prevent chat from being flooded with messages, keeping communication clean and organized.</p>
+      </a>
+    </div>
   </div>
 </section>
-
-<!-- Skills and Featured Sections left unchanged for now -->
 
 <footer>
   &copy; 2025 kxdn. All rights reserved.
