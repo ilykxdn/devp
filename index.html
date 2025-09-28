@@ -14,7 +14,7 @@
   --accent: #b39ddb;
   --accent-light: #d1c4e9;
   --shadow-light: rgba(0,0,0,0.2);
-  --separator: #ffffff; /* Pure white for all separators */
+  --separator: #ffffff; /* White separators */
 }
 
 /* Basic resets */
@@ -28,7 +28,7 @@ body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow
   padding: 16px 32px;
   background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
   z-index: 1000;
-  border-bottom: 1px solid var(--separator); /* White line below nav */
+  border-bottom: 2px solid var(--separator); /* Thicker white line */
 }
 .site-name { font-weight: 700; font-size: 1.5rem; color: #fff; text-shadow: 0 0 6px var(--accent-light); }
 nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
@@ -56,17 +56,15 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .section + .section::before {
   content: '';
   position: absolute; top: 0; left: 32px; right: 32px;
-  height: 1px; background: var(--separator); opacity: 1; /* More visible white line */
+  height: 2px; background: var(--separator); opacity: 1; /* Thicker white line */
 }
 #about::before {
   content: '';
   position: absolute; top: 0; left: 32px; right: 32px;
-  height: 1px; background: var(--separator); opacity: 1; /* Line above About Me */
+  height: 2px; background: var(--separator); opacity: 1; /* Line above About Me */
 }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; text-align: center; }
-.section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
-ul { padding-left: 24px; margin-top: 16px; } 
-ul li { margin-bottom: 12px; }
+.section p { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
 
 /* About Me layout */
 .about-container { display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: center; }
@@ -94,9 +92,31 @@ a.button {
 }
 a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(255,255,255,0.3); }
 
-/* Fade animation for other sections */
+/* Fade animation */
 .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* Skills Section Tabs */
+.skills-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 32px; }
+.skill-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 20px 24px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  min-width: 160px;
+  flex: 1 1 140px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+.skill-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
 
 /* Footer */
 footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin: 64px auto 32px; }
@@ -108,6 +128,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   .social-icons { margin-left: 8px; }
   .about-container { flex-direction: column; }
+  .skills-container { flex-direction: column; gap: 16px; }
 }
 @media (max-width: 400px) {
   header h1 { font-size: 2.6rem; }
@@ -186,15 +207,16 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 </section>
 
 <section class="section fade-in" id="skills">
-  <h2>Skills</h2>
-  <ul>
-    <li>Lua, JavaScript, SQL, and CFX scripting</li>
-    <li>Custom Framework Creation & Optimization</li>
-    <li>UI/UX Design & Implementation</li>
-    <li>Performance-focused server and client systems</li>
-    <li>Version control with Git and teamwork</li>
-    <li>Debugging and profiling for optimization</li>
-  </ul>
+  <h2 style="font-size:3rem; font-weight:900; margin-bottom:32px;">My Skills</h2>
+  <div class="skills-container">
+    <div class="skill-card">Clothing Development</div>
+    <div class="skill-card">Script Development</div>
+    <div class="skill-card">Car Development</div>
+    <div class="skill-card">Tools & Workflow</div>
+    <div class="skill-card">Web Development</div>
+    <div class="skill-card">GFX</div>
+    <div class="skill-card">+ Learning so much more</div>
+  </div>
 </section>
 
 <section class="section fade-in" id="featured">
