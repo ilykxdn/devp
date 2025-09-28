@@ -18,7 +18,14 @@
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; }
+body { 
+  margin: 0; 
+  font-family: 'Inter', sans-serif; 
+  padding-top: 100px; 
+  overflow-x: hidden; 
+  background: linear-gradient(180deg, #ede7f6 0%, #b39ddb 16.66%, #d1c4e9 16.66%, #9575cd 33.33%, #b39ddb 33.33%, #7e57c2 50%, #ede7f6 50%, #b39ddb 66.66%, #d1c4e9 66.66%, #9575cd 83.33%, #7e57c2 83.33%, #9575cd 100%);
+  background-attachment: fixed;
+}
 
 /* Header */
 .header-bar {
@@ -49,24 +56,28 @@ header p { font-size: 1.2rem; color: var(--text-muted); line-height: 1.7; max-wi
 .section {
   width: 100%; min-height: 90vh; display: flex; flex-direction: column;
   align-items: center; justify-content: center; padding: 64px 32px;
-  margin: 0; /* remove spacing between sections */
-  border-radius: 0; /* remove border-radius to avoid color gaps */
-  background: transparent; /* transparent so the gradient shows fully */
+  background: transparent;
+  position: relative;
+}
+.section:not(:last-child)::after {
+  content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: #fff; opacity: 0.3;
 }
 .section h2 { font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--accent-light); padding-bottom: 8px; text-align: center; }
 .section p, .section ul { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
 ul { padding-left: 24px; margin-top: 16px; } 
 ul li { margin-bottom: 12px; }
 
+/* About Me special layout */
+.about-content { display: flex; flex-wrap: wrap; align-items: center; gap: 60px; justify-content: center; }
+.about-text, .about-image { flex: 1 1 300px; max-width: 500px; opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
+.about-text.visible, .about-image.visible { opacity: 1; transform: translateY(0); }
+.about-image img { width: 100%; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+
 /* Projects */
 .project {
-  background: rgba(0,0,0,0.25); /* subtle contrast but not too large */
-  border-radius: 14px; 
-  padding: 28px 32px; 
-  margin-bottom: 28px;
+  background: rgba(0,0,0,0.25); border-radius: 14px; padding: 28px 32px; margin-bottom: 28px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
-  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: default;
 }
 .project:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,0.2); }
 .project h3, .project p { color: #fff; }
@@ -92,6 +103,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   .section { padding: 48px 24px; }
   .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   .social-icons { margin-left: 8px; }
+  .about-content { flex-direction: column; gap: 40px; }
 }
 @media (max-width: 400px) {
   header h1 { font-size: 2.6rem; }
@@ -100,7 +112,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 }
 
 @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-
 </style>
 </head>
 <body>
@@ -131,10 +142,18 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <p>With 5 years of FiveM development and 8 years of general coding experience, I craft immersive, optimized, and custom roleplay solutions tailored to your needs. Open to learning anything to help your FiveM vision succeed.</p>
 </header>
 
-<!-- Sections -->
+<!-- About Me Section -->
 <section class="section fade-in" id="about">
   <h2>About Me</h2>
-  <p>I'm a passionate developer focused on immersive experiences in GTA V's FiveM. I enjoy problem solving, writing clean code, and learning new techniques to stay ahead in game development.</p>
+  <div class="about-content">
+    <div class="about-text">
+      <p>Hi, I’m <strong>kxdn</strong>, a passionate FiveM developer with 5 years of experience crafting immersive, optimized roleplay servers. I love solving complex problems, building custom systems, and pushing my code to deliver the best experience for players.</p>
+      <p>From creating unique server frameworks to optimizing performance, I’m always learning new techniques and tools to improve the FiveM experience.</p>
+    </div>
+    <div class="about-image">
+      <img src="https://yourdomain.com/your-profile-pic.jpg" alt="kxdn Profile">
+    </div>
+  </div>
 </section>
 
 <section class="section fade-in" id="experience">
@@ -204,7 +223,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 
 <script>
 // Fade-in observer
-const fadeEls = document.querySelectorAll('.fade-in');
+const fadeEls = document.querySelectorAll('.fade-in, .about-text, .about-image');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if(entry.isIntersecting){
@@ -214,22 +233,6 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 fadeEls.forEach(el => observer.observe(el));
-
-// Static multi-gradient background
-const gradients = [
-  'linear-gradient(135deg, #ede7f6, #b39ddb)',
-  'linear-gradient(135deg, #d1c4e9, #9575cd)',
-  'linear-gradient(135deg, #b39ddb, #7e57c2)',
-  'linear-gradient(135deg, #ede7f6, #b39ddb)',
-  'linear-gradient(135deg, #d1c4e9, #9575cd)',
-  'linear-gradient(135deg, #7e57c2, #9575cd)'
-];
-
-// Combine gradients vertically
-document.body.style.background = gradients.join(', ');
-document.body.style.backgroundSize = '100% 100vh';
-document.body.style.backgroundRepeat = 'no-repeat';
-document.body.style.backgroundAttachment = 'fixed';
 </script>
 
 </body>
