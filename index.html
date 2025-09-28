@@ -18,7 +18,7 @@
 
 /* Basic resets */
 *, *::before, *::after { box-sizing: border-box; }
-body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; transition: background 0.3s ease; }
+body { margin: 0; font-family: 'Inter', sans-serif; padding-top: 100px; overflow-x: hidden; }
 
 /* Header */
 .header-bar {
@@ -80,6 +80,14 @@ a.button:hover { background: var(--accent-light); box-shadow: 0 10px 28px rgba(2
 
 /* Footer */
 footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin: 64px auto 32px; }
+
+/* Static gradients per section */
+#about { background: linear-gradient(135deg, #ede7f6, #b39ddb); }
+#experience { background: linear-gradient(135deg, #d1c4e9, #9575cd); }
+#projects { background: linear-gradient(135deg, #ede7f6, #b39ddb); }
+#skills { background: linear-gradient(135deg, #d1c4e9, #9575cd); }
+#featured { background: linear-gradient(135deg, #ede7f6, #b39ddb); }
+#contact { background: linear-gradient(135deg, #d1c4e9, #9575cd); }
 
 /* Responsive */
 @media (max-width: 720px) {
@@ -209,28 +217,6 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.1 });
 fadeEls.forEach(el => observer.observe(el));
-
-// Static gradient per section (alternating)
-const sections = document.querySelectorAll('.section');
-const sectionColors = [
-  ['#ede7f6','#b39ddb'], // Gradient 1
-  ['#d1c4e9','#9575cd']  // Gradient 2
-];
-
-function updateBackground() {
-  const scrollY = window.scrollY + window.innerHeight / 2; // center of viewport
-  for(let i=0; i<sections.length; i++){
-    const sec = sections[i];
-    if(scrollY >= sec.offsetTop && scrollY < sec.offsetTop + sec.offsetHeight){
-      const [c1,c2] = sectionColors[i % sectionColors.length];
-      document.body.style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-      return;
-    }
-  }
-}
-
-window.addEventListener('scroll', updateBackground);
-updateBackground();
 </script>
 
 </body>
