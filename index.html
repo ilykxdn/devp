@@ -193,9 +193,21 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
 <section class="section fade-in" id="showcases">
   <h2>Showcases</h2>
   <div class="showcase-grid">
-    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png?ex=68da456b&is=68d8f3eb&hm=7be1436818af38bcaae5bc3cde857051f8b1bee46f447f09e61c8dbe95dc7c97&=&format=webp&quality=lossless&width=1759&height=902" alt="Outlaws Racing Crew PS"></div>
-    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png?ex=68daae1d&is=68d95c9d&hm=8500ae6ef1c3b09aecc45ce2e7f75b5842aeccdb6326308a41b92d03bb467c96&=&format=webp&quality=lossless" alt="Legion MC"></div>
-    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png?ex=68da5ea8&is=68d90d28&hm=7e10b58119e94d16f68d2e514ac3c84244ce1b04d42df0d9e343fd103befcb3d&=&format=webp&quality=lossless&width=1687&height=902" alt="LSCS Preview"></div>
+    <div class="showcase-card">
+      <a href="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png" target="_blank">
+        <img src="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png?ex=68da456b&is=68d8f3eb&hm=7be1436818af38bcaae5bc3cde857051f8b1bee46f447f09e61c8dbe95dc7c97&=&format=webp&quality=lossless&width=1759&height=902" alt="Outlaws Racing Crew PS">
+      </a>
+    </div>
+    <div class="showcase-card">
+      <a href="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png" target="_blank">
+        <img src="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png?ex=68daae1d&is=68d95c9d&hm=8500ae6ef1c3b09aecc45ce2e7f75b5842aeccdb6326308a41b92d03bb467c96&=&format=webp&quality=lossless" alt="Legion MC">
+      </a>
+    </div>
+    <div class="showcase-card">
+      <a href="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png" target="_blank">
+        <img src="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png?ex=68da5ea8&is=68d90d28&hm=7e10b58119e94d16f68d2e514ac3c84244ce1b04d42df0d9e343fd103befcb3d&=&format=webp&quality=lossless&width=1687&height=902" alt="LSCS Preview">
+      </a>
+    </div>
   </div>
 </section>
 
@@ -209,24 +221,22 @@ footer { text-align: center; color: var(--text-muted); font-size: 0.95rem; margi
   <div class="social" aria-label="Social Links" style="margin-top:16px;">
     <a href="https://github.com/ilykxdn" target="_blank">GitHub</a> | 
     <a href="https://x.com/xokxdn" target="_blank">X</a> | 
-    <a href="https://throne.com/kxdn" target="_blank">Throne</a>
+    <a href="https://discord.gg/w8w4dsKKG8" target="_blank">Discord</a>
   </div>
 </section>
 
 <footer>
-  &copy; 2025 kxdn. All rights reserved.
+  &copy; 2025 kxdn — All Rights Reserved
 </footer>
 
 <script>
-// Fade-in observer
-const fadeEls = document.querySelectorAll('.fade-in');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  });
-}, { threshold: 0.2 });
-
-fadeEls.forEach(el => observer.observe(el));
+// Scroll animation
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+}, appearOptions);
+faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
 
 </body>
