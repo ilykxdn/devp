@@ -136,12 +136,11 @@
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
   }
   .showcase-card img {
     width: 100%; height: 100%;
     object-fit: cover;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
     backface-visibility: hidden;
     -webkit-transform: translateZ(0);
     transition: transform 0.5s ease;
@@ -151,6 +150,51 @@
     box-shadow: 0 12px 28px rgba(0,0,0,0.35);
   }
   .showcase-card:hover img { transform: scale(1.05); }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none; justify-content: center; align-items: center;
+    z-index: 2000;
+  }
+  .lightbox img {
+    max-width: 90%; max-height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+  }
+  .lightbox .close, .lightbox .prev, .lightbox .next {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    color: #fff; font-size: 2rem; cursor: pointer; padding: 12px;
+    background: rgba(0,0,0,0.4); border-radius: 50%;
+    user-select: none;
+  }
+  .lightbox .close { top: 5%; right: 5%; transform: none; font-size: 2.5rem; }
+  .lightbox .prev { left: 5%; }
+  .lightbox .next { right: 5%; }
+
+  /* Projects */
+  .projects-grid {
+    display: flex; flex-wrap: wrap; gap: 24px; justify-content: center;
+  }
+  .project-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 16px;
+    width: 560px;
+    max-width: 100%;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+  .project-card iframe {
+    width: 100%; height: 315px;
+    border: none; border-radius: 12px;
+  }
+  .project-card p {
+    margin-top: 12px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
 
   /* Button */
   a.button {
@@ -176,7 +220,7 @@
   @keyframes slideDown { from { transform: translateY(-100%);} to { transform: translateY(0);} }
 
   /* Responsive */
-  @media (max-width: 900px) { .card-container, .skills-container, .showcase-grid { flex-direction: column; align-items: center; } }
+  @media (max-width: 900px) { .card-container, .skills-container, .showcase-grid, .projects-grid { flex-direction: column; align-items: center; } }
   @media (max-width: 600px) { header h1 { font-size: 2.6rem; } .tagline { font-size: 1.2rem; } }
   </style>
 </head>
@@ -192,6 +236,7 @@
       <li><a href="#recent">Recent Work</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#showcases">Showcases</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
@@ -274,47 +319,117 @@
 <section id="showcases" class="section fade-in">
   <h2>Showcases</h2>
   <div class="showcase-grid">
-    <div class="showcase-card">
-      <a href="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png" target="_blank">
-        <img src="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png" alt="Outlaws Racing Crew PS">
-      </a>
+    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1384270826173370388/Front.png" alt="Outlaws Racing Crew PS"></div>
+    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png" alt="Legion MC"></div>
+    <div class="showcase-card"><img src="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png" alt="LSCS Preview"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="close" id="lightboxClose">&times;</span>
+  <span class="prev" id="lightboxPrev">&#10094;</span>
+  <span class="next" id="lightboxNext">&#10095;</span>
+  <img id="lightboxImg" src="" alt="Showcase Preview">
+</div>
+
+<div class="separator"></div>
+
+<!-- Projects -->
+<section id="projects" class="section fade-in">
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <iframe src="https://www.youtube.com/embed/vicA6totZic" allowfullscreen></iframe>
+      <p>Project contribution with a development team — showcased immersive FiveM systems.</p>
     </div>
-    <div class="showcase-card">
-      <a href="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png" target="_blank">
-        <img src="https://media.discordapp.net/attachments/1238545385165815849/1421890385587732670/Screenshot_2025-05-21_013901.png" alt="Legion MC">
-      </a>
-    </div>
-    <div class="showcase-card">
-      <a href="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png" target="_blank">
-        <img src="https://media.discordapp.net/attachments/1238545385165815849/1238618001759141898/8.png" alt="LSCS Preview">
-      </a>
+    <div class="project-card">
+      <iframe src="https://www.youtube.com/embed/vE6wThPgTrk" allowfullscreen></iframe>
+      <p>Worked with a team to bring optimized server features and experiences.</p>
     </div>
   </div>
+  <p style="max-width:700px; margin-top:28px; color:var(--text-muted);">
+    I’ve also contributed to over <strong>150 servers</strong>, helping to develop them from the ground up — creating scripts, vehicles, GFX, and full server setups.
+  </p>
 </section>
 
 <div class="separator"></div>
 
 <!-- Contact -->
 <section id="contact" class="section fade-in">
-  <h2>Contact</h2>
-  <p>Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
-  <a href="https://discord.gg/w8w4dsKKG8" target="_blank" class="button">Join My Discord</a>
+  <h2>Contact Me</h2>
+  <p>Want to collaborate or need development support? Reach out via Discord or my socials above.</p>
+  <a href="https://discord.gg/w8w4dsKKG8" class="button" target="_blank">Join My Discord</a>
 </section>
 
 <footer>
-  &copy; 2025 kxdn — All Rights Reserved
+  <p>&copy; 2025 kxdn. All rights reserved.</p>
 </footer>
 
 <script>
-  // Scroll animation
-  const faders = document.querySelectorAll('.fade-in');
-  const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-  const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-    });
-  }, appearOptions);
-  faders.forEach(fader => appearOnScroll.observe(fader));
+/* Fade-in on scroll */
+const fadeElems = document.querySelectorAll('.fade-in');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+});
+fadeElems.forEach(el => obs.observe(el));
+
+/* Lightbox */
+const showcaseCards = document.querySelectorAll('.showcase-card img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  lightboxImg.src = showcaseCards[index].src;
+  lightbox.style.display = 'flex';
+}
+function closeLightbox() { lightbox.style.display = 'none'; }
+function showPrev() {
+  currentIndex = (currentIndex - 1 + showcaseCards.length) % showcaseCards.length;
+  lightboxImg.src = showcaseCards[currentIndex].src;
+}
+function showNext() {
+  currentIndex = (currentIndex + 1) % showcaseCards.length;
+  lightboxImg.src = showcaseCards[currentIndex].src;
+}
+
+showcaseCards.forEach((img, i) => {
+  img.addEventListener('click', () => openLightbox(i));
+});
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', showPrev);
+lightboxNext.addEventListener('click', showNext);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+/* Scrollspy */
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a");
+window.addEventListener("scroll", () => {
+  let current = "";
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    if (pageYOffset >= sectionTop) current = section.getAttribute("id");
+  });
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href").includes(current)) {
+      link.classList.add("active");
+    }
+  });
+});
 </script>
+
+<style>
+.nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+</style>
+
 </body>
 </html>
