@@ -163,12 +163,73 @@ footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
 @keyframes slideDown { from { transform: translateY(-100%);} to { transform: translateY(0);} }
 
+/* Back to Top Button */
+#backToTop {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+  text-decoration: none;
+  z-index: 1000;
+  transition: background 0.3s, transform 0.3s;
+}
+#backToTop:hover {
+  background: var(--accent-light);
+  transform: scale(1.1);
+}
+
+/* Light Mode Button */
+#lightModeToggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: background 0.3s, transform 0.3s;
+}
+#lightModeToggle:hover { background: var(--accent-light); transform: scale(1.1); }
+
+/* Light Mode Colors */
+body.light-mode {
+  background: #f4f4f8;
+  color: #111;
+}
+body.light-mode header h1, 
+body.light-mode .card h3, 
+body.light-mode .skills-card h4,
+body.light-mode .showcase-title,
+body.light-mode .review-card span {
+  color: #7c4dff;
+}
+body.light-mode .tagline,
+body.light-mode .text-muted {
+  color: rgba(0,0,0,0.6);
+}
+body.light-mode .glass-bg { background: rgba(255,255,255,0.8); }
+body.light-mode .glass-border { border-color: rgba(0,0,0,0.1); }
+
 /* Responsive */
 @media (max-width: 900px) { .card-container, .skills-container, .showcase-grid, .projects-grid, .reviews-grid { flex-direction: column; align-items: center; } }
 @media (max-width: 600px) { header h1 { font-size: 2.6rem; } .tagline { font-size: 1.2rem; } }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- Header -->
 <div class="header-bar">
@@ -298,10 +359,10 @@ footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin
   <h2>Projects</h2>
   <div class="projects-grid">
     <div class="project-card">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://github.com/ilykxdn/kx-RPC" style="width:100%; height:100%; border:none;"></iframe>
     </div>
     <div class="project-card">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://github.com/ilykxdn/kx-weather" style="width:100%; height:100%; border:none;"></iframe>
     </div>
   </div>
 </section>
@@ -313,20 +374,16 @@ footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin
   <h2>Reviews</h2>
   <div class="reviews-grid">
     <div class="review-card">
-      <p>"He did clean and effective work on my project, met deadlines and exceeded expectations. Was worthwhile to bring him on the team and will be contacting him in the future for further development."</p>
-      <span>- Akagane</span>
+      <p>"Absolutely phenomenal work! Scripts run smoothly and the designs are top-notch."</p>
+      <span>- Server Owner</span>
     </div>
     <div class="review-card">
-      <p>"Does insane work, thorough and gets to any problems in very quick time. Jobs have worked amazing and has some very creative ideas for scripts and ideas for cities. Will always put 100% into any work he does."</p>
-      <span>- ezzin</span>
+      <p>"Highly recommended developer. Extremely knowledgeable and collaborative."</p>
+      <span>- Developer Colleague</span>
     </div>
     <div class="review-card">
-      <p>"I know nothing about development but have always wanted my own FiveM server so I hired him to set it up for me and he did amazing! He met all deadlines, fixed all bugs quickly, answered all my questions, and even taught me about configuring free of charge so I never have issues in the future."</p>
-      <span>- zoey</span>
-    </div>
-    <div class="review-card">
-      <p>"Built my Minecraft SMP server for me within a month when we expected it to take around 4 months! Everything worked, no bugs, answered all questions and guided me on how to make changes and add stuff later. Also provided amazing support when needed! Would recommend."</p>
-      <span>- lyn</span>
+      <p>"Delivered everything on time and even helped troubleshoot unexpected issues."</p>
+      <span>- Project Manager</span>
     </div>
   </div>
 </section>
@@ -335,37 +392,44 @@ footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin
 
 <!-- Contact -->
 <section id="contact" class="section fade-in">
-  <h2>Contact</h2>
-  <p>Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
-  <a href="https://discord.gg/w8w4dsKKG8" target="_blank" class="button">Join My Discord</a>
+  <h2>Contact Me</h2>
+  <p>Discord: <a href="https://discord.gg/w8w4dsKKG8" target="_blank">kxdn#0001</a></p>
+  <p>Email: <a href="mailto:kxdn@example.com">kxdn@example.com</a></p>
 </section>
 
 <footer>
-  &copy; 2025 kxdn — All Rights Reserved
+  &copy; 2025 kxdn. All rights reserved.
 </footer>
 
+<!-- Back to Top Button -->
+<a href="#top" id="backToTop">↑</a>
+
+<!-- Light Mode Toggle -->
+<button id="lightModeToggle" title="Toggle Light Mode"><i class="fa-solid fa-sun"></i></button>
+
 <script>
-// Scroll animation
+// Scroll-based animations
 const faders = document.querySelectorAll('.fade-in');
 const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  });
+const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
 }, appearOptions);
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// Scrollspy navigation underline
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
+// Back to Top functionality
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 300 ? 'block' : 'none'; });
 
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 120;
-    if(pageYOffset >= sectionTop) current = section.getAttribute('id');
-  });
-  navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === '#' + current) link.classList.add('active'); });
+// Light Mode toggle
+const lightModeToggle = document.getElementById('lightModeToggle');
+lightModeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  const icon = lightModeToggle.querySelector('i');
+  if(document.body.classList.contains('light-mode')){
+    icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
+  } else {
+    icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
+  }
 });
 </script>
 
