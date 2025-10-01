@@ -25,6 +25,7 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   padding-top: 100px;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* Header Bar */
@@ -64,6 +65,16 @@ nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
 .social-icons { display: flex; gap: 16px; }
 .social-icons a { color: var(--text-primary); font-size: 1.2rem; transition: color 0.3s; }
 .social-icons a:hover { color: var(--accent-light); }
+
+/* Light Mode Toggle */
+#light-mode-toggle {
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 16px;
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+#light-mode-toggle:hover { color: var(--accent-light); }
 
 /* Hero Header */
 header {
@@ -130,7 +141,7 @@ header p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
 
 /* Projects */
 .projects-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.project-card { width: 560px; max-width: 90%; height: 315px; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass-bg); }
+.project-card { width: 560px; max-width: 90%; height: 315px; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass-bg); display: flex; align-items: center; justify-content: center; }
 
 /* Reviews */
 .reviews-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1100px; }
@@ -150,9 +161,26 @@ header p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
 .review-card p { color: var(--text-primary); margin-bottom: 12px; font-size: 0.95rem; line-height: 1.4; }
 .review-card span { color: var(--accent-light); font-weight: 600; text-align: right; font-size: 0.9rem; }
 
-/* Button */
+/* Buttons */
 a.button { display: inline-block; padding: 14px 28px; background: var(--accent); color: #fff; font-weight: 600; border-radius: 10px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease; }
 a.button:hover { background: var(--accent-light); }
+
+/* Back to Top */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: none;
+  z-index: 1001;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+#back-to-top:hover { background: var(--accent-light); }
 
 /* Footer */
 footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin: 64px 0 32px; }
@@ -163,73 +191,22 @@ footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
 @keyframes slideDown { from { transform: translateY(-100%);} to { transform: translateY(0);} }
 
-/* Back to Top Button */
-#backToTop {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  background: var(--accent);
-  color: #fff;
-  padding: 12px 16px;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: none;
-  text-decoration: none;
-  z-index: 1000;
-  transition: background 0.3s, transform 0.3s;
-}
-#backToTop:hover {
-  background: var(--accent-light);
-  transform: scale(1.1);
-}
-
-/* Light Mode Button */
-#lightModeToggle {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  transition: background 0.3s, transform 0.3s;
-}
-#lightModeToggle:hover { background: var(--accent-light); transform: scale(1.1); }
-
-/* Light Mode Colors */
-body.light-mode {
-  background: #f4f4f8;
-  color: #111;
-}
-body.light-mode header h1, 
-body.light-mode .card h3, 
-body.light-mode .skills-card h4,
-body.light-mode .showcase-title,
-body.light-mode .review-card span {
-  color: #7c4dff;
-}
-body.light-mode .tagline,
-body.light-mode .text-muted {
-  color: rgba(0,0,0,0.6);
-}
-body.light-mode .glass-bg { background: rgba(255,255,255,0.8); }
-body.light-mode .glass-border { border-color: rgba(0,0,0,0.1); }
-
 /* Responsive */
 @media (max-width: 900px) { .card-container, .skills-container, .showcase-grid, .projects-grid, .reviews-grid { flex-direction: column; align-items: center; } }
 @media (max-width: 600px) { header h1 { font-size: 2.6rem; } .tagline { font-size: 1.2rem; } }
+
+body.light-mode {
+  background: #f5f5f5;
+  color: #1a1a2e;
+}
+body.light-mode .header-bar { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.1); }
+body.light-mode .card, body.light-mode .skills-card, body.light-mode .showcase-card, body.light-mode .project-card, body.light-mode .review-card { background: #fff; border-color: rgba(0,0,0,0.1); }
+body.light-mode a.button { background: var(--accent); color: #fff; }
+body.light-mode a.button:hover { background: var(--accent-light); }
+body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); color: #000; }
 </style>
 </head>
-<body id="top">
+<body>
 
 <!-- Header -->
 <div class="header-bar">
@@ -250,6 +227,7 @@ body.light-mode .glass-border { border-color: rgba(0,0,0,0.1); }
     <a href="https://discord.gg/w8w4dsKKG8" target="_blank"><i class="fa-brands fa-discord"></i></a>
     <a href="https://github.com/ilykxdn" target="_blank"><i class="fa-brands fa-github"></i></a>
     <a href="https://twitter.com/kxdn_dev" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    <i class="fa-solid fa-sun" id="light-mode-toggle" title="Toggle Light Mode"></i>
   </div>
 </div>
 
@@ -359,10 +337,16 @@ body.light-mode .glass-border { border-color: rgba(0,0,0,0.1); }
   <h2>Projects</h2>
   <div class="projects-grid">
     <div class="project-card">
-      <iframe src="https://github.com/ilykxdn/kx-RPC" style="width:100%; height:100%; border:none;"></iframe>
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
     </div>
     <div class="project-card">
-      <iframe src="https://github.com/ilykxdn/kx-weather" style="width:100%; height:100%; border:none;"></iframe>
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="project-card">
+      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" class="button">kx-weather on GitHub</a>
+    </div>
+    <div class="project-card">
+      <a href="https://github.com/ilykxdn/kx-RPC" target="_blank" class="button">kx-RPC on GitHub</a>
     </div>
   </div>
 </section>
@@ -374,16 +358,20 @@ body.light-mode .glass-border { border-color: rgba(0,0,0,0.1); }
   <h2>Reviews</h2>
   <div class="reviews-grid">
     <div class="review-card">
-      <p>"Absolutely phenomenal work! Scripts run smoothly and the designs are top-notch."</p>
-      <span>- Server Owner</span>
+      <p>"He did clean and effective work on my project, met deadlines and exceeded expectations. Was worthwhile to bring him on the team and will be contacting him in the future for further development."</p>
+      <span>- Akagane</span>
     </div>
     <div class="review-card">
-      <p>"Highly recommended developer. Extremely knowledgeable and collaborative."</p>
-      <span>- Developer Colleague</span>
+      <p>"Does insane work, thorough and gets to any problems in very quick time. Jobs have worked amazing and has some very creative ideas for scripts and ideas for cities. Will always put 100% into any work he does."</p>
+      <span>- ezzin</span>
     </div>
     <div class="review-card">
-      <p>"Delivered everything on time and even helped troubleshoot unexpected issues."</p>
-      <span>- Project Manager</span>
+      <p>"I know nothing about development but have always wanted my own FiveM server so I hired him to set it up for me and he did amazing! He met all deadlines, fixed all bugs quickly, answered all my questions, and even taught me about configuring free of charge so I never have issues in the future."</p>
+      <span>- zoey</span>
+    </div>
+    <div class="review-card">
+      <p>"Built my Minecraft SMP server for me within a month when we expected it to take around 4 months! Everything worked, no bugs, answered all questions and guided me on how to make changes and add stuff later. Also provided amazing support when needed! Would recommend."</p>
+      <span>- lyn</span>
     </div>
   </div>
 </section>
@@ -392,45 +380,51 @@ body.light-mode .glass-border { border-color: rgba(0,0,0,0.1); }
 
 <!-- Contact -->
 <section id="contact" class="section fade-in">
-  <h2>Contact Me</h2>
-  <p>Discord: <a href="https://discord.gg/w8w4dsKKG8" target="_blank">kxdn#0001</a></p>
-  <p>Email: <a href="mailto:kxdn@example.com">kxdn@example.com</a></p>
+  <h2>Contact</h2>
+  <p>Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
+  <a href="https://discord.gg/w8w4dsKKG8" target="_blank" class="button">Join My Discord</a>
 </section>
 
 <footer>
-  &copy; 2025 kxdn. All rights reserved.
+  &copy; 2025 kxdn — All Rights Reserved
 </footer>
 
 <!-- Back to Top Button -->
-<a href="#top" id="backToTop">↑</a>
-
-<!-- Light Mode Toggle -->
-<button id="lightModeToggle" title="Toggle Light Mode"><i class="fa-solid fa-sun"></i></button>
+<div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 
 <script>
-// Scroll-based animations
+// Scroll animation
 const faders = document.querySelectorAll('.fade-in');
 const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
-const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-  entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+  });
 }, appearOptions);
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// Back to Top functionality
-const backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 300 ? 'block' : 'none'; });
+// Scrollspy navigation underline
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    if(pageYOffset >= sectionTop) current = section.getAttribute('id');
+  });
+  navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === '#' + current) link.classList.add('active'); });
 
-// Light Mode toggle
-const lightModeToggle = document.getElementById('lightModeToggle');
-lightModeToggle.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const icon = lightModeToggle.querySelector('i');
-  if(document.body.classList.contains('light-mode')){
-    icon.classList.remove('fa-sun'); icon.classList.add('fa-moon');
-  } else {
-    icon.classList.remove('fa-moon'); icon.classList.add('fa-sun');
-  }
+  // Back to top button
+  const backToTop = document.getElementById('back-to-top');
+  if(window.scrollY > 300) backToTop.style.display = 'block'; else backToTop.style.display = 'none';
 });
+
+// Back to Top
+document.getElementById('back-to-top').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+// Light Mode Toggle
+const lightToggle = document.getElementById('light-mode-toggle');
+lightToggle.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
 </script>
 
 </body>
