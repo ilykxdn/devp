@@ -149,6 +149,13 @@ header p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
 /* Projects */
 .projects-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
 .project-card { width: 560px; max-width: 90%; height: 315px; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass-bg); display: flex; align-items: center; justify-content: center; }
+.project-caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
+}
 
 /* Reviews */
 .reviews-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1100px; }
@@ -324,14 +331,8 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
     </div>
     <div class="showcase-card">
       <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" target="_blank">
-        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" alt="LSCS Preview">
-        <div class="showcase-title">LSCS Preview</div>
-      </a>
-    </div>
-    <div class="showcase-card">
-      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" target="_blank">
-        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" alt="Aogiri Racing Crew PS">
-        <div class="showcase-title">Aogiri Racing Crew PS</div>
+        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" alt="Los Santos Swap Club">
+        <div class="showcase-title">Los Santos Swap Club</div>
       </a>
     </div>
   </div>
@@ -343,15 +344,20 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="projects" class="section fade-in">
   <h2>Projects</h2>
   <div class="projects-grid">
-    <div class="project-card">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
+    <div>
+      <div class="project-card">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="project-caption">I contributed to this project as part of a team effort.</p>
     </div>
-    <div class="project-card">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
+    <div>
+      <div class="project-card">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="project-caption">I collaborated with a team to bring this project to life.</p>
     </div>
   </div>
 </section>
-
 
 <div class="separator"></div>
 
@@ -359,22 +365,9 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="reviews" class="section fade-in">
   <h2>Reviews</h2>
   <div class="reviews-grid">
-    <div class="review-card">
-      <p>"He did clean and effective work on my project, met deadlines and exceeded expectations. Was worthwhile to bring him on the team and will be contacting him in the future for further development."</p>
-      <span>- Akagane</span>
-    </div>
-    <div class="review-card">
-      <p>"Does insane work, thorough and gets to any problems in very quick time. Jobs have worked amazing and has some very creative ideas for scripts and ideas for cities. Will always put 100% into any work he does."</p>
-      <span>- ezzin</span>
-    </div>
-    <div class="review-card">
-      <p>"I know nothing about development but have always wanted my own FiveM server so I hired him to set it up for me and he did amazing! He met all deadlines, fixed all bugs quickly, answered all my questions, and even taught me about configuring free of charge so I never have issues in the future."</p>
-      <span>- zoey</span>
-    </div>
-    <div class="review-card">
-      <p>"Built my Minecraft SMP server for me within a month when we expected it to take around 4 months! Everything worked, no bugs, answered all questions and guided me on how to make changes and add stuff later. Also provided amazing support when needed! Would recommend."</p>
-      <span>- lyn</span>
-    </div>
+    <div class="review-card"><p>"Really helpful dev and good communication skills."</p><span>- el123</span></div>
+    <div class="review-card"><p>"Great dev, helped me fix my server and was extremely patient."</p><span>- charlieemccartney</span></div>
+    <div class="review-card"><p>"Fantastic to work with and excellent scripting knowledge."</p><span>- jaydenboy27</span></div>
   </div>
 </section>
 
@@ -383,51 +376,45 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <!-- Contact -->
 <section id="contact" class="section fade-in">
   <h2>Contact</h2>
-  <p>Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
-  <a href="https://discord.gg/cqgRm2qeu4" target="_blank" class="button">Join My Discord</a>
+  <p>Want to collaborate or need help with your FiveM server?</p>
+  <p style="margin-top:12px;"><a href="https://discord.gg/cqgRm2qeu4" class="button" target="_blank">Join my Discord</a></p>
 </section>
 
-<footer>
-  &copy; 2025 kxdn — All Rights Reserved
-</footer>
+<div id="back-to-top"><i class="fa-solid fa-arrow-up"></i></div>
 
-<!-- Back to Top Button -->
-<div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
+<footer>&copy; 2025 kxdn. All rights reserved.</footer>
 
 <script>
-// Scroll animation
+// Fade-in on scroll
 const faders = document.querySelectorAll('.fade-in');
-const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+const appearOptions = { threshold: 0.15 };
 const appearOnScroll = new IntersectionObserver((entries, observer) => {
   entries.forEach(entry => {
     if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
   });
 }, appearOptions);
-faders.forEach(fader => appearOnScroll.observe(fader));
+faders.forEach(fader => { appearOnScroll.observe(fader); });
 
-// Scrollspy navigation underline
-const sections = document.querySelectorAll('section');
+// Back to top
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 400 ? 'block' : 'none'; });
+backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+// Active nav link
 const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section');
 window.addEventListener('scroll', () => {
   let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 120;
-    if(pageYOffset >= sectionTop) current = section.getAttribute('id');
+  sections.forEach(section => { if (window.scrollY >= section.offsetTop - 150) { current = section.getAttribute('id'); } });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
   });
-  navLinks.forEach(link => { link.classList.remove('active'); if(link.getAttribute('href') === '#' + current) link.classList.add('active'); });
-
-  // Back to top button
-  const backToTop = document.getElementById('back-to-top');
-  if(window.scrollY > 300) backToTop.style.display = 'block'; else backToTop.style.display = 'none';
 });
 
-// Back to Top
-document.getElementById('back-to-top').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-// Light Mode Toggle
-const lightToggle = document.getElementById('light-mode-toggle');
-lightToggle.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
+// Light mode toggle
+const toggleButton = document.getElementById('light-mode-toggle');
+toggleButton.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
 </script>
-
 </body>
 </html>
