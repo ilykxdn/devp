@@ -148,22 +148,14 @@ header p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
 
 /* Projects */
 .projects-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.project-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 16px;
-  width: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease;
+.project-card { width: 560px; max-width: 90%; height: 315px; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass-bg); display: flex; align-items: center; justify-content: center; }
+.project-caption {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
 }
-.project-card:hover { transform: translateY(-4px); }
-.project-card h3 { color: var(--accent); margin-bottom: 8px; }
-.project-card p { color: var(--text-muted); font-size: 0.9rem; text-align: center; }
 
 /* Reviews */
 .reviews-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1100px; }
@@ -241,7 +233,6 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
       <li><a href="#skills">Skills</a></li>
       <li><a href="#showcases">Showcases</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#active-work">Active Work</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -315,8 +306,8 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
     <div class="skills-card"><h4>Handling Metas</h4></div>
     <div class="skills-card"><h4>Web Development</h4></div>
     <div class="skills-card"><h4>GFX Design</h4></div>
-    <div class="skills-card"><h4>Livery Design</h4></div>
-    <div class="skills-card"><h4>FiveM Servers</h4></div>
+    <div class="skills-card"><h4>15+ Coding Languages</h4></div>
+    <div class="skills-card"><h4>Always Learning More</h4></div>
   </div>
 </section>
 
@@ -326,9 +317,10 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="showcases" class="section fade-in">
   <h2>Showcases</h2>
   <div class="showcase-grid">
-    <div class="showcase-card"><img src="https://i.imgur.com/0Zc0h8S.jpg" alt="Showcase"><div class="showcase-title">Car Showcase</div></div>
-    <div class="showcase-card"><img src="https://i.imgur.com/F1K9RQC.jpg" alt="Showcase"><div class="showcase-title">Clothing Showcase</div></div>
-    <div class="showcase-card"><img src="https://i.imgur.com/m3Q3LqN.jpg" alt="Showcase"><div class="showcase-title">Server Showcase</div></div>
+    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/kx-weather.jpg?raw=true" alt="kx-weather"><div class="showcase-title">kx-weather</div></div>
+    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/kx-RPC.jpg?raw=true" alt="kx-RPC"><div class="showcase-title">kx-RPC</div></div>
+    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Handling.jpg?raw=true" alt="Handling"><div class="showcase-title">Handling</div></div>
+    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Clothing.jpg?raw=true" alt="Clothing"><div class="showcase-title">Clothing</div></div>
   </div>
 </section>
 
@@ -338,39 +330,9 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="projects" class="section fade-in">
   <h2>Projects</h2>
   <div class="projects-grid">
-    <div class="project-card"><h3>kx-weather</h3><p>Advanced QBCore weather system</p></div>
-    <div class="project-card"><h3>kx-RPC</h3><p>Discord Rich Presence script</p></div>
-    <div class="project-card"><h3>FiveM Scripts</h3><p>Custom scripts for roleplay servers</p></div>
-    <div class="project-card"><h3>Server Builds</h3><p>Optimized frameworks & server-side systems</p></div>
-  </div>
-</section>
-
-<div class="separator"></div>
-
-<!-- Active Work -->
-<section id="active-work" class="section fade-in">
-  <h2>Active Work</h2>
-  <div class="projects-grid">
-    <div class="project-card">
-      <h3>ErrorRP FiveM Server</h3>
-      <p>Developing and maintaining immersive roleplay systems for ErrorRP.</p>
-    </div>
-    <div class="project-card">
-      <h3>Windy Day Discord Bot</h3>
-      <p>Building a multi-purpose Discord bot with custom features and utilities.</p>
-    </div>
-    <div class="project-card">
-      <h3>kxdn.dev V2</h3>
-      <p>Redesigning and expanding the functionality of my developer portfolio website.</p>
-    </div>
-    <div class="project-card">
-      <h3>ErrorRP Website</h3>
-      <p>Designing and developing the official website for ErrorRP.</p>
-    </div>
-    <div class="project-card">
-      <h3>ErrorRP Discord Bot</h3>
-      <p>Creating a custom bot for managing and enhancing the ErrorRP Discord server.</p>
-    </div>
+    <div class="project-card">kx-weather</div>
+    <div class="project-card">kx-RPC</div>
+    <div class="project-card">FiveM Scripts</div>
   </div>
 </section>
 
@@ -380,10 +342,8 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="reviews" class="section fade-in">
   <h2>Reviews</h2>
   <div class="reviews-grid">
-    <div class="review-card"><p>"kx-weather is amazing, works perfectly on my server!"</p><span>- TripleShee</span></div>
-    <div class="review-card"><p>"kxdn always delivers clean and efficient code."</p><span>- ServerOwner123</span></div>
-    <div class="review-card"><p>"Windy Day Bot improved our Discord server functionality tremendously."</p><span>- DiscordAdmin</span></div>
-    <div class="review-card"><p>"Collaborating with kxdn has been a pleasure."</p><span>- ErrorRP Team</span></div>
+    <div class="review-card"><p>"kx-weather is amazing!"</p><span>- TripleShee</span></div>
+    <div class="review-card"><p>"kxdn always delivers clean code."</p><span>- ServerOwner123</span></div>
   </div>
 </section>
 
@@ -392,34 +352,37 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <!-- Contact -->
 <section id="contact" class="section fade-in">
   <h2>Contact Me</h2>
-  <p>Reach out on Discord or check out my GitHub:</p>
-  <a href="https://discord.gg/cqgRm2qeu4" target="_blank" class="button">Discord</a>
-  <a href="https://github.com/ilykxdn" target="_blank" class="button">GitHub</a>
+  <p>For collaboration or inquiries, reach me on Discord: <a href="https://discord.gg/cqgRm2qeu4" target="_blank">kxdn#0001</a></p>
 </section>
 
-<div id="back-to-top"><i class="fa-solid fa-chevron-up"></i></div>
-
+<!-- Footer -->
 <footer>
-  &copy; 2025 kxdn. All rights reserved.
+  &copy; 2025 kxdn. All Rights Reserved.
 </footer>
 
+<!-- Back to Top -->
+<div id="back-to-top"><i class="fa-solid fa-chevron-up"></i></div>
+
 <script>
-  // Fade-in elements
-  const faders = document.querySelectorAll('.fade-in');
-  const appearOptions = { threshold: 0, rootMargin: "0px 0px -100px 0px" };
-  const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }});
-  }, appearOptions);
-  faders.forEach(fader => appearOnScroll.observe(fader));
-
-  // Back to top button
-  const backToTop = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => { if(window.scrollY > 400){ backToTop.style.display='block'; } else { backToTop.style.display='none'; }});
-  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-
-  // Light mode toggle
+  // Light Mode Toggle
   const toggle = document.getElementById('light-mode-toggle');
   toggle.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
+
+  // Back to Top
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 300) backToTop.style.display = 'block';
+    else backToTop.style.display = 'none';
+  });
+  backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+  // Fade In on Scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+  const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
+    entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); appearOnScroll.unobserve(entry.target); }});
+  }, appearOptions);
+  faders.forEach(fader => { appearOnScroll.observe(fader); });
 </script>
 
 </body>
