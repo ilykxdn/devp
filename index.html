@@ -1,420 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>kxdn — FiveM Developer</title>
-<meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<!-- Favicon -->
-<link rel="icon" type="image/jpeg" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/IMG_1319.jpg?raw=true" />
-
-<!-- Fonts & Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  
-<style>
-:root {
-  --text-primary: #fff;
-  --text-muted: rgba(255, 255, 255, 0.75);
-  --accent: #7c4dff;
-  --accent-light: #b388ff;
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.12);
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
-  color: var(--text-primary);
-  overflow-x: hidden;
-  padding-top: 100px;
-  transition: background 0.3s, color 0.3s;
-}
-
-/* Header Bar */
-.header-bar {
-  position: fixed;
-  top: 0; left: 0; width: 100%;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 14px 32px;
-  background: var(--glass-bg);
-  border-bottom: 1px solid var(--glass-border);
-  backdrop-filter: blur(14px);
-  z-index: 1000;
-  animation: slideDown 0.8s ease forwards;
-}
-.site-name { font-weight: 700; font-size: 1.6rem; color: var(--accent-light); }
-nav.main-nav { flex-grow: 1; display: flex; justify-content: center; }
-.nav-links { display: flex; gap: 28px; list-style: none; position: relative; }
-.nav-links a {
-  text-decoration: none;
-  font-weight: 600;
-  color: var(--text-primary);
-  position: relative;
-  transition: color 0.3s ease;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute; left: 0; bottom: -4px;
-  width: 100%; height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-.nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
-.nav-links a:hover { color: var(--accent-light); }
-
-.social-icons { display: flex; gap: 16px; }
-.social-icons a { color: var(--text-primary); font-size: 1.2rem; transition: color 0.3s; }
-.social-icons a:hover { color: var(--accent-light); }
-
-/* Light Mode Toggle */
-#light-mode-toggle {
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-left: 16px;
-  color: var(--text-primary);
-  transition: color 0.3s ease;
-}
-#light-mode-toggle:hover { color: var(--accent-light); }
-
-/* Hero Header */
-header {
-  max-width: 800px; margin: 0 auto 64px; text-align: center;
-  animation: fadeUp 1s ease forwards; opacity: 0;
-}
-header h1 { font-size: 3.8rem; font-weight: 900; color: var(--accent); margin-bottom: 12px; }
-header .tagline { font-size: 1.5rem; color: var(--accent-light); margin-bottom: 20px; }
-header p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.7; }
-
-/* Separator */
-.separator { width: 80%; max-width: 1200px; height: 1px; background: var(--glass-border); margin: 64px auto; }
-
-/* Sections */
-.section { width: 100%; padding: 64px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.section h2 { font-size: 2rem; margin-bottom: 32px; color: var(--accent-light); }
-
-/* Cards */
-.card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
-.card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  padding: 24px;
-  width: 280px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.card:hover { transform: translateY(-6px); box-shadow: 0 12px 28px rgba(0,0,0,0.35); }
-.card h3 { margin-bottom: 12px; color: var(--accent); }
-
-/* Skills */
-.skills-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.skills-card {
-  flex: 1 1 220px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-.skills-card:hover { transform: translateY(-4px); }
-.skills-card h4 { color: var(--accent-light); }
-
-/* Showcase */
-.showcase-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.showcase-card {
-  position: relative;
-  width: 300px; height: 200px; overflow: hidden;
-  border-radius: 12px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  transition: transform 0.3s;
-}
-.showcase-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-.showcase-card:hover { transform: translateY(-4px); }
-.showcase-card:hover img { transform: scale(1.05); }
-.showcase-card .showcase-title {
-  position: absolute; bottom: 0; left: 0; width: 100%;
-  background: rgba(0,0,0,0.6); color: #fff;
-  padding: 6px 8px; font-weight: 600; text-align: center;
-}
-
-/* Projects */
-.projects-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.project-card { width: 560px; max-width: 90%; height: 315px; border-radius: 12px; overflow: hidden; border: 1px solid var(--glass-border); background: var(--glass-bg); display: flex; align-items: center; justify-content: center; }
-.project-caption {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  text-align: center;
-  margin-top: 8px;
-  font-style: italic;
-}
-
-/* Reviews */
-.reviews-grid { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; max-width: 1100px; }
-.review-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 20px;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease;
-}
-.review-card:hover { transform: translateY(-4px); }
-.review-card p { color: var(--text-primary); margin-bottom: 12px; font-size: 0.95rem; line-height: 1.4; }
-.review-card span { color: var(--accent-light); font-weight: 600; text-align: right; font-size: 0.9rem; }
-
-/* Buttons */
-a.button { display: inline-block; padding: 14px 28px; background: var(--accent); color: #fff; font-weight: 600; border-radius: 10px; text-decoration: none; box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease; }
-a.button:hover { background: var(--accent-light); }
-
-/* Back to Top */
-#back-to-top {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: var(--accent);
-  color: #fff;
-  padding: 12px 16px;
-  border-radius: 50%;
-  font-size: 1.4rem;
-  cursor: pointer;
-  display: none;
-  z-index: 1001;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-}
-#back-to-top:hover { background: var(--accent-light); }
-
-/* Footer */
-footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); margin: 64px 0 32px; }
-
-/* Animations */
-.fade-in { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(30px);} to { opacity: 1; transform: translateY(0);} }
-@keyframes slideDown { from { transform: translateY(-100%);} to { transform: translateY(0);} }
-
-/* Responsive */
-@media (max-width: 900px) { .card-container, .skills-container, .showcase-grid, .projects-grid, .reviews-grid { flex-direction: column; align-items: center; } }
-@media (max-width: 600px) { header h1 { font-size: 2.6rem; } .tagline { font-size: 1.2rem; } }
-
-body.light-mode {
-  background: #f5f5f5;
-  color: #1a1a2e;
-}
-body.light-mode .header-bar { background: rgba(255,255,255,0.9); border-color: rgba(0,0,0,0.1); }
-body.light-mode .card, body.light-mode .skills-card, body.light-mode .showcase-card, body.light-mode .project-card, body.light-mode .review-card { background: #fff; border-color: rgba(0,0,0,0.1); }
-body.light-mode a.button { background: var(--accent); color: #fff; }
-body.light-mode a.button:hover { background: var(--accent-light); }
-body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); color: #000; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>kxdn — FiveM Developer</title>
+  <meta name="description" content="kxdn is a FiveM developer with 5 years of experience, specializing in immersive and optimized server-side systems." />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2d02f5a36c.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --text-color: #e4e4e4;
+      --accent-color: #ff4757;
+      --card-bg: #1a1a1a;
+      --text-muted: #a0a0a0;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--bg-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid #222;
+    }
+    header h1 { font-size: 1.2rem; color: var(--accent-color); }
+    .nav-links a {
+      margin: 0 0.8rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-color); }
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem 2rem;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 0.5rem;
+    }
+    .separator {
+      height: 1px;
+      background: #222;
+      margin: 2rem auto;
+      width: 90%;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      aspect-ratio: 16/9;
+    }
+    .project-caption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .active-work-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .active-work-list li {
+      background: var(--card-bg);
+      margin: 0.5rem 0;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease;
+    }
+    .active-work-list li:hover {
+      transform: translateX(5px);
+      color: var(--accent-color);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-top: 1px solid #222;
+    }
+    /* Animations */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.8s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top {
+      position: fixed;
+      bottom: 25px; right: 25px;
+      background: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 45px; height: 45px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1>kxdn</h1>
+    <nav class="nav-links">
+      <a href="#showcase">Showcase</a>
+      <a href="#projects">Projects</a>
+      <a href="#active-work">Active Work</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<!-- Header -->
-<div class="header-bar">
-  <div class="site-name">kxdn</div>
-  <nav class="main-nav">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#recent">Recent Work</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#showcases">Showcases</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#contact">Contact</a></li>
+  <section id="showcase" class="section fade-in">
+    <h2>Showcase</h2>
+    <p>Welcome! I’m kxdn, a FiveM developer with years of experience in scripting immersive roleplay systems, optimized handling, cars, clothing, and GFX design.</p>
+  </section>
+
+  <div class="separator"></div>
+
+  <!-- Projects -->
+  <section id="projects" class="section fade-in">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div>
+        <div class="project-card">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="project-caption">I contributed to this project as part of a team effort.</p>
+      </div>
+      <div>
+        <div class="project-card">
+          <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <p class="project-caption">I collaborated with a team to bring this project to life.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="separator"></div>
+
+  <!-- Active Work -->
+  <section id="active-work" class="section fade-in">
+    <h2>Active Work</h2>
+    <ul class="active-work-list">
+      <li>🚓 Active developer for <strong>ErrorRP</strong> (FiveM Roleplay Server)</li>
+      <li>🤖 Maintaining and improving the <strong>Windy Day Discord Bot</strong></li>
+      <li>🌐 Member of the <strong>Bot Ghost Web Dev Team</strong></li>
+      <li>💻 Freelance web development — personal websites & dev portfolios</li>
+      <li>🗺️ Currently learning and experimenting with <strong>FiveM Map Development</strong></li>
     </ul>
-  </nav>
-  <div class="social-icons">
-    <a href="https://discord.gg/cqgRm2qeu4" target="_blank"><i class="fa-brands fa-discord"></i></a>
-    <a href="https://github.com/ilykxdn" target="_blank"><i class="fa-brands fa-github"></i></a>
-    <a href="https://x.com/xokxdn" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-    <i class="fa-solid fa-sun" id="light-mode-toggle" title="Toggle Light Mode"></i>
-  </div>
-</div>
+  </section>
 
-<!-- Hero -->
-<header>
-  <h1>Hello, it's kxdn</h1>
-  <div class="tagline">I am a experienced FiveM Developer</div>
-  <p>I’m a developer passionate about creating immersive FiveM experiences. I specialize in custom scripts, cars, handling, clothing, and GFX — while constantly learning and pushing my skills further.</p>
-</header>
+  <div class="separator"></div>
 
-<div class="separator"></div>
-
-<!-- About -->
-<section id="about" class="section fade-in">
-  <h2>About Me</h2>
-  <p style="max-width:700px;">I craft immersive roleplay experiences in FiveM, blending scripts, cars, handling, clothing, and GFX design. I thrive on solving complex challenges and writing clean, optimized code that scales with servers I contribute to.</p>
-</section>
-
-<div class="separator"></div>
-
-<!-- Experience -->
-<section id="experience" class="section fade-in">
-  <h2>Experience</h2>
-  <div class="card-container">
-    <div class="card"><h3>5+ Years Dev</h3><p>Custom frameworks, scripts, cars, and clothing.</p></div>
-    <div class="card"><h3>Custom Servers</h3><p>Launched multiple unique roleplay servers.</p></div>
-    <div class="card"><h3>Collaboration</h3><p>Worked with server owners & designers worldwide.</p></div>
-    <div class="card"><h3>Mentoring</h3><p>Training and guiding new developers.</p></div>
-    <div class="card"><h3>GFX Design</h3><p>2+ years of graphics design and creative assets.</p></div>
-    <div class="card"><h3>Livery Design</h3><p>Custom car liveries built for FiveM vehicles.</p></div>
-  </div>
-</section>
-
-<div class="separator"></div>
-
-<!-- Recent Work -->
-<section id="recent" class="section fade-in">
-  <h2>Recent Work</h2>
-  <div class="card-container">
-    <div class="card">
-      <h3>kx-weather</h3>
-      <p>Dynamic, location-based weather system for QBCore servers.</p>
-      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" class="button">View GitHub</a>
+  <!-- Reviews -->
+  <section id="reviews" class="section fade-in">
+    <h2>Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card"><p>"Really helpful dev and good communication skills."</p><span>- el123</span></div>
+      <div class="review-card"><p>"Great dev, helped me fix my server and was extremely patient."</p><span>- charlieemccartney</span></div>
+      <div class="review-card"><p>"Fantastic to work with and excellent scripting knowledge."</p><span>- jaydenboy27</span></div>
     </div>
-    <div class="card">
-      <h3>kx-RPC</h3>
-      <p>Standalone FiveM Discord Rich Presence script.</p>
-      <a href="https://github.com/ilykxdn/kx-RPC" target="_blank" class="button">View GitHub</a>
-    </div>
-  </div>
-</section>
+  </section>
 
-<div class="separator"></div>
+  <div class="separator"></div>
 
-<!-- Skills -->
-<section id="skills" class="section fade-in">
-  <h2>My Skills</h2>
-  <div class="skills-container">
-    <div class="skills-card"><h4>Clothing Development</h4></div>
-    <div class="skills-card"><h4>Script Development</h4></div>
-    <div class="skills-card"><h4>Car Development</h4></div>
-    <div class="skills-card"><h4>Handling Metas</h4></div>
-    <div class="skills-card"><h4>Web Development</h4></div>
-    <div class="skills-card"><h4>GFX Design</h4></div>
-    <div class="skills-card"><h4>15+ Coding Languages</h4></div>
-    <div class="skills-card"><h4>Always Learning More</h4></div>
-  </div>
-</section>
+  <!-- Contact -->
+  <section id="contact" class="section fade-in">
+    <h2>Contact</h2>
+    <p>Want to collaborate or need help with your FiveM server?</p>
+    <p style="margin-top:12px;"><a href="https://discord.gg/cqgRm2qeu4" class="button" target="_blank">Join my Discord</a></p>
+  </section>
 
-<div class="separator"></div>
+  <div id="back-to-top"><i class="fa-solid fa-arrow-up"></i></div>
 
-<!-- Showcases -->
-<section id="showcases" class="section fade-in">
-  <h2>Showcases</h2>
-  <div class="showcase-grid">
-    <div class="showcase-card">
-      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" target="_blank">
-        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
-        <div class="showcase-title">Outlaws Racing Crew PS</div>
-      </a>
-    </div>
-    <div class="showcase-card">
-      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" target="_blank">
-        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
-        <div class="showcase-title">Legion MC</div>
-      </a>
-    </div>
-    <div class="showcase-card">
-      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" target="_blank">
-        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" alt="Los Santos Swap Club">
-        <div class="showcase-title">Los Santos Swap Club</div>
-      </a>
-    </div>
-  </div>
-</section>
+  <footer>&copy; 2025 kxdn. All rights reserved.</footer>
 
-<div class="separator"></div>
+  <script>
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.15 };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, appearOptions);
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
 
-<!-- Projects -->
-<section id="projects" class="section fade-in">
-  <h2>Projects</h2>
-  <div class="projects-grid">
-    <div>
-      <div class="project-card">
-        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <p class="project-caption">I contributed to this project as part of a team effort.</p>
-    </div>
-    <div>
-      <div class="project-card">
-        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <p class="project-caption">I collaborated with a team to bring this project to life.</p>
-    </div>
-  </div>
-</section>
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 400 ? 'block' : 'none'; });
+    backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-<div class="separator"></div>
-
-<!-- Reviews -->
-<section id="reviews" class="section fade-in">
-  <h2>Reviews</h2>
-  <div class="reviews-grid">
-    <div class="review-card"><p>"Really helpful dev and good communication skills."</p><span>- el123</span></div>
-    <div class="review-card"><p>"Great dev, helped me fix my server and was extremely patient."</p><span>- charlieemccartney</span></div>
-    <div class="review-card"><p>"Fantastic to work with and excellent scripting knowledge."</p><span>- jaydenboy27</span></div>
-  </div>
-</section>
-
-<div class="separator"></div>
-
-<!-- Contact -->
-<section id="contact" class="section fade-in">
-  <h2>Contact</h2>
-  <p>Want to collaborate or need help with your FiveM server?</p>
-  <p style="margin-top:12px;"><a href="https://discord.gg/cqgRm2qeu4" class="button" target="_blank">Join my Discord</a></p>
-</section>
-
-<div id="back-to-top"><i class="fa-solid fa-arrow-up"></i></div>
-
-<footer>&copy; 2025 kxdn. All rights reserved.</footer>
-
-<script>
-// Fade-in on scroll
-const faders = document.querySelectorAll('.fade-in');
-const appearOptions = { threshold: 0.15 };
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-  });
-}, appearOptions);
-faders.forEach(fader => { appearOnScroll.observe(fader); });
-
-// Back to top
-const backToTop = document.getElementById('back-to-top');
-window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 400 ? 'block' : 'none'; });
-backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-// Active nav link
-const navLinks = document.querySelectorAll('.nav-links a');
-const sections = document.querySelectorAll('section');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => { if (window.scrollY >= section.offsetTop - 150) { current = section.getAttribute('id'); } });
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
-  });
-});
-
-// Light mode toggle
-const toggleButton = document.getElementById('light-mode-toggle');
-toggleButton.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
-</script>
+    // Active nav link
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => { if (window.scrollY >= section.offsetTop - 150) { current = section.getAttribute('id'); } });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
+      });
+    });
+  </script>
 </body>
 </html>
