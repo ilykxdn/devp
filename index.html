@@ -317,10 +317,24 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="showcases" class="section fade-in">
   <h2>Showcases</h2>
   <div class="showcase-grid">
-    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/kx-weather.jpg?raw=true" alt="kx-weather"><div class="showcase-title">kx-weather</div></div>
-    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/kx-RPC.jpg?raw=true" alt="kx-RPC"><div class="showcase-title">kx-RPC</div></div>
-    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Handling.jpg?raw=true" alt="Handling"><div class="showcase-title">Handling</div></div>
-    <div class="showcase-card"><img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Clothing.jpg?raw=true" alt="Clothing"><div class="showcase-title">Clothing</div></div>
+    <div class="showcase-card">
+      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" target="_blank">
+        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
+        <div class="showcase-title">Outlaws Racing Crew PS</div>
+      </a>
+    </div>
+    <div class="showcase-card">
+      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" target="_blank">
+        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
+        <div class="showcase-title">Legion MC</div>
+      </a>
+    </div>
+    <div class="showcase-card">
+      <a href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" target="_blank">
+        <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/lssc1.png?raw=true" alt="Los Santos Swap Club">
+        <div class="showcase-title">Los Santos Swap Club</div>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -330,9 +344,18 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="projects" class="section fade-in">
   <h2>Projects</h2>
   <div class="projects-grid">
-    <div class="project-card">kx-weather</div>
-    <div class="project-card">kx-RPC</div>
-    <div class="project-card">FiveM Scripts</div>
+    <div>
+      <div class="project-card">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="project-caption">I contributed to this project as part of a team effort.</p>
+    </div>
+    <div>
+      <div class="project-card">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="project-caption">I collaborated with a team to bring this project to life.</p>
+    </div>
   </div>
 </section>
 
@@ -342,8 +365,9 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 <section id="reviews" class="section fade-in">
   <h2>Reviews</h2>
   <div class="reviews-grid">
-    <div class="review-card"><p>"kx-weather is amazing!"</p><span>- TripleShee</span></div>
-    <div class="review-card"><p>"kxdn always delivers clean code."</p><span>- ServerOwner123</span></div>
+    <div class="review-card"><p>"Really helpful dev and good communication skills."</p><span>- el123</span></div>
+    <div class="review-card"><p>"Great dev, helped me fix my server and was extremely patient."</p><span>- charlieemccartney</span></div>
+    <div class="review-card"><p>"Fantastic to work with and excellent scripting knowledge."</p><span>- jaydenboy27</span></div>
   </div>
 </section>
 
@@ -351,39 +375,46 @@ body.light-mode .showcase-card .showcase-title { background: rgba(0,0,0,0.3); co
 
 <!-- Contact -->
 <section id="contact" class="section fade-in">
-  <h2>Contact Me</h2>
-  <p>For collaboration or inquiries, reach me on Discord: <a href="https://discord.gg/cqgRm2qeu4" target="_blank">kxdn#0001</a></p>
+  <h2>Contact</h2>
+  <p>Want to collaborate or need help with your FiveM server?</p>
+  <p style="margin-top:12px;"><a href="https://discord.gg/cqgRm2qeu4" class="button" target="_blank">Join my Discord</a></p>
 </section>
 
-<!-- Footer -->
-<footer>
-  &copy; 2025 kxdn. All Rights Reserved.
-</footer>
+<div id="back-to-top"><i class="fa-solid fa-arrow-up"></i></div>
 
-<!-- Back to Top -->
-<div id="back-to-top"><i class="fa-solid fa-chevron-up"></i></div>
+<footer>&copy; 2025 kxdn. All rights reserved.</footer>
 
 <script>
-  // Light Mode Toggle
-  const toggle = document.getElementById('light-mode-toggle');
-  toggle.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
-
-  // Back to Top
-  const backToTop = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-    if(window.scrollY > 300) backToTop.style.display = 'block';
-    else backToTop.style.display = 'none';
+// Fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.15 };
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
   });
-  backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+}, appearOptions);
+faders.forEach(fader => { appearOnScroll.observe(fader); });
 
-  // Fade In on Scroll
-  const faders = document.querySelectorAll('.fade-in');
-  const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
-  const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
-    entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); appearOnScroll.unobserve(entry.target); }});
-  }, appearOptions);
-  faders.forEach(fader => { appearOnScroll.observe(fader); });
+// Back to top
+const backToTop = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => { backToTop.style.display = window.scrollY > 400 ? 'block' : 'none'; });
+backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+// Active nav link
+const navLinks = document.querySelectorAll('.nav-links a');
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => { if (window.scrollY >= section.offsetTop - 150) { current = section.getAttribute('id'); } });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current){ link.classList.add('active'); }
+  });
+});
+
+// Light mode toggle
+const toggleButton = document.getElementById('light-mode-toggle');
+toggleButton.addEventListener('click', () => { document.body.classList.toggle('light-mode'); });
 </script>
-
 </body>
 </html>
