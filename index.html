@@ -82,12 +82,11 @@ body::after{
   align-items:center;
   justify-content:space-between;
   padding:0 36px;
-  background:rgba(9,10,15,.86);
-  backdrop-filter: none;
   background: rgba(9,10,15,.92);
   border-bottom:1px solid var(--border);
   z-index:1000;
 }
+
 .site-name{
   font-size:1.45rem;
   font-weight:700;
@@ -1003,9 +1002,11 @@ reveals.forEach(el => revealObserver.observe(el));
 /* ===== Scrollspy (nav highlight) ===== */
 const sections = document.querySelectorAll('section, header.hero');
 const navLinks = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
+let scrollTicking = false;
+
+function onScroll() {
   let current = '';
-  const offset = 140;
+  const offset = 160;
 
   sections.forEach(section => {
     const top = section.offsetTop - offset;
@@ -1013,9 +1014,29 @@ window.addEventListener('scroll', () => {
   });
 
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    link.classList.toggle(
+      'active',
+      link.getAttribute('href') === '#' + current
+    );
   });
+
+  const backToTop = document.getElementById('back-to-top');
+  if (backToTop) {
+    backToTop.style.display = (window.scrollY > 500) ? 'flex' : 'none';
+  }
+
+  scrollTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!scrollTicking) {
+    scrollTicking = true;
+    requestAnimationFrame(onScroll);
+  }
+}, { passive: true });
+
+// run once on load
+onScroll();
 
   /* Back to top */
   const backToTop = document.getElementById('back-to-top');
