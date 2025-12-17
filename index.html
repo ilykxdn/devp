@@ -81,7 +81,61 @@ header {
   max-width: 860px;
   margin: 0 auto 160px;
   text-align: center;
+  position: relative;
 }
+
+/* HERO V2 ANIMATION */
+.hero-bg {
+  position: absolute;
+  inset: -120px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139,92,246,.18), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(139,92,246,.12), transparent 45%);
+  filter: blur(80px);
+  z-index: -1;
+  animation: floatGlow 14s ease-in-out infinite alternate;
+}
+
+@keyframes floatGlow {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-40px) scale(1.05); }
+}
+
+.hero-line {
+  width: 120px;
+  height: 3px;
+  margin: 32px auto;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: lineReveal 1.4s ease forwards;
+}
+
+@keyframes lineReveal {
+  from { opacity: 0; width: 0; }
+  to { opacity: 1; width: 120px; }
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: .8rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-bottom: 22px;
+  animation: fadeUp .9s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-title span {
+  background: linear-gradient(120deg, #a78bfa, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 header h1 {
   font-size: 3.8rem;
   font-weight: 700;
@@ -314,7 +368,10 @@ footer {
 </div>
 
 <header class="reveal">
-  <h1>FiveM development, <span>done right</span>.</h1>
+  <div class="hero-bg"></div>
+  <div class="hero-tag">FiveM Developer • Commissions Open</div>
+  <h1 class="hero-title">FiveM development,<br><span>engineered for quality</span>.</h1>
+  <div class="hero-line"></div>
   <div class="tagline">Systems • Scripts • UI • Immersion</div>
   <p>I help servers stand out with polished systems, clean performance, and immersive design. Built for longevity, not shortcuts.</p>
   <div class="cta-buttons">
