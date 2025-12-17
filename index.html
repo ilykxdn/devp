@@ -3,357 +3,1086 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>kxdn — FiveM Developer</title>
-<meta name="description" content="Professional FiveM development — systems, scripts, UI, vehicles, and immersive server experiences." />
+<title>kxdn — Developer</title>
+<meta name="description" content="kxdn is a FiveM developer with 5+ years of experience, specializing in immersive and optimized server-side systems." />
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="icon" type="image/jpeg" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/IMG_1319.jpg?raw=true" />
 
 <style>
-:root {
-  --bg-main: #090a0f;
-  --bg-soft: #11131f;
-  --bg-card: #15182a;
-  --border: rgba(255,255,255,.07);
-  --text-main: #ffffff;
-  --text-muted: rgba(255,255,255,.65);
-  --accent: #8b5cf6;
-  --accent-soft: rgba(139,92,246,.15);
+:root{
+  --bg-main:#090a0f;
+  --bg-soft:#11131f;
+  --bg-card:#15182a;
+  --border:rgba(255,255,255,.07);
+  --text:#fff;
+  --muted:rgba(255,255,255,.65);
+  --accent:#8b5cf6;           /* muted violet */
+  --accent-2:#22c55e;         /* availability green */
+  --accent-soft:rgba(139,92,246,.14);
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius:18px;
+  --max:1150px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'Inter', sans-serif;
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
   background: radial-gradient(circle at top, #14172a, var(--bg-main));
-  color: var(--text-main);
-  padding-top: 90px;
-  line-height: 1.7;
+  color:var(--text);
+  padding-top:90px;
+  line-height:1.7;
+  overflow-x:hidden;
 }
 
-/* NOISE OVERLAY */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
-  opacity: .035;
-  z-index: 9999;
+/* ===== Noise / grain overlay (embedded SVG data URI; no external calls) ===== */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  opacity:.045;
+  mix-blend-mode:overlay;
+  z-index:9999;
 }
 
-/* HEADER */
-.header-bar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 36px;
-  background: rgba(9,10,15,.85);
+/* ===== Header ===== */
+.header-bar{
+  position:fixed; top:0; left:0; right:0;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 36px;
+  background:rgba(9,10,15,.86);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--border);
-  z-index: 1000;
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+}
+.site-name{
+  font-size:1.45rem;
+  font-weight:700;
+  color:var(--accent);
+}
+nav.main-nav{ flex:1; display:flex; justify-content:center; }
+.nav-links{
+  list-style:none;
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+.nav-links a{
+  text-decoration:none;
+  font-size:.95rem;
+  font-weight:500;
+  color:var(--muted);
+  position:relative;
+  padding:6px 2px;
+  transition:color .25s ease;
+}
+.nav-links a:hover{ color:var(--text); }
+.nav-links a.active{ color:var(--text); }
+.nav-links a.active::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-10px;
+  height:2px;
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
-.site-name { font-size: 1.45rem; font-weight: 700; color: var(--accent); }
-
-.nav-links { list-style: none; display: flex; gap: 24px; }
-.nav-links a {
-  text-decoration: none;
-  font-size: .95rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  position: relative;
+.social-icons{
+  display:flex;
+  gap:16px;
+  align-items:center;
 }
-.nav-links a:hover { color: var(--text-main); }
-
-.social-icons { display: flex; gap: 16px; align-items: center; }
-.social-icons a { color: var(--text-muted); }
-
-/* HERO */
-header {
-  max-width: 900px;
-  margin: 0 auto 180px;
-  text-align: center;
-  position: relative;
+.social-icons a, #light-mode-toggle{
+  color:var(--muted);
+  font-size:1.05rem;
+  transition:transform .25s ease, color .25s ease;
+  cursor:pointer;
+}
+.social-icons a:hover, #light-mode-toggle:hover{
+  color:var(--text);
+  transform:translateY(-1px);
 }
 
-.hero-bg {
-  position: absolute;
-  inset: -160px;
+/* ===== Layout helpers ===== */
+.separator{
+  max-width:900px;
+  height:1px;
+  background:var(--border);
+  margin:0 auto;
+}
+.section{
+  max-width:var(--max);
+  margin:0 auto;
+  padding:140px 36px;
+  text-align:center;
+}
+.section h2{
+  font-size:2.25rem;
+  font-weight:600;
+  margin-bottom:70px;
+}
+.sub{
+  max-width:720px;
+  margin: -46px auto 70px;
+  color:var(--muted);
+}
+
+/* ===== Hero (V2) ===== */
+header.hero{
+  max-width:900px;
+  margin:0 auto 180px;
+  text-align:center;
+  position:relative;
+}
+.hero-bg{
+  position:absolute;
+  inset:-180px;
   background:
-    radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(139,92,246,.18), transparent 45%),
-    radial-gradient(circle at 80% 60%, rgba(139,92,246,.12), transparent 45%);
-  filter: blur(90px);
-  z-index: -1;
+    radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(139,92,246,.20), transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(139,92,246,.12), transparent 50%);
+  filter: blur(95px);
+  z-index:-1;
+  will-change: transform;
 }
-
-.hero-tag {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: .8rem;
-  background: var(--accent-soft);
-  color: var(--accent);
-  margin-bottom: 24px;
+.hero-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:.82rem;
+  background:var(--accent-soft);
+  color:var(--accent);
+  margin-bottom:26px;
+  border:1px solid rgba(139,92,246,.18);
 }
-
-.availability {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: 10px;
-  font-size: .75rem;
-  color: #6ee7b7;
+.availability{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-left:6px;
+  color:#86efac;
+  font-size:.78rem;
 }
-
-header h1 {
-  font-size: 3.9rem;
-  font-weight: 700;
-  margin-bottom: 22px;
+.availability .dot{
+  width:8px;height:8px;border-radius:99px;
+  background:var(--accent-2);
+  box-shadow: 0 0 18px rgba(34,197,94,.45);
 }
-header h1 span {
+.hero-title{
+  font-size:3.9rem;
+  font-weight:700;
+  margin-bottom:20px;
+  letter-spacing:-.02em;
+}
+.hero-title span{
   background: linear-gradient(120deg, #a78bfa, #7c3aed);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-line{
+  width:120px;height:3px;
+  margin:26px auto 22px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  border-radius:99px;
+  opacity:.9;
+}
+.tagline{
+  font-size:1.35rem;
+  color:var(--muted);
+  margin-bottom:26px;
+}
+.hero p{
+  max-width:650px;
+  margin:0 auto;
+  color:var(--muted);
+}
+.cta-buttons{
+  margin-top:38px;
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.button{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 30px;
+  border-radius:12px;
+  font-weight:500;
+  text-decoration:none;
+  font-size:.95rem;
+  transition: transform .25s ease, opacity .25s ease, background .25s ease;
+  will-change: transform;
+}
+.button.primary{ background:var(--accent); color:#fff; }
+.button.secondary{ border:1px solid var(--border); color:var(--text); background:transparent; }
+.button:hover{ transform: translateY(-2px); opacity:.95; }
+
+/* ===== Micro-interactions base ===== */
+.card, .skill-card, .review-card, .process-step, .blog-card, .preview-card{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow: none;
+}
+.lift{
+  transition: transform .32s ease, box-shadow .32s ease, border-color .32s ease;
+  will-change: transform;
+}
+.lift:hover{
+  transform: translateY(-6px);
+  border-color: rgba(139,92,246,.22);
+  box-shadow: var(--shadow);
 }
 
-.tagline {
-  font-size: 1.35rem;
-  color: var(--text-muted);
-  margin-bottom: 26px;
+/* ===== About ===== */
+#about p{ color:var(--muted); max-width:760px; margin:0 auto; }
+
+/* ===== Experience timeline + line draw animation ===== */
+.timeline{
+  position:relative;
+  max-width:980px;
+  margin:0 auto;
+  padding: 10px 0;
 }
-
-header p { max-width: 640px; margin: 0 auto; color: var(--text-muted); }
-
-.cta-buttons {
-  margin-top: 38px;
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-}
-
-.button {
-  padding: 14px 30px;
-  border-radius: 12px;
-  font-weight: 500;
-  text-decoration: none;
-  font-size: .95rem;
-  transition: transform .25s ease;
-}
-
-.button.primary { background: var(--accent); color: #fff; }
-.button.secondary { border: 1px solid var(--border); color: var(--text-main); }
-.button:hover { transform: translateY(-2px); }
-
-/* SECTIONS */
-.section {
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 140px 36px;
-}
-
-.section h2 {
-  font-size: 2.25rem;
-  margin-bottom: 70px;
-  font-weight: 600;
-}
-
-.separator { max-width: 900px; height: 1px; background: var(--border); margin: 0 auto; }
-
-/* HOW I WORK */
-.process {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-  gap: 30px;
-}
-
-.process-step {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 30px;
-  transition: transform .3s ease;
-}
-.process-step:hover { transform: translateY(-6px); }
-.process-step i { font-size: 1.4rem; color: var(--accent); margin-bottom: 14px; }
-
-/* EXPERIENCE */
-.timeline {
-  position: relative;
-  max-width: 950px;
-  margin: 0 auto;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-}
-
-.timeline-item {
-  display: flex;
-  margin-bottom: 100px;
-}
-.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
-
-.timeline-year {
-  position: absolute;
-  left: 50%;
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0; bottom:0;
+  width:2px;
+  background: linear-gradient(to bottom, transparent, rgba(139,92,246,.55), transparent);
+  opacity:.35;
   transform: translateX(-50%);
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--accent);
-  font-size: .85rem;
-  padding: 6px 14px;
-  border-radius: 999px;
+}
+.timeline-progress{
+  position:absolute;
+  left:50%;
+  top:0;
+  width:2px;
+  height:0%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  box-shadow: 0 0 26px rgba(139,92,246,.35);
+  border-radius:99px;
+}
+.timeline-item{
+  display:flex;
+  position:relative;
+  margin-bottom:100px;
+}
+.timeline-item:nth-child(odd){ flex-direction: row-reverse; }
+.timeline-year{
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  background: rgba(21,24,42,.9);
+  border:1px solid var(--border);
+  color:var(--accent);
+  font-size:.86rem;
+  padding:6px 14px;
+  border-radius:999px;
+}
+.timeline-content{
+  width:45%;
+  padding:28px;
+  text-align:left;
+}
+.timeline-content h3{ margin-bottom:8px; font-weight:600; }
+.timeline-content p{ color:var(--muted); font-size:.95rem; }
+
+/* ===== Skills ===== */
+.skills-group-title{
+  margin: 0 auto 24px;
+  max-width:var(--max);
+  color: rgba(255,255,255,.8);
+  font-weight:600;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  font-size:.78rem;
+  text-align:left;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap:24px;
+  margin-bottom:64px;
+}
+.skill-card{
+  padding:24px;
+  text-align:left;
+}
+.skill-card h4{ margin-bottom:10px; font-weight:600; }
+.skill-level{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:.86rem;
+  color:var(--accent);
+}
+.pip{
+  width:7px;height:7px;border-radius:99px;
+  background:var(--accent);
+  opacity:.9;
 }
 
-.timeline-content {
-  width: 45%;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  padding: 28px;
-  border-radius: 18px;
+/* ===== Showcase (image previews) ===== */
+.showcase-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:26px;
+}
+.preview-card{
+  overflow:hidden;
+  text-align:left;
+  position:relative;
+}
+.preview-card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  display:block;
+  transition: transform .6s ease;
+}
+.preview-overlay{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(to top, rgba(9,10,15,.92), transparent 60%);
+  opacity:0;
+  display:flex;
+  align-items:flex-end;
+  padding:18px;
+  transition: opacity .35s ease;
+}
+.preview-overlay h4{
+  font-weight:600;
+  font-size:.95rem;
+}
+.preview-card:hover img{ transform: scale(1.06); }
+.preview-card:hover .preview-overlay{ opacity:1; }
+
+/* ===== Cards / grids for existing sections ===== */
+.card-container{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:26px;
+}
+.card{
+  padding:26px;
+  text-align:left;
+}
+.card h3{ color:var(--accent); margin-bottom:10px; font-weight:600; }
+.card p{ color:var(--muted); }
+
+.projects-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap:26px;
+  align-items:start;
+}
+.project-card{
+  width:100%;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius);
+  overflow:hidden;
+  border:1px solid var(--border);
+  background:var(--bg-card);
+}
+.project-caption{
+  color:var(--muted);
+  margin-top:12px;
+  font-size:.92rem;
+  text-align:left;
 }
 
-/* WHY HIRE ME */
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap: 28px;
+/* ===== How I Work ===== */
+.process{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap:26px;
+}
+.process-step{
+  padding:28px;
+  text-align:left;
+}
+.process-step i{
+  font-size:1.35rem;
+  color:var(--accent);
+  margin-bottom:12px;
+}
+.process-step h4{ margin-bottom:8px; font-weight:600; }
+.process-step p{ color:var(--muted); font-size:.95rem; }
+
+/* ===== Why hire me ===== */
+.why-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:26px;
+}
+.why-card{
+  padding:30px;
+  text-align:left;
+}
+.why-card i{
+  color:var(--accent);
+  font-size:1.35rem;
+  margin-bottom:12px;
+}
+.why-card h4{ margin-bottom:8px; font-weight:600; }
+.why-card p{ color:var(--muted); font-size:.95rem; }
+
+/* ===== Reviews ===== */
+.reviews-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:26px;
+}
+.review-card{
+  padding:30px;
+  text-align:left;
+}
+.review-card p{
+  color:var(--muted);
+  margin-bottom:18px;
+  font-size:.95rem;
+}
+.review-author{
+  color:var(--accent);
+  font-weight:600;
+  font-size:.9rem;
+  text-align:right;
 }
 
-.why-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 32px;
+/* ===== Blog / Notes ===== */
+.blog-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap:26px;
+}
+.blog-card{
+  padding:28px;
+  text-align:left;
+}
+.blog-card .tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  color:var(--accent);
+  font-size:.78rem;
+  margin-bottom:14px;
+}
+.blog-card h4{ margin-bottom:10px; font-weight:600; }
+.blog-card p{ color:var(--muted); font-size:.95rem; }
+
+/* ===== Reveal ===== */
+.reveal{
+  opacity:0;
+  transform: translateY(26px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform: translateY(0);
 }
 
-/* BLOG */
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-  gap: 30px;
+/* ===== Back to top ===== */
+#back-to-top{
+  position:fixed;
+  bottom:22px;
+  right:22px;
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background: rgba(139,92,246,.92);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 12px 30px rgba(0,0,0,.35);
+  cursor:pointer;
+  z-index:1001;
+  transition: transform .25s ease, opacity .25s ease;
 }
+#back-to-top:hover{ transform: translateY(-2px); }
 
-.blog-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 28px;
-  transition: transform .3s ease;
+/* ===== Light mode (optional; kept) ===== */
+body.light-mode{
+  background:#f6f6f7;
+  color:#111;
 }
-.blog-card:hover { transform: translateY(-6px); }
-.blog-card span { font-size: .75rem; color: var(--accent); }
-
-/* REVIEWS */
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-  gap: 28px;
+body.light-mode .header-bar{
+  background: rgba(245,245,246,.92);
+  border-bottom:1px solid rgba(0,0,0,.08);
 }
-
-.review-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 30px;
+body.light-mode .nav-links a{ color: rgba(0,0,0,.65); }
+body.light-mode .nav-links a:hover,
+body.light-mode .nav-links a.active{ color:#111; }
+body.light-mode .card,
+body.light-mode .skill-card,
+body.light-mode .review-card,
+body.light-mode .process-step,
+body.light-mode .blog-card,
+body.light-mode .preview-card{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
 }
+body.light-mode .separator{ background: rgba(0,0,0,.10); }
+body.light-mode .sub,
+body.light-mode .card p,
+body.light-mode .timeline-content p,
+body.light-mode .process-step p,
+body.light-mode .why-card p,
+body.light-mode .review-card p,
+body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
+body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
-/* REVEAL */
-.reveal { opacity: 0; transform: translateY(30px); transition: all .9s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-@media (max-width: 900px) {
-  .timeline::before { left: 14px; }
-  .timeline-item { flex-direction: column; padding-left: 36px; }
-  .timeline-content { width: 100%; }
-  .timeline-year { left: 14px; transform: none; }
+/* ===== Responsive ===== */
+@media (max-width: 980px){
+  .hero-title{ font-size: 3.1rem; }
+  .header-bar{ padding:0 18px; }
+  nav.main-nav{ display:none; } /* keeps it clean on small screens */
+}
+@media (max-width: 900px){
+  .timeline::before, .timeline-progress{ left:14px; transform:none; }
+  .timeline-item{ flex-direction:column; padding-left:34px; }
+  .timeline-item:nth-child(odd){ flex-direction:column; }
+  .timeline-content{ width:100%; }
+  .timeline-year{ left:14px; transform:none; }
+}
+@media (max-width: 520px){
+  .section{ padding:110px 18px; }
+  .hero-title{ font-size: 2.5rem; }
 }
 </style>
 </head>
+
 <body>
 
+<!-- Header -->
 <div class="header-bar">
   <div class="site-name">kxdn</div>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#process">How I Work</a></li>
-    <li><a href="#blog">Notes</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+
+  <nav class="main-nav">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#recent">Recent</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#process">How I Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#current">Current</a></li>
+      <li><a href="#why">Why Me</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#blog">Notes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <div class="social-icons">
-    <a href="https://github.com/ilykxdn" target="_blank"><i class="fa-brands fa-github"></i></a>
     <a href="https://discord.gg/cqgRm2qeu4" target="_blank"><i class="fa-brands fa-discord"></i></a>
+    <a href="https://github.com/ilykxdn" target="_blank"><i class="fa-brands fa-github"></i></a>
+    <a href="https://x.com/xokxdn" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    <i class="fa-solid fa-sun" id="light-mode-toggle" title="Toggle Light Mode"></i>
   </div>
 </div>
 
-<header class="reveal">
+<!-- Hero -->
+<header class="hero reveal" id="top">
   <div class="hero-bg"></div>
-  <div class="hero-tag">FiveM Developer • Commissions Open <span class="availability">● Available</span></div>
-  <h1>FiveM systems,<br><span>built to last</span>.</h1>
-  <div class="tagline">Frameworks • UI • Performance • Immersion</div>
-  <p>I design long-term FiveM solutions focused on stability, performance, and player experience.</p>
+
+  <div class="hero-tag">
+    FiveM Developer • Commissions Open
+    <span class="availability"><span class="dot"></span> Available</span>
+  </div>
+
+  <h1 class="hero-title">FiveM systems,<br><span>built to last</span>.</h1>
+  <div class="hero-line"></div>
+
+  <div class="tagline">Frameworks • UI / NUI • Performance • Immersion</div>
+  <p>I’m a developer passionate about creating immersive FiveM experiences. I specialize in custom scripts, cars, handling, clothing, and GFX — while constantly learning and pushing my skills further.</p>
+
   <div class="cta-buttons">
-    <a href="#contact" class="button primary">Start a Project</a>
-    <a href="#work" class="button secondary">View Work</a>
+    <a href="#contact" class="button primary"><i class="fa-solid fa-briefcase"></i> Start a Commission</a>
+    <a href="#work" class="button secondary"><i class="fa-solid fa-images"></i> View Work</a>
   </div>
 </header>
 
 <div class="separator"></div>
 
-<section id="process" class="section reveal">
-  <h2>How I Work</h2>
-  <div class="process">
-    <div class="process-step"><i class="fa-solid fa-comments"></i><h4>Consult</h4><p>Understand goals, scope, and server vision.</p></div>
-    <div class="process-step"><i class="fa-solid fa-diagram-project"></i><h4>Plan</h4><p>Design scalable systems and timelines.</p></div>
-    <div class="process-step"><i class="fa-solid fa-code"></i><h4>Build</h4><p>Clean, optimized development.</p></div>
-    <div class="process-step"><i class="fa-solid fa-vial"></i><h4>Test</h4><p>Stability, performance, and edge cases.</p></div>
-    <div class="process-step"><i class="fa-solid fa-rocket"></i><h4>Deliver</h4><p>Deployment and documentation.</p></div>
-    <div class="process-step"><i class="fa-solid fa-life-ring"></i><h4>Support</h4><p>Post-launch fixes and iteration.</p></div>
+<!-- About -->
+<section id="about" class="section reveal">
+  <h2>About Me</h2>
+  <p>I craft immersive roleplay experiences in FiveM, blending scripts, cars, handling, clothing, and GFX design. I thrive on solving complex challenges and writing clean, optimized code that scales with servers I contribute to.</p>
+</section>
+
+<div class="separator"></div>
+
+<!-- Work (Previews / Showcases) -->
+<section id="work" class="section reveal">
+  <h2>Selected Work</h2>
+  <p class="sub">A few previews of ongoing and past work. (Click any image to open full size.)</p>
+
+  <div class="showcase-grid">
+    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" target="_blank">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
+      <div class="preview-overlay"><h4>Outlaws Racing Crew PS</h4></div>
+    </a>
+
+    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" target="_blank">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
+      <div class="preview-overlay"><h4>Legion MC</h4></div>
+    </a>
+
+    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" target="_blank">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" alt="Malditos Preview">
+      <div class="preview-overlay"><h4>Malditos MC Preview</h4></div>
+    </a>
+
+    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" target="_blank">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" alt="Aogiri Racing Crew PS">
+      <div class="preview-overlay"><h4>Aogiri Racing Crew PS</h4></div>
+    </a>
   </div>
 </section>
 
 <div class="separator"></div>
 
-<section id="blog" class="section reveal">
-  <h2>Notes & Thoughts</h2>
-  <div class="blog-grid">
-    <div class="blog-card"><span>Performance</span><h4>Optimizing FiveM Scripts</h4><p>Thoughts on reducing server load and improving tick rates.</p></div>
-    <div class="blog-card"><span>Lessons Learned</span><h4>Building Long-Term Servers</h4><p>What survives past launch day.</p></div>
-    <div class="blog-card"><span>Dev Notes</span><h4>Framework Architecture</h4><p>Designing systems meant to scale.</p></div>
+<!-- Recent Work (GitHub projects) -->
+<section id="recent" class="section reveal">
+  <h2>Recent Work</h2>
+  <div class="card-container">
+    <div class="card lift">
+      <h3>kx-weather</h3>
+      <p>Dynamic, location-based weather system for QBCore servers.</p>
+      <a href="https://github.com/ilykxdn/kx-weather" target="_blank" class="button primary" style="margin-top:18px;">
+        <i class="fa-brands fa-github"></i> View GitHub
+      </a>
+    </div>
+
+    <div class="card lift">
+      <h3>kx-RPC</h3>
+      <p>Standalone FiveM Discord Rich Presence script.</p>
+      <a href="https://github.com/ilykxdn/kx-RPC" target="_blank" class="button primary" style="margin-top:18px;">
+        <i class="fa-brands fa-github"></i> View GitHub
+      </a>
+    </div>
   </div>
 </section>
 
-<footer>
-  © 2025 kxdn — Professional FiveM Development
+<div class="separator"></div>
+
+<!-- Experience (Timeline) -->
+<section id="experience" class="section reveal">
+  <h2>Experience</h2>
+
+  <div class="timeline" id="timeline">
+    <div class="timeline-progress" id="timelineProgress"></div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <div class="timeline-content card lift">
+        <h3>Rust Server Development</h3>
+        <p>Started developing Rust servers for fun, learning server logic, plugins, and community management fundamentals.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2017</div>
+      <div class="timeline-content card lift">
+        <h3>Discord Bot Development</h3>
+        <p>Began coding Discord bots, focusing on automation, moderation tools, and backend logic.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2019</div>
+      <div class="timeline-content card lift">
+        <h3>Entered FiveM Development</h3>
+        <p>Discovered FiveM and transitioned into server development, scripting, and system design.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2021</div>
+      <div class="timeline-content card lift">
+        <h3>Custom Framework Engineering</h3>
+        <p>Started building fully custom FiveM frameworks from the ground up with scalability and performance in mind.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-content card lift">
+        <h3>Web Development for FiveM</h3>
+        <p>Developed custom websites and web tools tailored specifically for FiveM servers and communities.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-content card lift">
+        <h3>Professional Commissions</h3>
+        <p>Client-focused development, UI integration, and long-term server solutions for live communities.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-content card lift">
+        <h3>Bachelor’s Degree in Software Development</h3>
+        <p>Graduated college with a bachelor’s degree, strengthening software engineering principles and best practices.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item" style="margin-bottom:0;">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-content card lift">
+        <h3>Clothing & 3D Modeling Focus</h3>
+        <p>Shifted focus toward clothing development and returned to 3D modeling to expand creative and visual pipelines.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- How I Work -->
+<section id="process" class="section reveal">
+  <h2>How I Work</h2>
+  <p class="sub">A clean process that keeps projects smooth, predictable, and professional.</p>
+
+  <div class="process">
+    <div class="process-step lift">
+      <i class="fa-solid fa-comments"></i>
+      <h4>Consult</h4>
+      <p>We align on goals, scope, and the server vision.</p>
+    </div>
+
+    <div class="process-step lift">
+      <i class="fa-solid fa-diagram-project"></i>
+      <h4>Plan</h4>
+      <p>I map the systems, dependencies, and timeline.</p>
+    </div>
+
+    <div class="process-step lift">
+      <i class="fa-solid fa-code"></i>
+      <h4>Build</h4>
+      <p>Clean, optimized development with real-world constraints in mind.</p>
+    </div>
+
+    <div class="process-step lift">
+      <i class="fa-solid fa-vial"></i>
+      <h4>Test</h4>
+      <p>Performance, stability, edge cases, and polish checks.</p>
+    </div>
+
+    <div class="process-step lift">
+      <i class="fa-solid fa-rocket"></i>
+      <h4>Deliver</h4>
+      <p>Deployment guidance and clear documentation.</p>
+    </div>
+
+    <div class="process-step lift">
+      <i class="fa-solid fa-life-ring"></i>
+      <h4>Support</h4>
+      <p>Post-launch fixes, iteration, and long-term reliability.</p>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Skills (Grouped: Expert, Advanced, Intermediate, New) -->
+<section id="skills" class="section reveal">
+  <h2>Skills</h2>
+  <p class="sub">Ordered by proficiency for quick scanning: Expert → Advanced → Intermediate → New.</p>
+
+  <div class="skills-group-title">Expert</div>
+  <div class="skills-grid">
+    <div class="skill-card lift"><h4>Python</h4><div class="skill-level"><span class="pip"></span> Expert</div></div>
+    <div class="skill-card lift"><h4>Lua</h4><div class="skill-level"><span class="pip"></span> Expert</div></div>
+    <div class="skill-card lift"><h4>Frameworks</h4><div class="skill-level"><span class="pip"></span> Expert</div></div>
+    <div class="skill-card lift"><h4>JavaScript</h4><div class="skill-level"><span class="pip"></span> Expert</div></div>
+    <div class="skill-card lift"><h4>SQL</h4><div class="skill-level"><span class="pip"></span> Expert</div></div>
+    <div class="skill-card lift"><h4>Discord Bots</h4><div class="skill-level"><span class="pip"></span> Expert</div></div>
+  </div>
+
+  <div class="skills-group-title">Advanced</div>
+  <div class="skills-grid">
+    <div class="skill-card lift"><h4>SQLite</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>Java</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>CSS3</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>Ruby</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>UI / NUI</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>Web Development</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>Clothing Design</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+    <div class="skill-card lift"><h4>Car Tuning</h4><div class="skill-level"><span class="pip"></span> Advanced</div></div>
+  </div>
+
+  <div class="skills-group-title">Intermediate</div>
+  <div class="skills-grid" style="margin-bottom:0;">
+    <div class="skill-card lift"><h4>PHP</h4><div class="skill-level"><span class="pip"></span> Intermediate</div></div>
+    <div class="skill-card lift"><h4>3D Modeling</h4><div class="skill-level"><span class="pip"></span> Intermediate</div></div>
+  </div>
+
+  <div class="skills-group-title" style="margin-top:64px;">New</div>
+  <div class="skills-grid" style="margin-bottom:0;">
+    <!-- Leave this empty for now or add things you’re actively learning -->
+    <div class="skill-card lift"><h4>Always learning more</h4><div class="skill-level"><span class="pip"></span> New</div></div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Projects (YouTube embeds) -->
+<section id="projects" class="section reveal">
+  <h2>Projects</h2>
+
+  <div class="projects-grid">
+    <div>
+      <div class="project-card lift">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vicA6totZic"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="project-caption">I contributed to this project as part of a team effort.</p>
+    </div>
+
+    <div>
+      <div class="project-card lift">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/vE6wThPgTrk"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+      <p class="project-caption">I contributed to this project alongside a talented team.</p>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Current Work -->
+<section id="current" class="section reveal">
+  <h2>Currently Working On</h2>
+
+  <div class="card-container">
+    <div class="card lift">
+      <h3>ErrorRP FiveM Server</h3>
+      <p>Actively developing and managing a new roleplay experience with custom systems.</p>
+    </div>
+    <div class="card lift">
+      <h3>ErrorRP Discord Bot</h3>
+      <p>Management & Moderation tools with in-game and Discord integration features.</p>
+    </div>
+    <div class="card lift">
+      <h3>ErrorRP Website</h3>
+      <p>Building a fully integrated, immersive site to represent the server and its community.</p>
+    </div>
+    <div class="card lift">
+      <h3>kxdn.dev V2</h3>
+      <p>Redesigning and upgrading my own portfolio website for better speed and style.</p>
+    </div>
+    <div class="card lift">
+      <h3>Project Street Crew Outfit</h3>
+      <p>Creating a custom outfit for an upcoming crew in Project Street.</p>
+    </div>
+    <div class="card lift">
+      <h3>FiveM Map Development</h3>
+      <p>I am currently learning FiveM map/mlo development.</p>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Why Clients Hire Me -->
+<section id="why" class="section reveal">
+  <h2>Why Clients Hire Me</h2>
+  <p class="sub">The difference between “it works” and “it’s built for real servers.”</p>
+
+  <div class="why-grid">
+    <div class="why-card lift">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h4>Long-term mindset</h4>
+      <p>I build systems that survive updates, growth, and real community usage — not quick fixes.</p>
+    </div>
+    <div class="why-card lift">
+      <i class="fa-solid fa-gauge-high"></i>
+      <h4>Performance first</h4>
+      <p>Optimization matters. Cleaner systems mean better stability and fewer issues at scale.</p>
+    </div>
+    <div class="why-card lift">
+      <i class="fa-solid fa-comments"></i>
+      <h4>Clear communication</h4>
+      <p>Consistent updates, realistic timelines, and direct answers — no mystery progress.</p>
+    </div>
+    <div class="why-card lift">
+      <i class="fa-solid fa-wand-magic-sparkles"></i>
+      <h4>Polish & immersion</h4>
+      <p>UI, flow, and detail matter. I focus on how players experience what we build.</p>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Reviews -->
+<section id="reviews" class="section reveal">
+  <h2>Reviews</h2>
+
+  <div class="reviews-grid">
+    <div class="review-card lift">
+      <p>"He did clean and effective work on my project, met deadlines and exceeded expectations. Was worthwhile to bring him on the team and will be contacting him in the future for further development."</p>
+      <div class="review-author">— Akagane</div>
+    </div>
+
+    <div class="review-card lift">
+      <p>"Does insane work, thorough and gets to any problems in very quick time. Jobs have worked amazing and has some very creative ideas for scripts and ideas for cities. Will always put 100% into any work he does."</p>
+      <div class="review-author">— ezzin</div>
+    </div>
+
+    <div class="review-card lift">
+      <p>"I know nothing about development but have always wanted my own FiveM server so I hired him to set it up for me and he did amazing! He met all deadlines, fixed all bugs quickly, answered all my questions, and even taught me about configuring free of charge so I never have issues in the future."</p>
+      <div class="review-author">— zoey</div>
+    </div>
+
+    <div class="review-card lift">
+      <p>"Built my Minecraft SMP server for me within a month when we expected it to take around 4 months! Everything worked, no bugs, answered all questions and guided me on how to make changes and add stuff later. Also provided amazing support when needed! Would recommend."</p>
+      <div class="review-author">— lyn</div>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Blog / Notes -->
+<section id="blog" class="section reveal">
+  <h2>Notes</h2>
+  <p class="sub">Performance tips, dev thoughts, and lessons learned. (You can replace these with real posts anytime.)</p>
+
+  <div class="blog-grid">
+    <div class="blog-card lift">
+      <div class="tag"><i class="fa-solid fa-gauge-high"></i> Performance</div>
+      <h4>Optimizing FiveM scripts without breaking gameplay</h4>
+      <p>How I think about server load, event frequency, loops, and database access patterns in real communities.</p>
+    </div>
+
+    <div class="blog-card lift">
+      <div class="tag"><i class="fa-solid fa-book"></i> Lessons learned</div>
+      <h4>What survives past launch day</h4>
+      <p>Why maintainability, documentation, and predictable systems matter more than flashy features.</p>
+    </div>
+
+    <div class="blog-card lift">
+      <div class="tag"><i class="fa-solid fa-code"></i> Dev thoughts</div>
+      <h4>Framework architecture that scales</h4>
+      <p>Patterns I use to keep systems clean: modular design, separation of concerns, and consistent APIs.</p>
+    </div>
+  </div>
+</section>
+
+<div class="separator"></div>
+
+<!-- Contact -->
+<section id="contact" class="section reveal">
+  <h2>Contact</h2>
+  <p class="sub">Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
+  <a href="https://discord.gg/cqgRm2qeu4" target="_blank" class="button primary">
+    <i class="fa-brands fa-discord"></i> Join My Discord
+  </a>
+</section>
+
+<footer style="text-align:center; padding:90px 0 50px; color:var(--muted); font-size:.85rem;">
+  &copy; 2025 kxdn — All Rights Reserved
 </footer>
 
+<!-- Back to Top -->
+<div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
+
 <script>
-// HERO MOUSE REACTIVE GLOW
+/* ===== Mouse reactive hero glow ===== */
 const hero = document.querySelector('.hero-bg');
-document.addEventListener('mousemove', e => {
+document.addEventListener('mousemove', (e) => {
+  if (!hero) return;
   hero.style.setProperty('--mx', `${(e.clientX / window.innerWidth) * 100}%`);
   hero.style.setProperty('--my', `${(e.clientY / window.innerHeight) * 100}%`);
 });
 
-// REVEAL
+/* ===== Reveal on scroll ===== */
 const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
-},{ threshold: .15 });
-reveals.forEach(r => observer.observe(r));
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.14 });
+reveals.forEach(el => revealObserver.observe(el));
+
+/* ===== Scrollspy (nav highlight) ===== */
+const sections = document.querySelectorAll('section, header.hero');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  const offset = 140;
+
+  sections.forEach(section => {
+    const top = section.offsetTop - offset;
+    if (window.scrollY >= top) current = section.getAttribute('id');
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+
+  /* Back to top */
+  const backToTop = document.getElementById('back-to-top');
+  if (window.scrollY > 500) backToTop.style.display = 'flex';
+  else backToTop.style.display = 'none';
+});
+
+/* Back to top click */
+document.getElementById('back-to-top').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* Light mode toggle (kept) */
+document.getElementById('light-mode-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+});
+
+/* ===== Timeline line draw animation ===== */
+const timeline = document.getElementById('timeline');
+const progress = document.getElementById('timelineProgress');
+
+function updateTimelineProgress() {
+  if (!timeline || !progress) return;
+
+  const rect = timeline.getBoundingClientRect();
+  const viewportH = window.innerHeight;
+
+  // How much of the timeline is within view
+  const start = Math.min(Math.max(0, viewportH - rect.top), viewportH);
+  const total = rect.height + viewportH;
+  const pct = Math.min(Math.max((start / total) * 1.65, 0), 1); // tuned feel
+
+  progress.style.height = (pct * 100).toFixed(2) + '%';
+}
+
+window.addEventListener('scroll', updateTimelineProgress, { passive: true });
+window.addEventListener('resize', updateTimelineProgress);
+updateTimelineProgress();
 </script>
 
 </body>
