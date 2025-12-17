@@ -1408,7 +1408,9 @@ if (noteOverlay && noteModal && noteClose) {
       const tagEl = card.querySelector('.tag');
       const tagHtml = tagEl ? tagEl.outerHTML : '';
       const title = card.querySelector('h4')?.textContent || '';
-      const body = card.dataset.full || card.querySelector('p')?.textContent || '';
+      const tpl = card.querySelector('template.note-full');
+      const body = (tpl ? tpl.innerHTML : (card.querySelector('p')?.textContent || '')).trim();
+
 
       openNoteModal({ tagHtml, title, body });
     });
