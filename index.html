@@ -50,16 +50,15 @@ body{
 /* ===== Global mouse-reactive glow (subtle + whole page) ===== */
 .global-glow{
   position:fixed;
-  inset:-120px;
+  inset:-80px;
   z-index:-2;
   pointer-events:none;
   background:
-    radial-gradient(circle at var(--mx) var(--my), rgba(139,92,246,.06), transparent 60%),
-    radial-gradient(circle at 75% 60%, rgba(139,92,246,.04), transparent 65%);
-  filter: blur(60px); /* MUCH cheaper */
-  opacity:.6;
+    radial-gradient(circle at var(--mx) var(--my), rgba(139,92,246,.06), transparent 62%),
+    radial-gradient(circle at 75% 60%, rgba(139,92,246,.04), transparent 68%);
+  filter: blur(35px);  /* was 60px */
+  opacity:.55;
   transform: translateZ(0);
-  will-change: transform;
 }
 
 /* ===== Noise / grain overlay (embedded SVG data URI; no external calls) ===== */
@@ -146,6 +145,8 @@ nav.main-nav{ flex:1; display:flex; justify-content:center; }
   margin:0 auto;
   padding:140px 36px;
   text-align:center;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 .section h2{
   font-size:2.25rem;
@@ -1035,19 +1036,7 @@ function updateTimelineProgress() {
 }
 
 function onScroll() {
-  // scrollspy
-  let current = '';
-  const offset = 160;
-
-  sections.forEach(section => {
-    const top = section.offsetTop - offset;
-    if (window.scrollY >= top) current = section.getAttribute('id');
-  });
-
-  navLinks.forEach(link => {
-    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
-  });
-
+ 
   // back to top
   if (backToTopBtn) {
     backToTopBtn.style.display = (window.scrollY > 500) ? 'flex' : 'none';
