@@ -933,30 +933,55 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 <div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 
 <script>
-/* ===== Mouse reactive glow (subtle, whole page, smoothed) ===== */
+/* ===== Mouse reactive glow (optimized — NOT always running) ===== */
 let targetX = 50, targetY = 35;
 let currentX = 50, currentY = 35;
+let rafId = null;
+let idleTimeout = null;
 
-function setMouseTargets(clientX, clientY){
-  targetX = (clientX / window.innerWidth) * 100;
-  targetY = (clientY / window.innerHeight) * 100;
-}
-
-window.addEventListener('mousemove', (e) => setMouseTargets(e.clientX, e.clientY), { passive: true });
-window.addEventListener('touchmove', (e) => {
-  const t = e.touches && e.touches[0];
-  if (t) setMouseTargets(t.clientX, t.clientY);
-}, { passive: true });
-
-function animateGlow(){
-  // LERP for smoothness
-  currentX += (targetX - currentX) * 0.08;
-  currentY += (targetY - currentY) * 0.08;
+function applyGlow() {
   document.documentElement.style.setProperty('--mx', currentX.toFixed(2) + '%');
   document.documentElement.style.setProperty('--my', currentY.toFixed(2) + '%');
-  requestAnimationFrame(animateGlow);
 }
-requestAnimationFrame(animateGlow);
+
+function tick() {
+  currentX += (targetX - currentX) * 0.10;
+  currentY += (targetY - currentY) * 0.10;
+  applyGlow();
+
+  if (Math.abs(targetX - currentX) < 0.05 && Math.abs(targetY - currentY) < 0.05) {
+    rafId = null;
+    return;
+  }
+  rafId = requestAnimationFrame(tick);
+}
+
+function poke() {
+  if (!rafId) rafId = requestAnimationFrame(tick);
+
+  clearTimeout(idleTimeout);
+  idleTimeout = setTimeout(() => {
+    targetX = 50;
+    targetY = 35;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }, 1200);
+}
+
+window.addEventListener('mousemove', (e) => {
+  targetX = (e.clientX / window.innerWidth) * 100;
+  targetY = (e.clientY / window.innerHeight) * 100;
+  poke();
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  const t = e.touches && e.touches[0];
+  if (!t) return;
+  targetX = (t.clientX / window.innerWidth) * 100;
+  targetY = (t.clientY / window.innerHeight) * 100;
+  poke();
+}, { passive: true });
+
+applyGlow();
 
 /* ===== Reveal on scroll ===== */
 const reveals = document.querySelectorAll('.reveal');
