@@ -457,9 +457,19 @@ header.hero{
 .blog-card h4{ margin-bottom:10px; font-weight:600; }
 .blog-card p{ color:var(--muted); font-size:.95rem; }
 
-/* ===== Reveal ===== */
-.reveal{ opacity:0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
-.reveal.visible{ opacity:1; transform: translateY(0); }
+/* ===== Reveal (FAIL-SAFE) ===== */
+.reveal{ opacity:1; transform:none; }
+
+.js .reveal{
+  opacity:0;
+  transform: translateY(26px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.js .reveal.visible{
+  opacity:1;
+  transform: translateY(0);
+}
+
 
 /* ===== Back to top ===== */
 #back-to-top{
@@ -940,6 +950,8 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 <div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 
 <script>
+document.documentElement.classList.add('js');
+
 /* ===== Mouse reactive glow (optimized — NOT always running) ===== */
 let targetX = 50, targetY = 35;
 let currentX = 50, currentY = 35;
@@ -951,7 +963,7 @@ function applyGlow() {
   document.documentElement.style.setProperty('--my', currentY.toFixed(2) + '%');
 }
 
-function tick() {
+function tickGlow() {
   currentX += (targetX - currentX) * 0.10;
   currentY += (targetY - currentY) * 0.10;
   applyGlow();
@@ -960,24 +972,24 @@ function tick() {
     rafId = null;
     return;
   }
-  rafId = requestAnimationFrame(tick);
+  rafId = requestAnimationFrame(tickGlow);
 }
 
-function poke() {
-  if (!rafId) rafId = requestAnimationFrame(tick);
+function pokeGlow() {
+  if (!rafId) rafId = requestAnimationFrame(tickGlow);
 
   clearTimeout(idleTimeout);
   idleTimeout = setTimeout(() => {
     targetX = 50;
     targetY = 35;
-    if (!rafId) rafId = requestAnimationFrame(tick);
+    if (!rafId) rafId = requestAnimationFrame(tickGlow);
   }, 1200);
 }
 
 window.addEventListener('mousemove', (e) => {
   targetX = (e.clientX / window.innerWidth) * 100;
   targetY = (e.clientY / window.innerHeight) * 100;
-  poke();
+  pokeGlow();
 }, { passive: true });
 
 window.addEventListener('touchmove', (e) => {
@@ -985,7 +997,7 @@ window.addEventListener('touchmove', (e) => {
   if (!t) return;
   targetX = (t.clientX / window.innerWidth) * 100;
   targetY = (t.clientY / window.innerHeight) * 100;
-  poke();
+  pokeGlow();
 }, { passive: true });
 
 applyGlow();
@@ -999,12 +1011,31 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.14 });
 reveals.forEach(el => revealObserver.observe(el));
 
-/* ===== Scrollspy (nav highlight) ===== */
+/* ===== Scrollspy + Back-to-top + Timeline (throttled via rAF) ===== */
 const sections = document.querySelectorAll('section, header.hero');
 const navLinks = document.querySelectorAll('.nav-links a');
+const backToTopBtn = document.getElementById('back-to-top');
+
+const timeline = document.getElementById('timeline');
+const progress = document.getElementById('timelineProgress');
+
 let scrollTicking = false;
 
+function updateTimelineProgress() {
+  if (!timeline || !progress) return;
+
+  const rect = timeline.getBoundingClientRect();
+  const viewportH = window.innerHeight;
+
+  const start = Math.min(Math.max(0, viewportH - rect.top), viewportH);
+  const total = rect.height + viewportH;
+  const pct = Math.min(Math.max((start / total) * 1.65, 0), 1);
+
+  progress.style.height = (pct * 100).toFixed(2) + '%';
+}
+
 function onScroll() {
+  // scrollspy
   let current = '';
   const offset = 160;
 
@@ -1014,16 +1045,16 @@ function onScroll() {
   });
 
   navLinks.forEach(link => {
-    link.classList.toggle(
-      'active',
-      link.getAttribute('href') === '#' + current
-    );
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
   });
 
-  const backToTop = document.getElementById('back-to-top');
-  if (backToTop) {
-    backToTop.style.display = (window.scrollY > 500) ? 'flex' : 'none';
+  // back to top
+  if (backToTopBtn) {
+    backToTopBtn.style.display = (window.scrollY > 500) ? 'flex' : 'none';
   }
+
+  // timeline line draw
+  updateTimelineProgress();
 
   scrollTicking = false;
 }
@@ -1035,47 +1066,28 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// run once on load
-onScroll();
-
-  /* Back to top */
-  const backToTop = document.getElementById('back-to-top');
-  if (window.scrollY > 500) backToTop.style.display = 'flex';
-  else backToTop.style.display = 'none';
-}, { passive: true });
-
-/* Back to top click */
-document.getElementById('back-to-top').addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+window.addEventListener('resize', () => {
+  requestAnimationFrame(updateTimelineProgress);
 });
 
-/* Light mode toggle (kept) */
-document.getElementById('light-mode-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-});
-
-/* ===== Timeline line draw animation ===== */
-const timeline = document.getElementById('timeline');
-const progress = document.getElementById('timelineProgress');
-
-function updateTimelineProgress() {
-  if (!timeline || !progress) return;
-
-  const rect = timeline.getBoundingClientRect();
-  const viewportH = window.innerHeight;
-
-  // How much of the timeline is within view
-  const start = Math.min(Math.max(0, viewportH - rect.top), viewportH);
-  const total = rect.height + viewportH;
-  const pct = Math.min(Math.max((start / total) * 1.65, 0), 1); // tuned feel
-
-  progress.style.height = (pct * 100).toFixed(2) + '%';
+if (backToTopBtn) {
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 }
 
-window.addEventListener('scroll', updateTimelineProgress, { passive: true });
-window.addEventListener('resize', updateTimelineProgress);
-updateTimelineProgress();
+/* Light mode toggle (kept) */
+const lightToggle = document.getElementById('light-mode-toggle');
+if (lightToggle) {
+  lightToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+  });
+}
+
+// run once on load
+onScroll();
 </script>
+
 
 </body>
 </html>
