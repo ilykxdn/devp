@@ -8,39 +8,40 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" type="image/jpeg" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/IMG_1319.jpg?raw=true" />
+
+<!-- Favicon (new logo) -->
+<link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/ilykxdn/devp/refs/heads/main/Assets/Images/KXlogo.jpg?raw=true" />
 
 <style>
 :root{
   --bg-main:#090a0f;
-  --bg-soft:#11131f;
-  --bg-card:#15182a;
+  --bg-soft:#0f1220;
+  --bg-card:#151a2f;
   --border:rgba(255,255,255,.07);
+
   --text:#fff;
   --muted:rgba(255,255,255,.65);
-  --accent:#8b5cf6;           /* muted violet */
-  --accent-2:#22c55e;         /* availability green */
-  --accent-soft:rgba(139,92,246,.14);
-  --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* New color direction (dark + gritty but more premium) */
+  --accent:#6366f1;          /* indigo */
+  --accent-alt:#38bdf8;      /* cyan */
+  --accent-2:#22c55e;        /* availability green */
+  --accent-soft:rgba(99,102,241,.14);
+
+  --shadow: 0 12px 34px rgba(0,0,0,.38);
   --radius:18px;
   --max:1150px;
 
-  /* mouse glow coordinates (set via JS) */
+  /* mouse glow coordinates */
   --mx:50%;
   --my:35%;
 }
-
-
-html, body {
-  background-color: var(--bg-main);
-}
-
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:'Inter',sans-serif;
-  background: radial-gradient(circle at top, #14172a, var(--bg-main));
+  background: radial-gradient(circle at top, #14182f, var(--bg-main));
   color:var(--text);
   padding-top:90px;
   line-height:1.7;
@@ -54,31 +55,21 @@ body{
   z-index:-2;
   pointer-events:none;
   background:
-    radial-gradient(
-      600px 420px at var(--mx) var(--my),
-      rgba(139,92,246,.085),
-      transparent 70%
-    ),
-    radial-gradient(
-      520px 380px at 75% 60%,
-      rgba(139,92,246,.06),
-      transparent 75%
-    );
+    radial-gradient(600px 420px at var(--mx) var(--my), rgba(99,102,241,.085), transparent 70%),
+    radial-gradient(520px 380px at 75% 60%, rgba(56,189,248,.05), transparent 75%);
   opacity:.65;
   transform: translateZ(0);
 }
 
-
-
-/* ===== Noise / grain overlay (embedded SVG data URI; no external calls) ===== */
+/* ===== Noise / grain overlay ===== */
 body::after{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
-  opacity:.025;
-  mix-blend-mode: normal; /* IMPORTANT */
+  opacity:.022;
+  mix-blend-mode: normal;
   z-index: 1;
 }
 
@@ -95,11 +86,38 @@ body::after{
   z-index:1000;
 }
 
-.site-name{
-  font-size:1.45rem;
+/* b2dev-style scroll progress indicator */
+.header-progress{
+  position:absolute;
+  left:0; bottom:0;
+  height:2px;
+  width:100%;
+  background:linear-gradient(90deg, var(--accent), var(--accent-alt));
+  transform:scaleX(0);
+  transform-origin:left;
+  opacity:.9;
+}
+
+/* Brand w/ logo */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.brand img{
+  width:34px;
+  height:34px;
+  object-fit:contain;
+  border-radius:10px;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.35));
+}
+.brand .site-name{
+  font-size:1.35rem;
   font-weight:700;
   color:var(--accent);
+  letter-spacing:.01em;
 }
+
 nav.main-nav{ flex:1; display:flex; justify-content:center; }
 .nav-links{
   list-style:none;
@@ -175,6 +193,22 @@ header.hero{
   text-align:center;
   position:relative;
 }
+
+/* Subtle stagger-in (load only) */
+.hero-stagger{
+  opacity:0;
+  transform: translateY(18px);
+  animation: heroIn .9s ease forwards;
+}
+.hero-stagger.d1{ animation-delay:.08s; }
+.hero-stagger.d2{ animation-delay:.16s; }
+.hero-stagger.d3{ animation-delay:.24s; }
+.hero-stagger.d4{ animation-delay:.32s; }
+.hero-stagger.d5{ animation-delay:.40s; }
+@keyframes heroIn{
+  to{ opacity:1; transform:none; }
+}
+
 .hero-tag{
   display:inline-flex;
   align-items:center;
@@ -185,7 +219,7 @@ header.hero{
   background:var(--accent-soft);
   color:var(--accent);
   margin-bottom:26px;
-  border:1px solid rgba(139,92,246,.18);
+  border:1px solid rgba(99,102,241,.22);
 }
 .availability{
   display:inline-flex;
@@ -198,8 +232,14 @@ header.hero{
 .availability .dot{
   width:8px;height:8px;border-radius:99px;
   background:var(--accent-2);
-  box-shadow: 0 0 18px rgba(34,197,94,.45);
+  animation: pulse 2.4s ease infinite;
 }
+@keyframes pulse{
+  0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55) }
+  70%{ box-shadow:0 0 0 10px rgba(34,197,94,0) }
+  100%{ box-shadow:0 0 0 0 rgba(34,197,94,0) }
+}
+
 .hero-title{
   font-size:3.9rem;
   font-weight:700;
@@ -207,7 +247,7 @@ header.hero{
   letter-spacing:-.02em;
 }
 .hero-title span{
-  background: linear-gradient(120deg, #a78bfa, #7c3aed);
+  background: linear-gradient(120deg, var(--accent), var(--accent-alt));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
@@ -247,9 +287,9 @@ header.hero{
   transition: transform .25s ease, opacity .25s ease, background .25s ease;
   will-change: transform;
 }
-.button.primary{ background:var(--accent); color:#fff; }
+.button.primary{ background:linear-gradient(90deg,var(--accent),var(--accent-alt)); color:#0b0c10; }
 .button.secondary{ border:1px solid var(--border); color:var(--text); background:transparent; }
-.button:hover{ transform: translateY(-2px); opacity:.95; }
+.button:hover{ transform: translateY(-2px); opacity:.96; }
 
 /* ===== Micro-interactions base ===== */
 .card, .skill-card, .review-card, .process-step, .blog-card, .preview-card, .why-card{
@@ -258,19 +298,19 @@ header.hero{
   border-radius:var(--radius);
 }
 .lift{
-  transition: transform .32s ease, box-shadow .32s ease, border-color .32s ease;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
   will-change: transform;
 }
 .lift:hover{
   transform: translateY(-6px);
-  border-color: rgba(139,92,246,.22);
+  border-color: rgba(99,102,241,.22);
   box-shadow: var(--shadow);
 }
 
 /* ===== About ===== */
 #about p{ color:var(--muted); max-width:760px; margin:0 auto; }
 
-/* ===== Experience timeline + line draw animation ===== */
+/* ===== Experience timeline ===== */
 .timeline{
   position:relative;
   max-width:980px;
@@ -283,7 +323,7 @@ header.hero{
   left:50%;
   top:0; bottom:0;
   width:2px;
-  background: linear-gradient(to bottom, transparent, rgba(139,92,246,.55), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(99,102,241,.55), transparent);
   opacity:.28;
   transform: translateX(-50%);
 }
@@ -295,7 +335,7 @@ header.hero{
   height:0%;
   transform: translateX(-50%);
   background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-  box-shadow: 0 0 26px rgba(139,92,246,.32);
+  box-shadow: 0 0 26px rgba(99,102,241,.22);
   border-radius:99px;
 }
 .timeline-item{
@@ -308,9 +348,9 @@ header.hero{
   position:absolute;
   left:50%;
   transform: translateX(-50%);
-  background: rgba(21,24,42,.9);
+  background: rgba(21,26,47,.92);
   border:1px solid var(--border);
-  color:var(--accent);
+  color:var(--accent-alt);
   font-size:.86rem;
   padding:6px 14px;
   border-radius:999px;
@@ -329,11 +369,8 @@ header.hero{
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap:26px;
 }
-.why-card{
-  padding:30px;
-  text-align:left;
-}
-.why-card i{ color:var(--accent); font-size:1.35rem; margin-bottom:12px; }
+.why-card{ padding:30px; text-align:left; }
+.why-card i{ color:var(--accent-alt); font-size:1.35rem; margin-bottom:12px; }
 .why-card h4{ margin-bottom:8px; font-weight:600; }
 .why-card p{ color:var(--muted); font-size:.95rem; }
 
@@ -341,7 +378,7 @@ header.hero{
 .skills-group-title{
   margin: 0 auto 24px;
   max-width:var(--max);
-  color: rgba(255,255,255,.8);
+  color: rgba(255,255,255,.82);
   font-weight:600;
   letter-spacing:.02em;
   text-transform:uppercase;
@@ -361,9 +398,9 @@ header.hero{
   align-items:center;
   gap:10px;
   font-size:.86rem;
-  color:var(--accent);
+  color:var(--accent-alt);
 }
-.pip{ width:7px; height:7px; border-radius:99px; background:var(--accent); opacity:.9; }
+.pip{ width:7px; height:7px; border-radius:99px; background:var(--accent-alt); opacity:.9; }
 
 /* ===== How I work ===== */
 .process{
@@ -372,7 +409,7 @@ header.hero{
   gap:26px;
 }
 .process-step{ padding:28px; text-align:left; }
-.process-step i{ font-size:1.35rem; color:var(--accent); margin-bottom:12px; }
+.process-step i{ font-size:1.35rem; color:var(--accent-alt); margin-bottom:12px; }
 .process-step h4{ margin-bottom:8px; font-weight:600; }
 .process-step p{ color:var(--muted); font-size:.95rem; }
 
@@ -411,7 +448,7 @@ header.hero{
   gap:26px;
 }
 .card{ padding:26px; text-align:left; }
-.card h3{ color:var(--accent); margin-bottom:10px; font-weight:600; }
+.card h3{ color:var(--accent-alt); margin-bottom:10px; font-weight:600; }
 .card p{ color:var(--muted); }
 
 .projects-grid{
@@ -443,7 +480,7 @@ header.hero{
 }
 .review-card{ padding:30px; text-align:left; }
 .review-card p{ color:var(--muted); margin-bottom:18px; font-size:.95rem; }
-.review-author{ color:var(--accent); font-weight:600; font-size:.9rem; text-align:right; }
+.review-author{ color:var(--accent-alt); font-weight:600; font-size:.9rem; text-align:right; }
 
 /* ===== Blog / Notes ===== */
 .blog-grid{
@@ -460,7 +497,7 @@ header.hero{
   border-radius:999px;
   background: rgba(255,255,255,.04);
   border:1px solid var(--border);
-  color:var(--accent);
+  color:var(--accent-alt);
   font-size:.78rem;
   margin-bottom:14px;
 }
@@ -469,7 +506,6 @@ header.hero{
 
 /* ===== Reveal (FAIL-SAFE) ===== */
 .reveal{ opacity:1; transform:none; }
-
 .js .reveal{
   opacity:0;
   transform: translateY(26px);
@@ -479,7 +515,6 @@ header.hero{
   opacity:1;
   transform: translateY(0);
 }
-
 
 /* ===== Back to top ===== */
 #back-to-top{
@@ -492,7 +527,8 @@ header.hero{
   display:none;
   align-items:center;
   justify-content:center;
-  background: rgba(139,92,246,.92);
+  background: linear-gradient(90deg, var(--accent), var(--accent-alt));
+  color:#0b0c10;
   border:1px solid rgba(255,255,255,.12);
   box-shadow: 0 12px 30px rgba(0,0,0,.35);
   cursor:pointer;
@@ -531,13 +567,12 @@ body.light-mode .process-step p,
 body.light-mode .why-card p,
 body.light-mode .review-card p,
 body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
-body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 /* ===== Responsive ===== */
 @media (max-width: 980px){
   .hero-title{ font-size: 3.1rem; }
   .header-bar{ padding:0 18px; }
-  nav.main-nav{ display:none; } /* keeps it clean on small screens */
+  nav.main-nav{ display:none; }
 }
 @media (max-width: 900px){
   .timeline::before, .timeline-progress{ left:14px; transform:none; }
@@ -555,12 +590,16 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <body>
 
-<!-- subtle global glow -->
 <div class="global-glow" aria-hidden="true"></div>
 
 <!-- Header -->
 <div class="header-bar">
-  <div class="site-name">kxdn</div>
+  <div class="header-progress" id="headerProgress" aria-hidden="true"></div>
+
+  <div class="brand">
+    <img src="https://raw.githubusercontent.com/ilykxdn/devp/refs/heads/main/Assets/Images/KXlogo.jpg?raw=true" alt="kxdn logo" />
+    <div class="site-name">kxdn</div>
+  </div>
 
   <nav class="main-nav">
     <ul class="nav-links">
@@ -579,7 +618,8 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
   </nav>
 
   <div class="social-icons">
-    <a href="https://discord.gg/cqgRm2qeu4" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+    <!-- NEW DISCORD LINK -->
+    <a href="https://discord.gg/w8w4dsKKG8" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     <a href="https://github.com/ilykxdn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
     <a href="https://x.com/xokxdn" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
     <i class="fa-solid fa-sun" id="light-mode-toggle" title="Toggle Light Mode" aria-label="Toggle Light Mode"></i>
@@ -588,18 +628,18 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <!-- Hero -->
 <header class="hero reveal" id="top">
-  <div class="hero-tag">
+  <div class="hero-tag hero-stagger d1">
     FiveM Developer • Commissions Open
     <span class="availability"><span class="dot"></span> Available</span>
   </div>
 
-  <h1 class="hero-title">FiveM systems,<br><span>built to last</span>.</h1>
-  <div class="hero-line"></div>
+  <h1 class="hero-title hero-stagger d2">FiveM systems,<br><span>built to last</span>.</h1>
+  <div class="hero-line hero-stagger d3"></div>
 
-  <div class="tagline">Frameworks • UI / NUI • Performance • Immersion</div>
-  <p>I’m a developer passionate about creating immersive FiveM experiences. I specialize in custom scripts, cars, handling, clothing, and GFX — while constantly learning and pushing my skills further.</p>
+  <div class="tagline hero-stagger d4">Frameworks • UI / NUI • Performance • Immersion</div>
+  <p class="hero-stagger d5">I’m a developer passionate about creating immersive FiveM experiences. I specialize in custom scripts, cars, handling, clothing, and GFX — while constantly learning and pushing my skills further.</p>
 
-  <div class="cta-buttons">
+  <div class="cta-buttons hero-stagger d5">
     <a href="#contact" class="button primary"><i class="fa-solid fa-briefcase"></i> Start a Commission</a>
     <a href="#work" class="button secondary"><i class="fa-solid fa-images"></i> View Work</a>
   </div>
@@ -615,7 +655,7 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Experience (Timeline) -->
+<!-- Experience -->
 <section id="experience" class="section reveal">
   <h2>Experience</h2>
 
@@ -685,13 +725,11 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
         <p>Shifted focus toward clothing development and returned to 3D modeling to expand creative and visual pipelines.</p>
       </div>
     </div>
-
   </div>
 </section>
 
 <div class="separator"></div>
 
-<!-- Why Clients Hire Me -->
 <section id="why" class="section reveal">
   <h2>Why Clients Hire Me</h2>
   <p class="sub">The difference between “it works” and “it’s built for real servers.”</p>
@@ -722,7 +760,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Skills (Grouped: Expert, Advanced, Intermediate, New) -->
 <section id="skills" class="section reveal">
   <h2>Skills</h2>
   <p class="sub">Ordered by proficiency for quick scanning: Expert → Advanced → Intermediate → New.</p>
@@ -763,7 +800,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- How I Work -->
 <section id="process" class="section reveal">
   <h2>How I Work</h2>
   <p class="sub">A clean process that keeps projects smooth, predictable, and professional.</p>
@@ -809,7 +845,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Work (Selected Work / Previews) -->
 <section id="work" class="section reveal">
   <h2>Selected Work</h2>
   <p class="sub">A few previews of ongoing and past work. (Click any image to open full size.)</p>
@@ -839,7 +874,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Recent Work (GitHub projects) -->
 <section id="recent" class="section reveal">
   <h2>Recent Work</h2>
   <div class="card-container">
@@ -863,7 +897,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Projects (YouTube embeds) -->
 <section id="projects" class="section reveal">
   <h2>Projects</h2>
 
@@ -886,7 +919,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Reviews (right above contact) -->
 <section id="reviews" class="section reveal">
   <h2>Reviews</h2>
 
@@ -915,7 +947,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Notes (Blog) -->
 <section id="blog" class="section reveal">
   <h2>Notes</h2>
   <p class="sub">Performance tips, dev thoughts, and lessons learned. (Replace these with real posts anytime.)</p>
@@ -943,11 +974,11 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
 
 <div class="separator"></div>
 
-<!-- Contact -->
 <section id="contact" class="section reveal">
   <h2>Contact</h2>
   <p class="sub">Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
-  <a href="https://discord.gg/cqgRm2qeu4" target="_blank" class="button primary">
+  <!-- NEW DISCORD LINK -->
+  <a href="https://discord.gg/w8w4dsKKG8" target="_blank" class="button primary">
     <i class="fa-brands fa-discord"></i> Join My Discord
   </a>
 </section>
@@ -956,7 +987,6 @@ body.light-mode body::after{ opacity:.02; mix-blend-mode:multiply; }
   &copy; 2025 kxdn — All Rights Reserved
 </footer>
 
-<!-- Back to Top -->
 <div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
 
 <script>
@@ -965,8 +995,8 @@ document.documentElement.classList.add('js');
 /* ===== Mouse reactive glow (optimized — NOT always running) ===== */
 let targetX = 50, targetY = 35;
 let currentX = 50, currentY = 35;
-let rafId = null;
-let idleTimeout = null;
+let glowRaf = null;
+let glowIdle = null;
 
 function applyGlow() {
   document.documentElement.style.setProperty('--mx', currentX.toFixed(2) + '%');
@@ -979,20 +1009,19 @@ function tickGlow() {
   applyGlow();
 
   if (Math.abs(targetX - currentX) < 0.05 && Math.abs(targetY - currentY) < 0.05) {
-    rafId = null;
+    glowRaf = null;
     return;
   }
-  rafId = requestAnimationFrame(tickGlow);
+  glowRaf = requestAnimationFrame(tickGlow);
 }
 
 function pokeGlow() {
-  if (!rafId) rafId = requestAnimationFrame(tickGlow);
+  if (!glowRaf) glowRaf = requestAnimationFrame(tickGlow);
 
-  clearTimeout(idleTimeout);
-  idleTimeout = setTimeout(() => {
-    targetX = 50;
-    targetY = 35;
-    if (!rafId) rafId = requestAnimationFrame(tickGlow);
+  clearTimeout(glowIdle);
+  glowIdle = setTimeout(() => {
+    targetX = 50; targetY = 35;
+    if (!glowRaf) glowRaf = requestAnimationFrame(tickGlow);
   }, 1200);
 }
 
@@ -1021,10 +1050,11 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.14 });
 reveals.forEach(el => revealObserver.observe(el));
 
-/* ===== Scrollspy + Back-to-top + Timeline (throttled via rAF) ===== */
+/* ===== Scrollspy + Back-to-top + Timeline + Header Progress (single rAF loop) ===== */
 const sections = document.querySelectorAll('section, header.hero');
 const navLinks = document.querySelectorAll('.nav-links a');
 const backToTopBtn = document.getElementById('back-to-top');
+const headerProgress = document.getElementById('headerProgress');
 
 const timeline = document.getElementById('timeline');
 const progress = document.getElementById('timelineProgress');
@@ -1044,15 +1074,40 @@ function updateTimelineProgress() {
   progress.style.height = (pct * 100).toFixed(2) + '%';
 }
 
-function onScroll() {
- 
+function updateHeaderProgress(){
+  if (!headerProgress) return;
+  const h = document.documentElement;
+  const max = (h.scrollHeight - h.clientHeight) || 1;
+  const pct = h.scrollTop / max;
+  headerProgress.style.transform = `scaleX(${pct})`;
+}
+
+function onScroll(){
+  // scrollspy
+  let current = '';
+  const offset = 160;
+
+  sections.forEach(section => {
+    const id = section.getAttribute('id');
+    if (!id) return;
+    const top = section.offsetTop - offset;
+    if (window.scrollY >= top) current = id;
+  });
+
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+
   // back to top
   if (backToTopBtn) {
     backToTopBtn.style.display = (window.scrollY > 500) ? 'flex' : 'none';
   }
 
-  // timeline line draw
+  // timeline
   updateTimelineProgress();
+
+  // header progress
+  updateHeaderProgress();
 
   scrollTicking = false;
 }
@@ -1065,7 +1120,10 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 window.addEventListener('resize', () => {
-  requestAnimationFrame(updateTimelineProgress);
+  requestAnimationFrame(() => {
+    updateTimelineProgress();
+    updateHeaderProgress();
+  });
 });
 
 if (backToTopBtn) {
@@ -1085,7 +1143,6 @@ if (lightToggle) {
 // run once on load
 onScroll();
 </script>
-
 
 </body>
 </html>
