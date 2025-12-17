@@ -50,12 +50,10 @@
   transition: opacity .25s ease;
   z-index:2000;
 }
-
 #lightbox.open{
   opacity:1;
   pointer-events:auto;
 }
-
 #lightbox img{
   max-width:92vw;
   max-height:92vh;
@@ -63,7 +61,6 @@
   box-shadow: 0 30px 80px rgba(0,0,0,.6);
 }
 
-  
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -278,7 +275,7 @@ header.hero{
   background: linear-gradient(120deg, #22d3ee, #6366f1);
   background-clip: text;
   -webkit-background-clip: text;
-  color: transparent;                 /* important */
+  color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
@@ -337,9 +334,6 @@ header.hero{
   border-color: rgba(99,102,241,.22);
   box-shadow: var(--shadow);
 }
-
-/* ===== About ===== */
-#about p{ color:var(--muted); max-width:760px; margin:0 auto; }
 
 /* ===== Experience timeline ===== */
 .timeline{
@@ -648,7 +642,6 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
   </nav>
 
   <div class="social-icons">
-    <!-- NEW DISCORD LINK -->
     <a href="https://discord.gg/w8w4dsKKG8" target="_blank" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
     <a href="https://github.com/ilykxdn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
     <a href="https://x.com/xokxdn" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
@@ -824,7 +817,6 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 
 <section id="process" class="section reveal">
   <h2>How I Work</h2>
-  <p class="sub"></p>
 
   <div class="process">
     <div class="process-step lift">
@@ -871,37 +863,31 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
   <h2>Selected Work</h2>
   <p class="sub">A few previews of ongoing and past work. (Click any image to open full size.)</p>
 
-<div class="showcase-grid">
+  <div class="showcase-grid">
+    <a class="preview-card lift lightbox-trigger" href="#"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
+      <div class="preview-overlay"><h4>Outlaws Racing Crew PS</h4></div>
+    </a>
 
-  <a class="preview-card lift lightbox-trigger"
-     href="#"
-     data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true">
-    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
-    <div class="preview-overlay"><h4>Outlaws Racing Crew PS</h4></div>
-  </a>
+    <a class="preview-card lift lightbox-trigger" href="#"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
+      <div class="preview-overlay"><h4>Legion MC</h4></div>
+    </a>
 
-  <a class="preview-card lift lightbox-trigger"
-     href="#"
-     data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true">
-    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
-    <div class="preview-overlay"><h4>Legion MC</h4></div>
-  </a>
+    <a class="preview-card lift lightbox-trigger" href="#"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" alt="Malditos Preview">
+      <div class="preview-overlay"><h4>Malditos MC Preview</h4></div>
+    </a>
 
-  <a class="preview-card lift lightbox-trigger"
-     href="#"
-     data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true">
-    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" alt="Malditos Preview">
-    <div class="preview-overlay"><h4>Malditos MC Preview</h4></div>
-  </a>
-
-  <a class="preview-card lift lightbox-trigger"
-     href="#"
-     data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true">
-    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" alt="Aogiri Racing Crew PS">
-    <div class="preview-overlay"><h4>Aogiri Racing Crew PS</h4></div>
-  </a>
-
-</div>
+    <a class="preview-card lift lightbox-trigger" href="#"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true">
+      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" alt="Aogiri Racing Crew PS">
+      <div class="preview-overlay"><h4>Aogiri Racing Crew PS</h4></div>
+    </a>
+  </div>
 </section>
 
 <div class="separator"></div>
@@ -1009,7 +995,6 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 <section id="contact" class="section reveal">
   <h2>Contact</h2>
   <p class="sub">Let’s build something amazing together. Open to new tools and techniques to fit your project’s needs in the FiveM world.</p>
-  <!-- NEW DISCORD LINK -->
   <a href="https://discord.gg/w8w4dsKKG8" target="_blank" class="button primary">
     <i class="fa-brands fa-discord"></i> Join My Discord
   </a>
@@ -1020,6 +1005,11 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 </footer>
 
 <div id="back-to-top" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></div>
+
+<!-- ✅ Lightbox is now BEFORE the script so JS can find it -->
+<div id="lightbox" aria-hidden="true">
+  <img id="lightbox-img" alt="">
+</div>
 
 <script>
 document.documentElement.classList.add('js');
@@ -1172,38 +1162,38 @@ if (lightToggle) {
   });
 }
 
-/* ===== Lightbox ===== */
+/* ===== Lightbox (now works) ===== */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 
-document.querySelectorAll('.lightbox-trigger').forEach(card => {
-  card.addEventListener('click', (e) => {
-    e.preventDefault();
+if (lightbox && lightboxImg) {
+  document.querySelectorAll('.lightbox-trigger').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const src = card.dataset.full;
+      if (!src) return;
 
-    const src = card.dataset.full;
-    if (!src) return;
-
-    lightboxImg.src = src;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
   });
-});
 
-lightbox.addEventListener('click', () => {
-  lightbox.classList.remove('open');
-  lightboxImg.src = '';
-  document.body.style.overflow = '';
-});
+  const close = () => {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  };
+
+  lightbox.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+}
 
 // run once on load
 onScroll();
 </script>
 
-<!-- Lightbox -->
-<div id="lightbox" aria-hidden="true">
-  <img id="lightbox-img" alt="">
-</div>
-
-  
 </body>
 </html>
