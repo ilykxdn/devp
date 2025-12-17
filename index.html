@@ -513,7 +513,7 @@ header.hero{
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap:26px;
 }
-.blog-card{ padding:28px; text-align:left; }
+.blog-card{ padding:28px; text-align:left; cursor:pointer; } /* cursor added */
 .blog-card .tag{
   display:inline-flex;
   align-items:center;
@@ -609,6 +609,103 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 @media (max-width: 520px){
   .section{ padding:110px 18px; }
   .hero-title{ font-size: 2.5rem; }
+}
+
+/* ===== Notes Modal ===== */
+#noteModalOverlay{
+  position:fixed;
+  inset:0;
+  background: rgba(8,10,18,.72);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .22s ease;
+  z-index:2500; /* above lightbox */
+  padding:24px;
+  backdrop-filter: blur(6px);
+}
+
+#noteModalOverlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+#noteModal{
+  width:min(760px, 100%);
+  border-radius:16px;
+  padding:22px 22px 18px;
+  background: rgba(21,26,47,.96);
+  border:1px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  position:relative;
+  transform: translateY(10px);
+  transition: transform .22s ease;
+}
+
+#noteModalOverlay.open #noteModal{
+  transform: translateY(0);
+}
+
+#noteModalClose{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.9);
+  cursor:pointer;
+}
+
+#noteModalTag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 12px;
+  border-radius:999px;
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  color:var(--accent-alt);
+  font-size:.78rem;
+  margin-bottom:14px;
+}
+
+#noteModalTitle{
+  font-size:1.25rem;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+#noteModalBody{
+  color:var(--muted);
+  font-size:.98rem;
+  white-space:pre-wrap; /* supports \n line breaks */
+}
+
+/* Light mode support */
+body.light-mode #noteModalOverlay{
+  background: rgba(0,0,0,.35);
+}
+body.light-mode #noteModal{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+}
+body.light-mode #noteModalClose{
+  background: rgba(0,0,0,.04);
+  color:#111;
+  border:1px solid rgba(0,0,0,.08);
+}
+body.light-mode #noteModalTag{
+  background: rgba(0,0,0,.03);
+  border:1px solid rgba(0,0,0,.08);
+}
+body.light-mode #noteModalBody{
+  color: rgba(0,0,0,.70);
 }
 </style>
 </head>
@@ -970,19 +1067,22 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
   <p class="sub">My performance tips, dev thoughts, and lessons learned.</p>
 
   <div class="blog-grid">
-    <div class="blog-card lift">
+    <div class="blog-card lift"
+         data-full="Deep dive:\n\n• Avoid tight loops on tick (or keep them extremely cheap)\n• Prefer event-driven state instead of constant polling\n• Cache expensive lookups (player data, config, exports)\n• Batch DB writes and debounce updates\n\nCommon mistakes I see:\n- Doing SQL inside hot paths\n- Creating threads per player for simple checks\n- Spamming network events\n\nRule of thumb: if it runs often, it must be cheap.">
       <div class="tag"><i class="fa-solid fa-gauge-high"></i> Performance</div>
       <h4>Optimizing FiveM scripts without breaking gameplay</h4>
       <p>How I think about server load, event frequency, loops, and database access patterns in real communities.</p>
     </div>
 
-    <div class="blog-card lift">
+    <div class="blog-card lift"
+         data-full="Launch day is the easy part — week 3 is where projects either hold up or fall apart.\n\nWhat survives:\n• Simple systems with predictable flows\n• Clear config + sane defaults\n• Logs that tell you what went wrong\n• Docs that explain *why* decisions exist\n\nWhat dies:\n- One-off hacks that only the original dev understands\n- Complex dependencies with no guard rails\n- “Just change it in 12 files” systems\n\nIf future-me can’t maintain it at 3AM, it’s not done.">
       <div class="tag"><i class="fa-solid fa-book"></i> Lessons learned</div>
       <h4>What survives past launch day</h4>
       <p>Why maintainability, documentation, and predictable systems matter more than flashy features.</p>
     </div>
 
-    <div class="blog-card lift">
+    <div class="blog-card lift"
+         data-full="A scalable framework is boring in the best way.\n\nPatterns I rely on:\n• Separation of concerns (UI ≠ game logic ≠ persistence)\n• A consistent API surface (exports/callbacks/events)\n• Modules that can be disabled without breaking everything\n• Shared utilities (validation, logging, permissions)\n\nThe goal:\nPlayers feel immersion — devs feel control.\n\nIf adding a feature requires rewriting the core, the architecture wasn’t ready.">
       <div class="tag"><i class="fa-solid fa-code"></i> Dev thoughts</div>
       <h4>Framework architecture that scales</h4>
       <p>Patterns I use to keep systems clean: modular design, separation of concerns, and consistent APIs.</p>
@@ -1009,6 +1109,16 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 <!-- ✅ Lightbox is now BEFORE the script so JS can find it -->
 <div id="lightbox" aria-hidden="true">
   <img id="lightbox-img" alt="">
+</div>
+
+<!-- ✅ Notes Modal (ALSO before the script) -->
+<div id="noteModalOverlay" aria-hidden="true">
+  <div id="noteModal" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle">
+    <button id="noteModalClose" type="button" aria-label="Close">✕</button>
+    <div id="noteModalTag"></div>
+    <h3 id="noteModalTitle"></h3>
+    <p id="noteModalBody"></p>
+  </div>
 </div>
 
 <script>
@@ -1182,12 +1292,81 @@ if (lightbox && lightboxImg) {
   const close = () => {
     lightbox.classList.remove('open');
     lightboxImg.src = '';
-    document.body.style.overflow = '';
+    // only unlock scroll if notes modal isn't open
+    const noteOverlay = document.getElementById('noteModalOverlay');
+    if (!noteOverlay || !noteOverlay.classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
   };
 
   lightbox.addEventListener('click', close);
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') close();
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) close();
+  });
+}
+
+/* ===== Notes modal (click blog cards) ===== */
+const noteOverlay = document.getElementById('noteModalOverlay');
+const noteModal = document.getElementById('noteModal');
+const noteClose = document.getElementById('noteModalClose');
+const noteTag = document.getElementById('noteModalTag');
+const noteTitle = document.getElementById('noteModalTitle');
+const noteBody = document.getElementById('noteModalBody');
+
+function openNoteModal({ tagHtml, title, body }) {
+  if (!noteOverlay) return;
+
+  noteTag.innerHTML = tagHtml || '';
+  noteTitle.textContent = title || '';
+  noteBody.textContent = body || '';
+
+  noteOverlay.classList.add('open');
+  noteOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+
+  // focus close for accessibility
+  if (noteClose) noteClose.focus();
+}
+
+function closeNoteModal() {
+  if (!noteOverlay) return;
+
+  noteOverlay.classList.remove('open');
+  noteOverlay.setAttribute('aria-hidden', 'true');
+
+  // only unlock scroll if lightbox isn't open
+  const lb = document.getElementById('lightbox');
+  if (!lb || !lb.classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
+}
+
+if (noteOverlay && noteModal && noteClose) {
+  // click outside closes
+  noteOverlay.addEventListener('click', (e) => {
+    if (e.target === noteOverlay) closeNoteModal();
+  });
+
+  // close button
+  noteClose.addEventListener('click', closeNoteModal);
+
+  // esc closes (only if open)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && noteOverlay.classList.contains('open')) {
+      closeNoteModal();
+    }
+  });
+
+  // attach to each blog card
+  document.querySelectorAll('#blog .blog-card').forEach((card) => {
+    card.addEventListener('click', () => {
+      const tagEl = card.querySelector('.tag');
+      const tagHtml = tagEl ? tagEl.outerHTML : '';
+      const title = card.querySelector('h4')?.textContent || '';
+      const body = card.dataset.full || card.querySelector('p')?.textContent || '';
+
+      openNoteModal({ tagHtml, title, body });
+    });
   });
 }
 
