@@ -247,10 +247,14 @@ header.hero{
   letter-spacing:-.02em;
 }
 .hero-title span{
-  background: linear-gradient(120deg, var(--accent), var(--accent-alt));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  display:inline-block;
+  background: linear-gradient(120deg, #22d3ee, #6366f1);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;                 /* important */
+  -webkit-text-fill-color: transparent;
 }
+
 .hero-line{
   width:120px;height:3px;
   margin:26px auto 22px;
@@ -603,7 +607,6 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 
   <nav class="main-nav">
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#why">Why Me</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -644,14 +647,6 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
     <a href="#work" class="button secondary"><i class="fa-solid fa-images"></i> View Work</a>
   </div>
 </header>
-
-<div class="separator"></div>
-
-<!-- About -->
-<section id="about" class="section reveal">
-  <h2>About Me</h2>
-  <p>I craft immersive roleplay experiences in FiveM, blending scripts, cars, handling, clothing, and GFX design. I thrive on solving complex challenges and writing clean, optimized code that scales with servers I contribute to.</p>
-</section>
 
 <div class="separator"></div>
 
@@ -762,7 +757,7 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 
 <section id="skills" class="section reveal">
   <h2>Skills</h2>
-  <p class="sub">Ordered by proficiency for quick scanning: Expert → Advanced → Intermediate → New.</p>
+  <p class="sub">Ordered by proficiency: Expert → Advanced → Intermediate → New.</p>
 
   <div class="skills-group-title">Expert</div>
   <div class="skills-grid">
@@ -802,7 +797,7 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 
 <section id="process" class="section reveal">
   <h2>How I Work</h2>
-  <p class="sub">A clean process that keeps projects smooth, predictable, and professional.</p>
+  <p class="sub"></p>
 
   <div class="process">
     <div class="process-step lift">
@@ -949,7 +944,7 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
 
 <section id="blog" class="section reveal">
   <h2>Notes</h2>
-  <p class="sub">Performance tips, dev thoughts, and lessons learned. (Replace these with real posts anytime.)</p>
+  <p class="sub">My performance tips, dev thoughts, and lessons learned.</p>
 
   <div class="blog-grid">
     <div class="blog-card lift">
