@@ -1066,28 +1066,73 @@ body.light-mode #noteModalBody{
   <h2>Notes</h2>
   <p class="sub">My performance tips, dev thoughts, and lessons learned.</p>
 
-  <div class="blog-grid">
-    <div class="blog-card lift"
-         data-full="Deep dive:\n\n• Avoid tight loops on tick (or keep them extremely cheap)\n• Prefer event-driven state instead of constant polling\n• Cache expensive lookups (player data, config, exports)\n• Batch DB writes and debounce updates\n\nCommon mistakes I see:\n- Doing SQL inside hot paths\n- Creating threads per player for simple checks\n- Spamming network events\n\nRule of thumb: if it runs often, it must be cheap.">
-      <div class="tag"><i class="fa-solid fa-gauge-high"></i> Performance</div>
-      <h4>Optimizing FiveM scripts without breaking gameplay</h4>
-      <p>How I think about server load, event frequency, loops, and database access patterns in real communities.</p>
-    </div>
+<div class="blog-grid">
+  <div class="blog-card lift">
+    <div class="tag"><i class="fa-solid fa-gauge-high"></i> Performance</div>
+    <h4>Optimizing FiveM scripts without breaking gameplay</h4>
+    <p>How I think about server load, event frequency, loops, and database access patterns in real communities.</p>
 
-    <div class="blog-card lift"
-         data-full="Launch day is the easy part — week 3 is where projects either hold up or fall apart.\n\nWhat survives:\n• Simple systems with predictable flows\n• Clear config + sane defaults\n• Logs that tell you what went wrong\n• Docs that explain *why* decisions exist\n\nWhat dies:\n- One-off hacks that only the original dev understands\n- Complex dependencies with no guard rails\n- “Just change it in 12 files” systems\n\nIf future-me can’t maintain it at 3AM, it’s not done.">
-      <div class="tag"><i class="fa-solid fa-book"></i> Lessons learned</div>
-      <h4>What survives past launch day</h4>
-      <p>Why maintainability, documentation, and predictable systems matter more than flashy features.</p>
-    </div>
+    <template class="note-full">
+Deep dive:
 
-    <div class="blog-card lift"
-         data-full="A scalable framework is boring in the best way.\n\nPatterns I rely on:\n• Separation of concerns (UI ≠ game logic ≠ persistence)\n• A consistent API surface (exports/callbacks/events)\n• Modules that can be disabled without breaking everything\n• Shared utilities (validation, logging, permissions)\n\nThe goal:\nPlayers feel immersion — devs feel control.\n\nIf adding a feature requires rewriting the core, the architecture wasn’t ready.">
-      <div class="tag"><i class="fa-solid fa-code"></i> Dev thoughts</div>
-      <h4>Framework architecture that scales</h4>
-      <p>Patterns I use to keep systems clean: modular design, separation of concerns, and consistent APIs.</p>
-    </div>
+• Avoid tight loops on tick (or keep them extremely cheap)
+• Prefer event-driven state instead of constant polling
+• Cache expensive lookups (player data, config, exports)
+• Batch DB writes and debounce updates
+
+Common mistakes I see:
+- Doing SQL inside hot paths
+- Creating threads per player for simple checks
+- Spamming network events
+
+Rule of thumb: if it runs often, it must be cheap.
+    </template>
   </div>
+
+  <div class="blog-card lift">
+    <div class="tag"><i class="fa-solid fa-book"></i> Lessons learned</div>
+    <h4>What survives past launch day</h4>
+    <p>Why maintainability, documentation, and predictable systems matter more than flashy features.</p>
+
+    <template class="note-full">
+Launch day is the easy part — week 3 is where projects either hold up or fall apart.
+
+What survives:
+• Simple systems with predictable flows
+• Clear config + sane defaults
+• Logs that tell you what went wrong
+• Docs that explain *why* decisions exist
+
+What dies:
+- One-off hacks that only the original dev understands
+- Complex dependencies with no guard rails
+- “Just change it in 12 files” systems
+
+If future-me can’t maintain it at 3AM, it’s not done.
+    </template>
+  </div>
+
+  <div class="blog-card lift">
+    <div class="tag"><i class="fa-solid fa-code"></i> Dev thoughts</div>
+    <h4>Framework architecture that scales</h4>
+    <p>Patterns I use to keep systems clean: modular design, separation of concerns, and consistent APIs.</p>
+
+    <template class="note-full">
+A scalable framework is boring in the best way.
+
+Patterns I rely on:
+• Separation of concerns (UI ≠ game logic ≠ persistence)
+• A consistent API surface (exports/callbacks/events)
+• Modules that can be disabled without breaking everything
+• Shared utilities (validation, logging, permissions)
+
+The goal:
+Players feel immersion — devs feel control.
+
+If adding a feature requires rewriting the core, the architecture wasn’t ready.
+    </template>
+  </div>
+</div>
 </section>
 
 <div class="separator"></div>
