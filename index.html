@@ -37,6 +37,33 @@
   --my:35%;
 }
 
+/* ===== Lightbox ===== */
+#lightbox{
+  position:fixed;
+  inset:0;
+  background: rgba(8,10,18,.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .25s ease;
+  z-index:2000;
+}
+
+#lightbox.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+#lightbox img{
+  max-width:92vw;
+  max-height:92vh;
+  border-radius:16px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+
+  
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
@@ -844,28 +871,33 @@ body.light-mode .blog-card p{ color: rgba(0,0,0,.65); }
   <h2>Selected Work</h2>
   <p class="sub">A few previews of ongoing and past work. (Click any image to open full size.)</p>
 
-  <div class="showcase-grid">
-    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" target="_blank">
-      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
-      <div class="preview-overlay"><h4>Outlaws Racing Crew PS</h4></div>
-    </a>
-
-    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" target="_blank">
-      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
-      <div class="preview-overlay"><h4>Legion MC</h4></div>
-    </a>
-
-    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" target="_blank">
-      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" alt="Malditos Preview">
-      <div class="preview-overlay"><h4>Malditos MC Preview</h4></div>
-    </a>
-
-    <a class="preview-card lift" href="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" target="_blank">
-      <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" alt="Aogiri Racing Crew PS">
-      <div class="preview-overlay"><h4>Aogiri Racing Crew PS</h4></div>
-    </a>
+<div class="showcase-grid">
+  <div class="preview-card lift lightbox-trigger"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true">
+    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Front.png?raw=true" alt="Outlaws Racing Crew PS">
+    <div class="preview-overlay"><h4>Outlaws Racing Crew PS</h4></div>
   </div>
+
+  <div class="preview-card lift lightbox-trigger"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true">
+    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/LegionMC1.png?raw=true" alt="Legion MC">
+    <div class="preview-overlay"><h4>Legion MC</h4></div>
+  </div>
+
+  <div class="preview-card lift lightbox-trigger"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true">
+    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/Malditos%20President%20KutteKX.png?raw=true" alt="Malditos Preview">
+    <div class="preview-overlay"><h4>Malditos MC Preview</h4></div>
+  </div>
+
+  <div class="preview-card lift lightbox-trigger"
+       data-full="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true">
+    <img src="https://github.com/ilykxdn/devp/blob/main/Assets/Images/aogiri2.png?raw=true" alt="Aogiri Racing Crew PS">
+    <div class="preview-overlay"><h4>Aogiri Racing Crew PS</h4></div>
+  </div>
+</div>
 </section>
+
 
 <div class="separator"></div>
 
@@ -1135,9 +1167,38 @@ if (lightToggle) {
   });
 }
 
+/* ===== Lightbox ===== */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+if (lightbox && lightboxImg) {
+  document.querySelectorAll('.lightbox-trigger').forEach(card => {
+    card.addEventListener('click', () => {
+      const src = card.dataset.full;
+      if (!src) return;
+
+      lightboxImg.src = src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lightbox.addEventListener('click', () => {
+    lightbox.classList.remove('open');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  });
+}
+
 // run once on load
 onScroll();
 </script>
 
+<!-- Lightbox -->
+<div id="lightbox" aria-hidden="true">
+  <img id="lightbox-img" alt="">
+</div>
+
+  
 </body>
 </html>
